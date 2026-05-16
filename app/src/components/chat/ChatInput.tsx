@@ -35,27 +35,29 @@ const ChatInput: React.FC<ChatInputProps> = ({ onSend, disabled }) => {
 
   return (
     <div className="chat-input-container">
+      <button className="chat-attachment-button" type="button" aria-label="Attach photo">
+        <span className="material-symbols-outlined">add_photo_alternate</span>
+      </button>
       <form className="chat-input-wrapper" onSubmit={handleSubmit}>
         <textarea
           ref={textareaRef}
           className="chat-input-field"
-          placeholder="Ask Split Zmaj..."
+          placeholder="Type a message..."
           value={text}
           onChange={(e) => setText(e.target.value)}
           onKeyDown={handleKeyDown}
           disabled={disabled}
           rows={1}
         />
-        <button 
-          type="submit" 
-          className="chat-send-button"
-          disabled={!text.trim() || disabled}
-        >
-          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M22 2L11 13M22 2L15 22L11 13M11 13L2 9L22 2" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-          </svg>
-        </button>
       </form>
+      <button 
+        type="button" 
+        className="chat-send-button"
+        onClick={handleSubmit}
+        disabled={!text.trim() || disabled}
+      >
+        <span className="material-symbols-outlined">send</span>
+      </button>
     </div>
   );
 };

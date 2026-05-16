@@ -24,7 +24,7 @@
 | Task | Status | Completed By | Notes |
 |---|---|---|---|
 | T01 App Shell + Layout | ✅ Done | Agent@12:25 | Foundation: routing, Header, BottomNav, PageContainer |
-| T02 Chat Page UI | ✅ Done | Agent@12:27 | Bubbles, citations, suggested prompts, input bar |
+| T02 Chat Page UI | ✅ Done | Agent@12:27 | Integrated premium Stitch design (Hajduk Theme), Material Symbols, and polished bubbles |
 | T03 Photo Report Page | ✅ Done | Agent@12:28 | Upload, AI classification preview, ticket confirmation |
 | T04 Pazar Feed + Vendor Upload | ⬜ Not Started | | Product cards, filters, vendor photo upload |
 | T05 3D Map Page (Mapbox) | ✅ Done | Agent@12:32 | Home screen: 3D buildings, issue markers, clustering |
@@ -87,6 +87,7 @@
 
 | # | Suggestion | Source | Effort | Priority | Status |
 |---|---|---|---|---|---|
+| R01 | Standardize Material Symbols across all lanes for consistency with Stitch design | Frontend Agent | S | P2 | ⬜ Unevaluated |
 
 ### Status Legend
 - `⬜ Unevaluated` — Not yet reviewed by Team Lead

@@ -11,6 +11,14 @@ const ChatBubble: React.FC<ChatBubbleProps> = ({ message }) => {
 
   return (
     <div className={`chat-bubble-container ${isAssistant ? 'assistant' : 'user'}`}>
+      {isAssistant && (
+        <div className="chat-bubble-header">
+          <div className="assistant-avatar">
+            <span className="material-symbols-outlined">smart_toy</span>
+          </div>
+          <span className="assistant-name">SplitAI</span>
+        </div>
+      )}
       <div className="chat-bubble">
         <div className="chat-bubble-content">
           {message.content}

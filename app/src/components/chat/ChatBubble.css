@@ -1,21 +1,52 @@
 .chat-bubble-container {
   display: flex;
+  flex-direction: column;
   width: 100%;
-  margin-bottom: var(--space-md);
+  margin-bottom: var(--space-sm);
 }
 
 .chat-bubble-container.user {
-  justify-content: flex-end;
+  align-items: flex-end;
 }
 
 .chat-bubble-container.assistant {
-  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.chat-bubble-header {
+  display: flex;
+  align-items: flex-end;
+  gap: var(--space-xs);
+  margin-bottom: 4px;
+}
+
+.assistant-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-full);
+  background: var(--color-bg-elevated);
+  color: var(--color-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(0, 71, 171, 0.1);
+}
+
+.assistant-avatar .material-symbols-outlined {
+  font-size: 18px;
+  font-variation-settings: 'FILL' 1;
+}
+
+.assistant-name {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--color-text-secondary);
 }
 
 .chat-bubble {
   max-width: 85%;
-  padding: var(--space-sm) var(--space-md);
-  border-radius: var(--radius-lg);
+  padding: var(--space-sm);
+  border-radius: var(--radius-md);
   position: relative;
   transition: var(--transition-default);
   animation: slideIn 0.3s ease-out;
@@ -27,19 +58,19 @@
 }
 
 .user .chat-bubble {
-  background: var(--gradient-primary);
+  background: var(--color-primary);
   color: white;
-  border-bottom-right-radius: var(--radius-xs);
-  box-shadow: var(--shadow-primary);
+  border-top-right-radius: 0;
+  box-shadow: 0 4px 12px rgba(0, 71, 171, 0.15);
 }
 
 .assistant .chat-bubble {
   background: var(--color-bg-card);
   color: var(--color-text-primary);
   border: 1px solid var(--color-border);
-  border-bottom-left-radius: var(--radius-xs);
-  box-shadow: var(--shadow-card);
-  backdrop-filter: blur(12px);
+  border-top-left-radius: 0;
+  box-shadow: 0 4px 12px rgba(0, 71, 171, 0.06);
+  backdrop-filter: blur(8px);
 }
 
 .chat-bubble-content {
@@ -56,12 +87,12 @@
 }
 
 .chat-bubble-time {
-  font-size: 11px;
-  opacity: 0.7;
+  font-size: 10px;
+  opacity: 0.6;
 }
 
 .user .chat-bubble-time {
-  color: rgba(255, 255, 255, 0.8);
+  color: rgba(255, 255, 255, 0.9);
 }
 
 .assistant .chat-bubble-time {

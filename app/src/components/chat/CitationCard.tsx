@@ -12,10 +12,16 @@ const CitationCard: React.FC<CitationCardProps> = ({ citation }) => {
   return (
     <div className={`citation-card ${isOpen ? 'open' : ''}`} onClick={() => setIsOpen(!isOpen)}>
       <div className="citation-header">
-        <span className="citation-icon">📄</span>
-        <span className="citation-source">{citation.sourceDocument}</span>
-        {citation.article && <span className="citation-article">Art. {citation.article}</span>}
-        <span className="citation-toggle">{isOpen ? '−' : '+'}</span>
+        <div className="citation-icon-wrapper">
+          <span className="material-symbols-outlined">link</span>
+        </div>
+        <div className="citation-info">
+          <span className="citation-source">{citation.sourceDocument}</span>
+          {citation.article && <span className="citation-article">Article {citation.article}</span>}
+        </div>
+        <span className="citation-toggle material-symbols-outlined">
+          {isOpen ? 'expand_less' : 'expand_more'}
+        </span>
       </div>
       {isOpen && (
         <div className="citation-body">
