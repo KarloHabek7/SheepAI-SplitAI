@@ -1,95 +1,138 @@
 .app-header {
-  height: 64px;
-  background: var(--color-bg-card);
-  border-bottom: 1px solid var(--color-border);
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  display: flex;
-  align-items: center;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+  position: fixed;
+  top: 16px;
+  left: 16px;
+  right: 16px;
+  z-index: 1000;
+  transition: var(--transition-default);
+  pointer-events: none; /* Let clicks pass through empty space */
 }
 
-.header-content {
-  width: 100%;
-  max-width: 1200px;
+.header-pill {
+  pointer-events: auto; /* Enable clicks on the pill itself */
+  max-width: 1100px;
   margin: 0 auto;
-  padding: 0 var(--space-sm);
+  height: 68px;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(20px) saturate(140%);
+  -webkit-backdrop-filter: blur(20px) saturate(140%);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-full);
+  padding: 0 24px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  box-shadow: 0 12px 40px rgba(0, 71, 171, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  transition: var(--transition-default);
+}
+
+.app-header.scrolled .header-pill {
+  background: rgba(255, 255, 255, 0.92);
+  box-shadow: 0 16px 50px rgba(0, 71, 171, 0.18), inset 0 1px 0 rgba(255, 255, 255, 1);
+  transform: translateY(-2px);
 }
 
 .logo {
   text-decoration: none;
   font-family: var(--font-display);
-  font-weight: 700;
-  font-size: 1.5rem;
+  font-weight: 800;
+  font-size: 1.6rem;
   color: var(--color-text-primary);
+  display: flex;
+  align-items: center;
+  letter-spacing: -0.5px;
 }
 
 .logo-accent {
   color: var(--color-primary);
+  background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .desktop-nav {
   display: flex;
-  gap: var(--space-md);
+  align-items: center;
+  gap: 8px;
 }
 
-.desktop-nav a {
+.nav-pill {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 18px;
+  border-radius: var(--radius-full);
   text-decoration: none;
   color: var(--color-text-secondary);
-  font-weight: 500;
-  font-size: var(--font-size-small);
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: var(--transition-default);
+  border: 1px solid transparent;
+}
+
+.nav-pill .nav-icon {
+  font-size: 20px;
   transition: var(--transition-fast);
-  padding: 4px 0;
-  border-bottom: 2px solid transparent;
 }
 
-.desktop-nav a:hover {
+.nav-pill:hover {
   color: var(--color-primary);
+  background: rgba(0, 71, 171, 0.06);
+  border-color: rgba(0, 71, 171, 0.1);
+  transform: translateY(-1px);
 }
 
-.desktop-nav a.active {
-  color: var(--color-primary);
-  border-bottom-color: var(--color-primary);
+.nav-pill.active {
+  color: #FFFFFF;
+  background: linear-gradient(135deg, var(--color-primary), hsl(215, 90%, 45%));
+  box-shadow: var(--shadow-primary);
+  border-color: transparent;
+}
+
+.nav-pill.active .nav-icon {
+  font-variation-settings: 'FILL' 1;
 }
 
 .header-actions {
   display: flex;
-  gap: var(--space-xs);
+  gap: 10px;
   align-items: center;
 }
 
-.icon-button {
-  background: transparent;
-  border: none;
+.pill-btn {
+  background: rgba(255, 255, 255, 0.8);
+  border: 1px solid var(--color-border);
   color: var(--color-text-secondary);
-  padding: 8px;
-  border-radius: var(--radius-sm);
+  padding: 8px 14px;
+  border-radius: var(--radius-full);
   cursor: pointer;
   display: flex;
   align-items: center;
-  justify-content: center;
-  transition: var(--transition-fast);
+  gap: 6px;
+  font-weight: 700;
+  font-size: 0.85rem;
+  transition: var(--transition-default);
+  box-shadow: 0 2px 8px rgba(0, 71, 171, 0.05);
 }
 
-.icon-button:hover {
-  background: var(--color-bg-elevated);
+.pill-btn:hover {
+  background: var(--color-bg-card);
   color: var(--color-primary);
+  border-color: var(--color-primary);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(0, 71, 171, 0.12);
 }
 
-.mobile-menu {
-  display: none;
+.pill-btn:active {
+  transform: translateY(0);
 }
 
-@media (max-width: 768px) {
+@media (max-width: 900px) {
   .desktop-nav {
     display: none;
   }
-  
-  .mobile-menu {
-    display: flex;
+  .header-pill {
+    padding: 0 20px;
+    height: 60px;
   }
 }

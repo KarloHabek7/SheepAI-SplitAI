@@ -1,3 +1,10 @@
 {
-  "welcome": "Dobrodošli u Hackathon Projekt"
+  "welcome": "Dobrodošli u Hackathon Projekt",
+  "nav": {
+    "map": "Karta",
+    "assistant": "Asistent",
+    "pazar": "Pazar",
+    "report": "Prijavi",
+    "info": "Info"
+  }
 }
