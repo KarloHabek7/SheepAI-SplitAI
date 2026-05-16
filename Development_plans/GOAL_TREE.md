@@ -20,12 +20,12 @@
 - [ ] [AI] Task 01: Gemini SDK Setup — `Development_plans/Lane_AI/Task_01_Gemini_SDK_Setup.md`
 - [ ] [AI] Task 02: Context Cache & RAG — `Development_plans/Lane_AI/Task_02_Context_Cache_RAG.md`
 - [ ] [AI] Task 03: System Prompt Engineering — `Development_plans/Lane_AI/Task_03_System_Prompt_Engineering.md`
-- [ ] [Frontend] Task 02: Chat Page UI — `Development_plans/Lane_Frontend/Task_02_ChatPage.md`
-- [ ] [Backend] Task 02: Chat Route — `Development_plans/Lane_Backend/Task_02_Chat_Route.md`
+- [x] [Frontend] Task 02: Chat Page UI — `Development_plans/Lane_Frontend/Task_02_ChatPage.md`
+- [x] [Backend] Task 02: Chat Route — `Development_plans/Lane_Backend/Task_02_Chat_Route.md`
 - [ ] [Lead] Task 01: CP1 Integration — Chat + RAG E2E — `Development_plans/Lane_Lead/Task_01_CP1_Integration.md`
 
 #### Feature 1.2: Multilingual Chat Interface
-- [ ] [Frontend] Task 02: Chat Page UI (multilingual display) — `Development_plans/Lane_Frontend/Task_02_ChatPage.md`
+- [x] [Frontend] Task 02: Chat Page UI (multilingual display) — `Development_plans/Lane_Frontend/Task_02_ChatPage.md`
 
 #### Feature 1.3: Function Calling Orchestration
 - [ ] [AI] Task 04: Function Calling Schema — `Development_plans/Lane_AI/Task_04_Function_Calling_Schema.md`
@@ -42,8 +42,8 @@
 
 #### Feature 2.1: Civic Issue Photo Reporting ("Marjan Vision")
 - [ ] [AI] Task 05: Vision Schemas (Zod) — `Development_plans/Lane_AI/Task_05_Vision_Schemas.md`
-- [ ] [Frontend] Task 03: Photo Report Page — `Development_plans/Lane_Frontend/Task_03_ReportPage.md`
-- [ ] [Backend] Task 03: Report Routes — `Development_plans/Lane_Backend/Task_03_Report_Routes.md`
+- [x] [Frontend] Task 03: Photo Report Page — `Development_plans/Lane_Frontend/Task_03_ReportPage.md`
+- [x] [Backend] Task 03: Report Routes — `Development_plans/Lane_Backend/Task_03_Report_Routes.md`
 - [ ] [Lead] Task 02: CP2 Integration — Vision + Pazar + Map E2E — `Development_plans/Lane_Lead/Task_02_CP2_Integration.md`
 
 #### Feature 2.2: Pazar Market Feed
@@ -76,13 +76,13 @@
 - [ ] [Creative] Task 04: Illustration Assets — `Development_plans/Lane_Creative/Task_04_Illustration_Assets.md`
 
 #### Feature 4.5: Backend Foundation & Data Layer
-- [ ] [Backend] Task 01: BFF Scaffold — `Development_plans/Lane_Backend/Task_01_BFF_Scaffold.md`
-- [ ] [Backend] Task 08: In-Memory Store — `Development_plans/Lane_Backend/Task_08_InMemory_Store.md`
+- [x] [Backend] Task 01: BFF Scaffold — `Development_plans/Lane_Backend/Task_01_BFF_Scaffold.md`
+- [x] [Backend] Task 08: In-Memory Store — `Development_plans/Lane_Backend/Task_08_InMemory_Store.md`
 - [ ] [Backend] Task 09: Service Layer — `Development_plans/Lane_Backend/Task_09_Service_Layer.md`
 - [ ] [Backend] Task 10: Zustand Stores — `Development_plans/Lane_Backend/Task_10_Zustand_Stores.md`
 
 #### Feature 4.2: PWA & Responsive Web
-- [ ] [Frontend] Task 01: App Shell + Layout — `Development_plans/Lane_Frontend/Task_01_AppShell_Layout.md`
+- [x] [Frontend] Task 01: App Shell + Layout — `Development_plans/Lane_Frontend/Task_01_AppShell_Layout.md`
 - [ ] [Frontend] Task 08: PWA + Responsive + Capacitor — `Development_plans/Lane_Frontend/Task_08_PWA_Capacitor.md`
 - [ ] [Lead] Task 03: CP3 Final Integration + QA Polish — `Development_plans/Lane_Lead/Task_03_CP3_Final_QA.md`
 
@@ -111,7 +111,7 @@
 > **Why it matters:** A 3D isometric map of Split with live issue markers is the **visual centerpiece** of the app. When judges see colored pins appearing on a grayscale 3D city map after a photo report, the product instantly feels real and deployable. The map unifies all civic data spatially — every report, every cluster, every hotspot is visible at a glance. This is the bridge between "cool chatbot" and "civic control center." It also delivers the colleague's core concept (Gradsko Oko) as an integrated feature rather than a standalone app.
 
 #### Feature 6.1: 3D Isometric Map View
-- [ ] [Frontend] Task 05: 3D Map Page — `Development_plans/Lane_Frontend/Task_05_MapPage.md`
+- [x] [Frontend] Task 05: 3D Map Page — `Development_plans/Lane_Frontend/Task_05_MapPage.md`
 
 #### Feature 6.2: Issue Markers & Clustering
 - [ ] [Frontend] Task 05: Map Issue Layers — `Development_plans/Lane_Frontend/Task_05_MapPage.md`

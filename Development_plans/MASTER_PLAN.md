@@ -2,8 +2,8 @@
 
 > **One AI agent for Split: ask anything, report anything, in any language.**
 >
-> **Last Updated:** 2026-05-16T11:35:00+02:00
-> **Phase:** Architecture → Delegation
+> **Last Updated:** 2026-05-16T13:42:00+02:00
+> **Phase:** Execution (Wave 1 & 2 in progress)
 
 ---
 
@@ -41,16 +41,16 @@ graph LR
 
 ### Lane 0: Lead — Architecture & Orchestration
 - [x] Task 0.1: System Architecture + Type Contracts (Est. 1h)
-- [ ] Task 0.2: Task Delegation via `/delegate` (Est. 0.5h)
+- [x] Task 0.2: Task Delegation via `/delegate` (Est. 0.5h)
 - [ ] Task 0.3: Integration Checkpoint CP1 (Est. 0.5h)
 - [ ] Task 0.4: Integration Checkpoint CP2 (Est. 0.5h)
 - [ ] Task 0.5: Integration Checkpoint CP3 + Final QA (Est. 0.5h)
 - [ ] Task 0.6: Demo Rehearsal & Backup Video (Est. 0.5h)
 
 ### Lane 1: Frontend UI/UX
-- [ ] Task 1.1: App Shell + Layout (Header, BottomNav, routing) (Est. 1.5h)
-- [ ] Task 1.2: Chat Page — message bubbles, input, suggested prompts, citation cards (Est. 2h)
-- [ ] Task 1.3: Photo Report Page — camera/upload, classification preview, submit flow (Est. 1.5h)
+- [x] Task 1.1: App Shell + Layout (Header, BottomNav, routing) (Est. 1.5h)
+- [x] Task 1.2: Chat Page — message bubbles, input, suggested prompts, citation cards (Est. 2h)
+- [x] Task 1.3: Photo Report Page — camera/upload, classification preview, submit flow (Est. 1.5h)
 - [ ] Task 1.4: Pazar Feed Page — product cards grid, freshness indicators (Est. 1h)
 - [ ] Task 1.5: Pazar Vendor Upload Page — photo upload, listing preview (Est. 1h)
 - [ ] Task 1.6: Admin Dashboard Page — metric cards, severity chart, report table (Est. 2h)
@@ -60,19 +60,19 @@ graph LR
 - [ ] Task 1.10: Capacitor Init — install Capacitor, configure, add Android platform (Est. 0.5h)
 - [ ] Task 1.11: Capacitor Native Plugins — Camera, Geolocation, Haptics integration (Est. 1h)
 - [ ] Task 1.12: Android Build — build APK, test on device/emulator (Est. 0.5h)
-- [ ] Task 1.13: **3D Map Page — MapView + Mapbox GL JS init, 3D buildings, isometric camera, grayscale style** (Est. 2h)
+- [x] Task 1.13: **3D Map Page — MapView + Mapbox GL JS init, 3D buildings, isometric camera, grayscale style** (Est. 2h)
 - [ ] Task 1.14: **Map Issue Layers — GeoJSON source, circle markers, clustering, status colors, click/hover handlers** (Est. 1.5h)
 - [ ] Task 1.15: **Map UI Overlays — IssueDetailPanel, MapFilters, StatusLegend, LocationButton, ReportPinOverlay** (Est. 1.5h)
 
 ### Lane 2: Backend / API / Data
-- [ ] Task 2.1: Express BFF Scaffold — server entry, CORS, env, health check (Est. 0.5h)
-- [ ] Task 2.2: Chat Route — POST /api/chat, conversation management (Est. 1h)
-- [ ] Task 2.3: Report Routes — analyze + submit + list endpoints (Est. 1h)
+- [x] Task 2.1: Express BFF Scaffold — server entry, CORS, env, health check (Est. 0.5h)
+- [x] Task 2.2: Chat Route — POST /api/chat, conversation management (Est. 1h)
+- [x] Task 2.3: Report Routes — analyze + submit + list endpoints (Est. 1h)
 - [ ] Task 2.4: Pazar Routes — analyze + submit + feed endpoints (Est. 1h)
 - [ ] Task 2.5: Admin Routes — dashboard stats + report management (Est. 1h)
 - [ ] Task 2.6: Utility Routes — parking, transit, crowd, emergency (Est. 0.5h)
 - [ ] Task 2.7: Mock Tool Implementations — all 6 function-call tools (Est. 1h)
-- [ ] Task 2.8: In-Memory Data Store — reports, listings, conversations (Est. 0.5h)
+- [x] Task 2.8: In-Memory Data Store — reports, listings, conversations (Est. 0.5h)
 - [ ] Task 2.9: Frontend Service Layer — API client wrappers for all endpoints (Est. 1h)
 - [ ] Task 2.10: **Reports Bbox Filter — Add `bbox`, `status`, `category`, `severity_min` query params to GET /api/reports** (Est. 0.5h)
 
@@ -103,9 +103,9 @@ graph LR
 
 | Wave | Tasks (run in parallel) | Model per Task | Notes |
 |---|---|---|---|
-| **Wave 0** | L0-T0.1 (Architecture) | Opus Thinking | ✅ DONE — You are here |
-| **Wave 1** | L4-T4.1 (Brand Site), L0-T0.2 (Delegate), L3-T3.1 (SDK Setup) | Flash, Opus, Flash | Brand site and AI SDK have zero deps |
-| **Wave 2** | L4-T4.2 (Design Extract), L2-T2.1 (BFF Scaffold), L3-T3.2 (Context Cache), L3-T3.3 (Prompts) | Flash, Sonnet, Opus Thinking, Opus | After Wave 1 delivers brand site + SDK |
+| **Wave 0** | L0-T0.1 (Architecture) | Opus Thinking | ✅ DONE |
+| **Wave 1** | L4-T4.1 (Brand Site), L0-T0.2 (Delegate), L3-T3.1 (SDK Setup) | Flash, Opus, Flash | L0-T0.2 DONE; Brand site and AI SDK pending |
+| **Wave 2** | L4-T4.2 (Design Extract), L2-T2.1 (BFF Scaffold), L3-T3.2 (Context Cache), L3-T3.3 (Prompts) | Flash, Sonnet, Opus Thinking, Opus | L2-T2.1 DONE; AI and Design pending |
 | **Wave 3** | L1-T1.1 (App Shell), L2-T2.2–2.6 (Routes), L3-T3.4–3.5 (Schemas), L4-T4.3–4.4 (Assets) | Sonnet, Flash, Opus, Flash | After tokens.css + BFF scaffold |
 | **Wave 4** | L1-T1.2 (Chat UI), L1-T1.3 (Report UI), **L1-T1.13 (3D Map Page)**, L2-T2.7–2.8 (Tools+Store), L3-T3.6–3.7 (Hooks) | Sonnet, Sonnet, **Sonnet**, Flash, Opus | Core feature pages + map |
 | **Wave 5** | L1-T1.4–1.7 (Remaining pages), **L1-T1.14–1.15 (Map Layers + Overlays)**, L2-T2.9–2.10 (Service Layer + Bbox) | Sonnet, **Sonnet**, Flash | Secondary features + map completion |

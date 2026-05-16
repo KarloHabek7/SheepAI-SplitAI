@@ -1,6 +1,6 @@
 # PROJECT STATE — Auto-Updated by Agents
 
-> **Last Updated:** 2026-05-16T12:00:00+02:00
+> **Last Updated:** 2026-05-16T13:42:00+02:00
 > **Updated By:** Lead Agent (Lane 0)
 
 ---
@@ -11,7 +11,7 @@
 
 ---
 
-## 📊 Overall Progress: 8/35 tasks complete (23%) — CP1 Integration in progress (Frontend, Backend & AI branches merged to main)
+## 📊 Overall Progress: 8/35 tasks complete (23%) — CP1 Integration in progress (Frontend & Backend branches merged to main; awaiting AI SDK & RAG setup)
 
 <!-- Updated by Team Lead at checkpoints -->
 
