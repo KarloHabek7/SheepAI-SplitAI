@@ -1,0 +1,38 @@
+.pazar-feed-page {
+  padding-bottom: var(--space-xl);
+}
+
+.page-header-bg {
+  background: linear-gradient(135deg, var(--color-primary) 0%, #003366 100%);
+  color: white;
+  margin-bottom: var(--space-md);
+  padding: var(--space-lg) 0;
+}
+
+.hero-section {
+  max-width: 800px;
+}
+
+.hero-title {
+  font-family: var(--font-display);
+  font-size: var(--font-size-h1);
+  font-weight: 800;
+  margin: 0 0 8px 0;
+  letter-spacing: -0.02em;
+}
+
+.hero-subtitle {
+  font-size: 1.1rem;
+  opacity: 0.9;
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+  .hero-title {
+    font-size: var(--font-size-h2);
+  }
+  
+  .hero-subtitle {
+    font-size: 1rem;
+  }
+}

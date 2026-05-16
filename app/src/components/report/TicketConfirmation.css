@@ -1,0 +1,131 @@
+.ticket-confirmation {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: var(--space-xl) 0;
+  animation: scaleIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.success-animation {
+  margin-bottom: var(--space-lg);
+}
+
+.checkmark-circle {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: var(--color-success);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 10px 20px rgba(22, 199, 132, 0.2);
+}
+
+.checkmark {
+  width: 24px;
+  height: 48px;
+  border: solid white;
+  border-width: 0 6px 6px 0;
+  transform: rotate(45deg);
+  margin-top: -6px;
+}
+
+.success-title {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--color-text-primary);
+  margin-bottom: 8px;
+}
+
+.success-subtitle {
+  font-size: 16px;
+  color: var(--color-text-secondary);
+  margin-bottom: var(--space-xl);
+}
+
+.ticket-card {
+  width: 100%;
+  max-width: 320px;
+  background: white;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-lg);
+  box-shadow: var(--shadow-card);
+  margin-bottom: var(--space-xl);
+}
+
+.ticket-label {
+  font-size: 11px;
+  text-transform: uppercase;
+  color: var(--color-text-secondary);
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.ticket-id {
+  font-size: 28px;
+  font-weight: 800;
+  color: var(--color-primary);
+  letter-spacing: 1px;
+  margin-bottom: 12px;
+}
+
+.ticket-status-badge {
+  display: inline-block;
+  background: var(--color-bg-elevated);
+  color: var(--color-text-primary);
+  font-size: 12px;
+  font-weight: 600;
+  padding: 4px 12px;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--color-border);
+}
+
+.next-steps {
+  width: 100%;
+  max-width: 320px;
+  text-align: left;
+  margin-bottom: var(--space-xl);
+}
+
+.next-steps h3 {
+  font-size: 14px;
+  text-transform: uppercase;
+  color: var(--color-text-secondary);
+  margin-bottom: var(--space-sm);
+}
+
+.next-steps ul {
+  padding-left: var(--space-md);
+  margin: 0;
+}
+
+.next-steps li {
+  font-size: 14px;
+  color: var(--color-text-primary);
+  margin-bottom: 8px;
+}
+
+.new-report-btn {
+  background: var(--color-primary);
+  color: white;
+  border: none;
+  padding: 14px 28px;
+  border-radius: var(--radius-full);
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition-default);
+  box-shadow: var(--shadow-primary);
+}
+
+.new-report-btn:hover {
+  background: var(--color-secondary);
+  transform: translateY(-2px);
+}

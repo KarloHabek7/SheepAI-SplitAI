@@ -3,11 +3,11 @@
 This project uses a strict **Lane-Isolated Feature Branch** workflow to prevent merge conflicts during the rapid pace of the hackathon.
 
 ## The 5 Lanes
-0. `lane/lead/<feature>`: Team Lead — planning, architecture, cross-lane unblocking, integration.
-1. `lane/frontend/<feature>`: React component development, UI/UX.
-2. `lane/backend/<feature>`: API endpoints, stores, database.
-3. `lane/ai/<feature>`: AI/ML integrations, prompts.
-4. `lane/creative/<feature>`: Design assets, videos, pitch slides, marketing landing page.
+0. `lane/lead/task-<id>-<feature>`: Team Lead — planning, architecture, cross-lane unblocking, integration.
+1. `lane/frontend/task-<id>-<feature>`: React component development, UI/UX.
+2. `lane/backend/task-<id>-<feature>`: API endpoints, stores, database.
+3. `lane/ai/task-<id>-<feature>`: AI/ML integrations, prompts.
+4. `lane/creative/task-<id>-<feature>`: Design assets, videos, pitch slides, marketing landing page.
 
 ## File Ownership Matrix
 You may **ONLY** edit files within your owned directories unless specified as shared (additive only).

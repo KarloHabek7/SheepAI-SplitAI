@@ -1,0 +1,43 @@
+.suggested-prompts-container {
+  width: 100%;
+  padding: var(--space-sm) 0;
+  overflow: hidden;
+  background: var(--color-bg-card);
+}
+
+.suggested-prompts-scroll {
+  display: flex;
+  gap: var(--space-xs);
+  padding: 0 var(--space-sm);
+  overflow-x: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.suggested-prompts-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+.suggested-prompt-chip {
+  flex-shrink: 0;
+  padding: 8px 16px;
+  background: var(--color-bg-elevated);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-full);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--color-text-primary);
+  cursor: pointer;
+  transition: var(--transition-default);
+  white-space: nowrap;
+}
+
+.suggested-prompt-chip:hover {
+  background: var(--color-bg-card);
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+}
+
+.suggested-prompt-chip:active {
+  transform: scale(0.95);
+}

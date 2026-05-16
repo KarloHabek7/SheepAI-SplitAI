@@ -19,13 +19,32 @@ You are now acting as the **Implementer**. You have been assigned a specific sub
      - `Development_plans/Lane_<Lane>/Task_XX_<name>.md` (lane subfolder from `/delegate`)
    - Verify it has the required fields: Objective, Lane, Target Files, Implementation Steps, Acceptance Criteria.
 
+1.2. **Branching (MANDATORY):**
+   - Create and switch to a task-specific branch BEFORE starting any work:
+     ```bash
+     git checkout -b lane/<lane>/task-<id>-<description>
+     ```
+   - *Example:* `git checkout -b lane/frontend/task-01-hero-section`
+   - If the branch already exists, switch to it.
+   - NEVER work on a generic lane branch or reuse a previous task's branch.
+
 1.5. **Read Project State (AGAS):**
    - Read `Development_plans/PROJECT_STATE.md` — understand what's done, what's in progress, and current blockers across all lanes.
    - Read `Development_plans/GOAL_TREE.md` — locate your task in the hierarchy. Understand which Pillar and Feature it serves, and how it contributes to the North Star Vision.
    - Check your lane's "Next Recommended Actions" — confirm this task aligns with the recommended next step.
    - Use this context to inform your implementation quality and priorities (e.g., a task under a demo-critical pillar warrants extra polish).
 
-2. **Gather Context:**
+2. **Verify Branch Isolation:**
+   - Check your current branch: `git branch --show-current`.
+   - If the current branch does not match the task (e.g., you are on `lane/backend/T03` but executing `T04`), you MUST create a new branch:
+     ```bash
+     git checkout main
+     git pull
+     git checkout -b lane/<lane>/<task-id>-<short-name>
+     ```
+   - This ensures "each new thing" has its own isolated branch.
+
+3. **Gather Context:**
    - Read ONLY the files and line numbers listed in the "Required Reading" or "Context Snapshot" section.
    - Always read `DESIGN.md` if doing frontend or creative work.
      - Check if `DESIGN.md` header says "Generated from branding website" — if so, the design system is authoritative.

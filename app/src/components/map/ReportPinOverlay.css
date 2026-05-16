@@ -1,0 +1,93 @@
+.report-pin-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 200;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.pin-target {
+  position: relative;
+  transform: translateY(-24px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.pin-marker {
+  font-size: 40px;
+  filter: drop-shadow(0 4px 8px rgba(0,0,0,0.3));
+  animation: bouncePin 1s infinite alternate cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.pin-shadow {
+  width: 12px;
+  height: 4px;
+  background: rgba(0,0,0,0.2);
+  border-radius: 50%;
+  margin-top: -8px;
+  filter: blur(2px);
+}
+
+@keyframes bouncePin {
+  from { transform: translateY(0); }
+  to { transform: translateY(-8px); }
+}
+
+.pin-controls {
+  position: absolute;
+  bottom: calc(100px + env(safe-area-inset-bottom));
+  width: 90%;
+  max-width: 400px;
+  background: white;
+  border-radius: var(--radius-lg);
+  padding: var(--space-md);
+  box-shadow: var(--shadow-elevated);
+  pointer-events: auto;
+  text-align: center;
+}
+
+.pin-hint {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--color-text-primary);
+  margin-bottom: var(--space-md);
+}
+
+.pin-actions {
+  display: flex;
+  gap: var(--space-sm);
+}
+
+.pin-actions button {
+  flex: 1;
+  padding: 12px;
+  border-radius: var(--radius-full);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition-default);
+}
+
+.pin-cancel-btn {
+  background: var(--color-bg-elevated);
+  border: 1px solid var(--color-border);
+  color: var(--color-text-secondary);
+}
+
+.pin-confirm-btn {
+  background: var(--color-primary);
+  border: none;
+  color: white;
+  box-shadow: var(--shadow-primary);
+}
+
+.pin-confirm-btn:hover {
+  background: var(--color-secondary);
+}
