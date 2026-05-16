@@ -1,0 +1,30 @@
+.tool-call-card {
+  margin-top: var(--space-sm);
+  background: var(--color-bg-elevated);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-sm);
+  font-family: monospace;
+}
+
+.tool-call-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  font-size: 12px;
+  font-weight: bold;
+  color: var(--color-secondary);
+  margin-bottom: var(--space-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.tool-call-summary {
+  font-size: 11px;
+  background: rgba(0, 0, 0, 0.03);
+  padding: var(--space-xs);
+  border-radius: var(--radius-sm);
+  margin: 0;
+  overflow-x: auto;
+  color: var(--color-text-secondary);
+}
