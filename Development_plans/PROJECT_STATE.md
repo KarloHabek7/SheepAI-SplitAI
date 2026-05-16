@@ -11,7 +11,7 @@
 
 ---
 
-## 📊 Overall Progress: 8/35 tasks complete (23%) — CP1 Integration in progress
+## 📊 Overall Progress: 8/35 tasks complete (23%) — CP1 Integration in progress (Frontend, Backend & AI branches merged to main)
 
 <!-- Updated by Team Lead at checkpoints -->
 
