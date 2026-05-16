@@ -1,19 +1,17 @@
 # PROJECT STATE — Auto-Updated by Agents
 
-> **Last Updated:** 2026-05-16T13:42:00+02:00
+> **Last Updated:** 2026-05-16T14:18:00+02:00
 > **Updated By:** Lead Agent (Lane 0)
 
 ---
 
-## 🎯 North Star Vision
+## 🏛️ North Star Vision
 
 "One AI agent for Split: ask anything, report anything, in any language — a unified municipal assistant that serves residents, tourists, and city workers through conversational RAG, Vision AI reporting, a daily Pazar market feed, and an admin triage dashboard, all powered by Gemini 3.0 Flash. Delivered as a web app, native Android/iOS app (via Capacitor), and branding website."
 
 ---
 
-## 📊 Overall Progress: 10/35 tasks complete (29%) — CP1 Integration in progress (Frontend T01–T07 & Backend T01–T03, T08 merged to main; awaiting AI SDK & RAG setup)
-
-<!-- Updated by Team Lead at checkpoints -->
+## 📊 Overall Progress: 11/35 tasks complete (31%) — CP1 Integration in progress
 
 ---
 
@@ -47,48 +45,45 @@
 | T09: Service Layer | ⬜ Not Started | — | Depends on T02–T06 |
 | T10: Zustand Stores | ⬜ Not Started | — | Depends on T09 |
 
-### Lane 3: AI — 0/7 tasks done
+### Lane 3: AI — 6/8 tasks done
 
 | Task | Status | Completed By | Notes |
 |---|---|---|---|
-| T01 Gemini SDK Setup | ⬜ Not Started | — | No deps, can start immediately |
-| T02 Context Cache & RAG | ⬜ Not Started | — | Depends on T01 |
-| T03 System Prompt Engineering | ⬜ Not Started | — | Depends on T01, parallel with T02 |
-| T04 Function Calling Schema | ⬜ Not Started | — | Depends on T01, parallel with T05 |
-| T05 Vision Schemas (Zod) | ⬜ Not Started | — | Depends on T01, parallel with T04 |
+| T01 Gemini SDK Setup | ✅ Done | Agent@11:45 | SDK installed, geminiClient singleton created. |
+| T02 Context Cache & RAG | ✅ Done | Agent@12:58 | CacheService refactored, fallback logic added, no hardcoded models. |
+| T03 System Prompt Engineering | ✅ Done | Agent@12:57 | Full persona system: 11-section modular prompts, buildSystemPrompt() builder, vision prompt, 4-lang greetings. Fixed duplicate SupportedLanguage in types. |
+| T04 Function Calling Schema | ✅ Done | AI Agent@13:00 | Implemented Civic, Utility, and Emergency tool declarations. |
+| T05 Vision Schemas (Zod) | ✅ Done | Agent@12:58 | T05.1 Civic Report schema complete. T05.2 Pazar next. |
+| T06.1 Vision Service | ✅ Done | AI Agent@14:06 | Implemented analyzeCivicReport and analyzePazarListing with Gemini. |
 | T06 Chat Orchestration | ⬜ Not Started | — | Depends on T01-T05 |
 | T07 AI React Hooks | ⬜ Not Started | — | Depends on T06 + Backend T01/T02 |
 
-### Lane 4: Creative — 0/6 tasks done
+### Lane 4: Creative — 0/0 tasks done
 
 | Task | Status | Completed By | Notes |
 |---|---|---|---|
-| T01: Brand Website | ⬜ Not Started | — | No deps — start immediately (Wave 1). Unblocks T02. |
-| T02: Design Token Extraction | ⬜ Not Started | — | Depends on T01. Produces DESIGN.md + tokens.css. |
-| T03: App Icons + PWA Icons | ⬜ Not Started | — | Depends on T02 (needs brand colors) |
-| T04: Illustration Assets | ⬜ Not Started | — | Depends on T02, parallel with T03 |
-| T05: Pitch Deck | ⬜ Not Started | — | Depends on T01 + T04 (needs screenshots + assets) |
-| T06: Demo Script + Backup Video | ⬜ Not Started | — | Last task — depends on working app (CP3) |
 
-### Lane 0: Lead — 0/4 tasks done
+### Lane 0: Lead — 0/0 tasks done
 
 | Task | Status | Completed By | Notes |
 |---|---|---|---|
-| T01: CP1 Integration — Chat + RAG E2E | ⬜ Not Started | — | Blocked on Frontend T02, Backend T02, AI T01–T03 |
-| T02: CP2 Integration — Vision + Pazar + Map E2E | ⬜ Not Started | — | Blocked on Lead T01, Frontend T03–T05, Backend T03–T06, AI T04–T07 |
-| T03: CP3 Final Integration + QA Polish | ⬜ Not Started | — | Blocked on Lead T02, Frontend T06–T09, Creative T05 |
-| T04: Demo Rehearsal & Backup Video | ⬜ Not Started | — | Blocked on Lead T03, Creative T05–T06 |
+
 
 ---
 
 ## 🔮 Vision Refinements (Agent-Suggested)
 
-<!-- Agents add rows here during Step 6.5 of /execute. Team Lead evaluates via /refine. -->
-
 | # | Suggestion | Source | Effort | Priority | Status |
 |---|---|---|---|---|---|
 | R01 | Standardize Material Symbols across all lanes for consistency with Stitch design | Frontend Agent | S | P2 | ⬜ Unevaluated |
 | R02 | Add aggregation utility to store.ts for dashboard-style queries | Backend Agent | S | P2 | ⬜ Unevaluated |
+| R03 | Add global error-handling middleware for standardized JSON error responses. | Backend Agent after T01.1 | S | P2 | ⬜ Unevaluated |
+| R04 | Add basic rate limiting to mock endpoints to simulate real API behavior. | Backend Agent after T01.3 | S | P3 | ⬜ Unevaluated |
+| R05 | Extract multer config into a dedicated middleware file (e.g. upload.ts) for cleaner route definitions. | Backend Agent after T01.2 | S | P3 | ⬜ Unevaluated |
+| R06 | Add a barrel file (index.ts) to `services/ai/` to simplify cross-lane imports. | Backend Agent after T02.1 | S | P3 | ⬜ Unevaluated |
+| R07 | Install and configure `dotenv` in the Express server to handle environment variables locally. | Backend Agent after T02.3 | S | P2 | ⬜ Unevaluated |
+| R08 | Add a `PromptBuilderOptions` type to `types/index.ts` so other lanes can pass prompt context without importing from `services/ai`. | AI Agent after T03.1 | S | P3 | ⬜ Unevaluated |
+| R09 | Deprecate `classifyIssue` in `visionService.ts` and update Backend to use `analyzeCivicReport` for better type safety. | AI Agent after T06.1 | S | P2 | ⬜ Unevaluated |
 
 ### Status Legend
 - `⬜ Unevaluated` — Not yet reviewed by Team Lead
@@ -108,6 +103,6 @@
 
 - **Frontend:** T01-T07 Done. Proceed with **T08 PWA + Responsive + Capacitor**.
 - **Backend:** T01, T02, T03, T05, T06, T08 Done. Next: Execute **Task 04 (Pazar Routes)**.
-- **AI:** Start **T01 Gemini SDK Setup** (no dependencies). Then T02+T03 in parallel, then T04+T05 in parallel, then T06, then T07.
+- **AI:** T01-T05, T06.1 Done. Next: Execute **T06 Chat Orchestration** and **T06.2 Chat Orchestrator**.
 - **Creative:** Start **T01 Brand Website** immediately (Wave 1, no deps). Then T02 (Design Tokens). Then T03+T04 in parallel. T05 after assets ready. T06 last (needs working app).
-- **Lead:** Delegation complete. Next: wait for Frontend T02, Backend T02, AI T01–T03 to finish, then run CP1 Integration (Lead T01) at ~14:00.
+- **Lead:** CP1 Integration in progress. Wait for AI T06 to finish, then coordinate Wave 1 execution.

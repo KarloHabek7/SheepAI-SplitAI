@@ -8,11 +8,10 @@ description: "Use when writing commit messages, branching, or interacting with G
 
 > All git operations MUST follow these exact conventions. No exceptions.
 
-1. **NEVER commit to `main`.** The `main` branch is protected. Only the Tech Lead (Karlo) merges to `main` during scheduled Integration Checkpoints. Agents must only commit to their lane's feature branch.
+1. **NEVER commit to `main`.** The `main` branch is protected. Only the Tech Lead (Karlo) merges to `main` during scheduled Integration Checkpoints. Agents must only commit to their lane's feature branch. **Every task implementation MUST begin on a fresh branch based on the latest `main`.**
 
 2. **Branch naming format:** `lane/<lane-name>/task-<id>-<feature-description>`
    - All lowercase, hyphens for spaces, no special characters.
-   - Use the Task ID from `Development_plans/` (e.g., `T01`, `T03.4`).
    - Lane names: `lead`, `frontend`, `backend`, `ai`, `creative`, `flex`.
    - **MANDATORY:** Every new task must have its own unique branch. Never reuse a branch for a different task.
 

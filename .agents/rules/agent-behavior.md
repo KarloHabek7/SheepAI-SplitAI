@@ -12,7 +12,7 @@ title: "Agent Behavior"
 2. **Verify before committing.** Before every git commit, confirm:
    - `npm run build` succeeds with zero errors
    - `git status` shows only intended file changes
-   - You are on the correct feature branch (never `main`)
+   - You are on a fresh task-specific branch (never `main` or a stale feature branch)
    - Commit message follows the `<type>(<scope>): <description>` format
 
 3. **One task at a time.** Complete the current task fully before starting the next one. Do not leave files in a half-edited state. If you cannot finish, tell the user what remains.
