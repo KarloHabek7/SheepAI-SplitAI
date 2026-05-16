@@ -19,7 +19,7 @@ const EmergencyCard: React.FC<EmergencyCardProps> = ({ info }) => {
   };
 
   return (
-    <div className={`emergency-card alert-${info.alertType}`}>
+    <div className={`emergency-card alert-${info.alertType} animate-slide-up`}>
       <div className="card-header">
         <span className="material-symbols-rounded emergency-icon">
           {getIcon(info.alertType)}

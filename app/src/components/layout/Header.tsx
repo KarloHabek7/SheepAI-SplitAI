@@ -6,8 +6,15 @@ import './Header.css';
 const Header: React.FC = () => {
   const location = useLocation();
   const { t, i18n } = useTranslation();
-  const [theme, setTheme] = useState<'light' | 'dark'>('light');
+  const [theme, setTheme] = useState<'light' | 'dark'>(
+    (localStorage.getItem('theme') as 'light' | 'dark') || 'light'
+  );
   const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', theme);
+    localStorage.setItem('theme', theme);
+  }, [theme]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -23,9 +30,7 @@ const Header: React.FC = () => {
   };
 
   const toggleTheme = () => {
-    const nextTheme = theme === 'light' ? 'dark' : 'light';
-    setTheme(nextTheme);
-    document.documentElement.setAttribute('data-theme', nextTheme);
+    setTheme(prev => prev === 'light' ? 'dark' : 'light');
   };
 
   return (
@@ -38,27 +43,27 @@ const Header: React.FC = () => {
         <nav className="desktop-nav">
           <Link to="/" className={`nav-pill ${location.pathname === '/' ? 'active' : ''}`}>
             <span className="material-symbols-outlined nav-icon">map</span>
-            <span>{t('nav.map', 'Map')}</span>
+            <span>{t('nav.map')}</span>
           </Link>
           <Link to="/chat" className={`nav-pill ${location.pathname === '/chat' ? 'active' : ''}`}>
             <span className="material-symbols-outlined nav-icon">chat_bubble</span>
-            <span>{t('nav.assistant', 'Assistant')}</span>
+            <span>{t('nav.assistant')}</span>
           </Link>
           <Link to="/pazar" className={`nav-pill ${location.pathname.startsWith('/pazar') ? 'active' : ''}`}>
             <span className="material-symbols-outlined nav-icon">storefront</span>
-            <span>{t('nav.pazar', 'Pazar')}</span>
+            <span>{t('nav.pazar')}</span>
           </Link>
           <Link to="/report" className={`nav-pill ${location.pathname === '/report' ? 'active' : ''}`}>
             <span className="material-symbols-outlined nav-icon">add_photo_alternate</span>
-            <span>{t('nav.report', 'Report')}</span>
+            <span>{t('nav.report')}</span>
           </Link>
-          <Link to="/admin/dashboard" className={`nav-pill ${location.pathname.startsWith('/admin') ? 'active' : ''}`}>
+          <Link to="/admin" className={`nav-pill ${location.pathname.startsWith('/admin') ? 'active' : ''}`}>
             <span className="material-symbols-outlined nav-icon">admin_panel_settings</span>
-            <span>Admin</span>
+            <span>{t('nav.admin')}</span>
           </Link>
           <Link to="/emergency" className={`nav-pill ${location.pathname === '/emergency' ? 'active' : ''}`}>
-            <span className="material-symbols-outlined nav-icon">info</span>
-            <span>{t('nav.info', 'Info')}</span>
+            <span className="material-symbols-outlined nav-icon">campaign</span>
+            <span>{t('nav.emergency')}</span>
           </Link>
         </nav>
         

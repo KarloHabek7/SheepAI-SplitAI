@@ -20,7 +20,7 @@ const DashboardMetric: React.FC<DashboardMetricProps> = ({
   color = 'primary'
 }) => {
   return (
-    <div className={`metric-card metric-card--${color}`}>
+    <div className={`metric-card metric-card--${color} animate-scale-in`}>
       <div className="metric-header">
         <span className="material-symbols-outlined metric-icon">{icon}</span>
         <span className="metric-label">{label}</span>

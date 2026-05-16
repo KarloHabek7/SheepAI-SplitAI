@@ -10,7 +10,7 @@ const ChatBubble: React.FC<ChatBubbleProps> = ({ message }) => {
   const isAssistant = message.role === 'assistant';
   
   return (
-    <div className={`aura-bubble-row ${isAssistant ? 'assistant' : 'user'}`}>
+    <div className={`aura-bubble-row ${isAssistant ? 'assistant' : 'user'} animate-slide-up`}>
       {isAssistant && (
         <div className="aura-avatar" title="Split Zmaj AI">
           <span className="material-symbols-outlined text-sm">smart_toy</span>

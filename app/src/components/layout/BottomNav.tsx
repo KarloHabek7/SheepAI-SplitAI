@@ -11,12 +11,12 @@ const BottomNav: React.FC = () => {
       <div className="bottom-nav-pill">
         <NavLink to="/" className={({ isActive }) => `bottom-nav-item ${isActive ? 'active' : ''}`}>
           <span className="material-symbols-outlined nav-icon">map</span>
-          <span className="nav-label">{t('nav.map', 'Map')}</span>
+          <span className="nav-label">{t('nav.map')}</span>
         </NavLink>
         
         <NavLink to="/chat" className={({ isActive }) => `bottom-nav-item ${isActive ? 'active' : ''}`}>
           <span className="material-symbols-outlined nav-icon">chat_bubble</span>
-          <span className="nav-label">{t('nav.assistant', 'Assistant')}</span>
+          <span className="nav-label">{t('nav.assistant')}</span>
         </NavLink>
         
         <NavLink to="/report" className={({ isActive }) => `bottom-nav-item report-item ${isActive ? 'active' : ''}`}>
@@ -25,17 +25,17 @@ const BottomNav: React.FC = () => {
               <span className="material-symbols-outlined fab-icon">add_photo_alternate</span>
             </div>
           </div>
-          <span className="nav-label report-label">{t('nav.report', 'Report')}</span>
+          <span className="nav-label report-label">{t('nav.report')}</span>
         </NavLink>
         
         <NavLink to="/pazar" className={({ isActive }) => `bottom-nav-item ${isActive ? 'active' : ''}`}>
           <span className="material-symbols-outlined nav-icon">storefront</span>
-          <span className="nav-label">{t('nav.pazar', 'Pazar')}</span>
+          <span className="nav-label">{t('nav.pazar')}</span>
         </NavLink>
         
         <NavLink to="/emergency" className={({ isActive }) => `bottom-nav-item ${isActive ? 'active' : ''}`}>
-          <span className="material-symbols-outlined nav-icon">info</span>
-          <span className="nav-label">{t('nav.info', 'Info')}</span>
+          <span className="material-symbols-outlined nav-icon">campaign</span>
+          <span className="nav-label">{t('nav.emergency')}</span>
         </NavLink>
       </div>
     </nav>

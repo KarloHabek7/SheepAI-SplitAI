@@ -13,7 +13,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ listing }) => {
   const fallbackImg = imgFruit;
   
   return (
-    <div className="product-card">
+    <div className="product-card animate-scale-in">
       <div className="product-card-bg">
         <img src={listing.imageUrl || fallbackImg} alt={listing.vendor} />
         <div className="product-card-overlay"></div>

@@ -1,10 +1,43 @@
 {
-  "welcome": "Dobrodošli u Hackathon Projekt",
+  "welcome": "Dobrodošli u SplitAI",
+  "common": {
+    "loading": "Učitavanje...",
+    "error": "Došlo je do pogreške",
+    "submit": "Pošalji",
+    "cancel": "Odustani",
+    "back": "Natrag",
+    "next": "Dalje",
+    "save": "Spremi",
+    "delete": "Obriši",
+    "edit": "Uredi",
+    "search": "Traži",
+    "filter": "Filtriraj",
+    "all": "Sve"
+  },
   "nav": {
-    "map": "Karta",
-    "assistant": "Asistent",
+    "map": "Karta Grada",
+    "assistant": "AI Asistent",
     "pazar": "Pazar",
-    "report": "Prijavi",
-    "info": "Info"
+    "report": "Prijavi Problem",
+    "emergency": "Sirena",
+    "admin": "Admin Panel",
+    "login": "Prijava",
+    "logout": "Odjava"
+  },
+  "auth": {
+    "login": "Prijava",
+    "register": "Registracija",
+    "email": "Email adresa",
+    "password": "Lozinka",
+    "forgot_password": "Zaboravili ste lozinku?",
+    "no_account": "Nemate račun?",
+    "have_account": "Već imate račun?"
+  },
+  "emergency": {
+    "title": "Hitne Službe",
+    "subtitle": "Brza pomoć i prijevodi sirena",
+    "scan_qr": "Skeniraj QR Kod",
+    "call_112": "Nazovi 112",
+    "contacts": "Hitni Kontakti"
   }
 }

@@ -1,3 +1,9 @@
+.admin-page-root {
+  min-height: 100vh;
+  background: #0B0F19;
+  color: white;
+}
+
 .filters-bar {
   display: flex;
   justify-content: space-between;

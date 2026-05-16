@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { EmergencyType, SupportedLanguage } from '../types';
 import QRScanner from '../components/emergency/QRScanner';
 import EmergencyCard from '../components/emergency/EmergencyCard';
@@ -7,6 +8,7 @@ import { mockEmergencyData } from '../utils/mockEmergencyData';
 import './EmergencyPage.css';
 
 const EmergencyPage: React.FC = () => {
+  const { t } = useTranslation();
   const [language, setLanguage] = useState<SupportedLanguage>('hr');
   const [selectedType, setSelectedType] = useState<EmergencyType | null>(null);
 
@@ -23,8 +25,8 @@ const EmergencyPage: React.FC = () => {
         <div className="emergency-hero-content">
           <div className="header-text">
             <span className="material-symbols-rounded emergency-hero-icon">notifications_active</span>
-            <h1 className="page-title">Siren Translator</h1>
-            <p className="page-subtitle">Instant safety instructions</p>
+            <h1 className="page-title">{t('emergency.title')}</h1>
+            <p className="page-subtitle">{t('emergency.subtitle')}</p>
           </div>
           <div className="language-switcher-glass">
             {(['hr', 'en', 'de', 'it', 'fr'] as SupportedLanguage[]).map((lang) => (
@@ -48,7 +50,7 @@ const EmergencyPage: React.FC = () => {
             <div className="info-view">
               <button className="back-btn" onClick={() => setSelectedType(null)}>
                 <span className="material-symbols-rounded">arrow_back</span>
-                Back to Scanner
+                {t('common.back')}
               </button>
               {currentInfo && <EmergencyCard info={currentInfo} />}
             </div>
