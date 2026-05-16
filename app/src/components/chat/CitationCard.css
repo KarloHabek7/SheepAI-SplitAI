@@ -1,58 +1,77 @@
-.citation-card {
-  background: rgba(0, 71, 171, 0.03);
-  border-left: 3px solid var(--color-primary);
-  padding: 12px;
-  border-radius: 4px 12px 12px 4px;
-  margin-top: 8px;
+.citation-card-container {
+  background: var(--glass-bg);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid var(--glass-border);
+  border-left: 4px solid var(--color-primary);
+  padding: 14px 16px;
+  border-radius: 6px 16px 16px 6px;
+  margin-top: 10px;
+  margin-bottom: 12px;
   font-size: 0.85rem;
-  transition: var(--transition-fast);
+  transition: var(--transition-default);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.03);
 }
 
-.citation-card:hover {
-  background: rgba(0, 71, 171, 0.06);
+.citation-card-container:hover {
+  background: var(--color-bg-card);
+  border-left-color: var(--color-secondary);
+  box-shadow: 0 6px 24px rgba(0, 71, 171, 0.08);
+  transform: translateX(2px);
 }
 
 .citation-header {
   display: flex;
   align-items: center;
   gap: 8px;
-  margin-bottom: 6px;
+  margin-bottom: 8px;
   color: var(--color-primary);
   font-weight: 700;
 }
 
-.citation-icon {
-  font-size: 16px;
+.citation-book-icon {
+  font-size: 18px;
+  color: var(--color-primary);
 }
 
-.source-name {
+.citation-source-title {
   flex: 1;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  font-size: 0.9rem;
 }
 
-.article-tag {
+.citation-article-pill {
   font-size: 0.7rem;
-  background: var(--color-primary);
+  background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
   color: white;
-  padding: 2px 6px;
-  border-radius: 4px;
+  padding: 2px 8px;
+  border-radius: var(--radius-full);
+  font-weight: 600;
+  letter-spacing: 0.03em;
 }
 
 .citation-body {
   color: var(--color-text-secondary);
-  line-height: 1.4;
+  line-height: 1.5;
 }
 
-.excerpt {
+.citation-excerpt {
   margin: 0;
   font-style: italic;
 }
 
 .citation-footer {
-  margin-top: 6px;
+  margin-top: 8px;
   text-align: right;
   font-size: 0.75rem;
-  opacity: 0.6;
+  opacity: 0.7;
+  font-weight: 500;
+}
+
+@media (max-width: 600px) {
+  .citation-card-container {
+    padding: 12px 14px;
+  }
 }

@@ -33,9 +33,15 @@ const ChatInput: React.FC<ChatInputProps> = ({ onSend, disabled }) => {
   }, [message]);
 
   return (
-    <form className="chat-input-form" onSubmit={handleSubmit}>
-      <div className="input-wrapper">
-        <button type="button" className="action-btn" aria-label="Attach Photo">
+    <form className="chat-input-container" onSubmit={handleSubmit}>
+      <div className="chat-input-pill">
+        <button 
+          type="button" 
+          className="chat-action-btn" 
+          aria-label="Attach Photo"
+          title="Attach Photo"
+          disabled={disabled}
+        >
           <span className="material-symbols-outlined">add_a_photo</span>
         </button>
         
@@ -44,18 +50,20 @@ const ChatInput: React.FC<ChatInputProps> = ({ onSend, disabled }) => {
           value={message}
           onChange={(e) => setMessage(e.target.value)}
           onKeyDown={handleKeyDown}
-          placeholder="Ask anything about Split..."
+          placeholder="Ask Split Zmaj anything (e.g. Varoš regulations, parking near Riva)..."
           rows={1}
           disabled={disabled}
+          className="chat-textarea"
         />
         
         <button 
           type="submit" 
-          className={`send-btn ${message.trim() ? 'active' : ''}`}
+          className={`chat-send-btn ${message.trim() ? 'active' : ''}`}
           disabled={!message.trim() || disabled}
           aria-label="Send Message"
+          title="Send Message"
         >
-          <span className="material-symbols-outlined">send</span>
+          <span className="material-symbols-outlined">arrow_upward</span>
         </button>
       </div>
     </form>
