@@ -3,6 +3,7 @@ import express from 'express';
 import cors from 'cors';
 import { requestLogger } from './middleware/requestLogger.js';
 import { errorHandler } from './middleware/errorHandler.js';
+import chatRouter from './routes/chat.js';
 
 // Load environment variables from .env file
 dotenv.config({ path: '../.env' });
@@ -60,10 +61,12 @@ app.post('/api/cache/init', (_req, res) => {
 });
 
 // ---------------------------------------------------------------------------
-// Route Placeholders (to be implemented in Tasks 02–06)
+// Route Handlers
 // ---------------------------------------------------------------------------
 
-// TODO: Task 02 — POST /api/chat
+// Task 02 — POST /api/chat
+app.use('/api/chat', chatRouter);
+
 // TODO: Task 03 — POST /api/report/analyze, POST /api/report/submit, GET /api/reports
 // TODO: Task 04 — POST /api/pazar/analyze, POST /api/pazar/submit, GET /api/pazar/feed
 // TODO: Task 05 — GET /api/admin/dashboard, PATCH /api/admin/reports/:id

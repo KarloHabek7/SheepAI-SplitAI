@@ -32,12 +32,12 @@
 | T07 Emergency Page | ⬜ Not Started | | Multilingual Siren Translator |
 | T08 PWA + Responsive + Capacitor | ⬜ Not Started | | PWA manifest, responsive audit, Android setup |
 
-### Lane 2: Backend — 0/10 tasks done
+### Lane 2: Backend — 2/10 tasks done
 
 | Task | Status | Completed By | Notes |
 |---|---|---|---|
-| T01: BFF Scaffold | ⬜ Not Started | — | No deps — start immediately |
-| T02: Chat Route | ⬜ Not Started | — | Depends on T01 |
+| T01: BFF Scaffold | ✅ Done | Agent@12:26 | Basic Express setup with health checks |
+| T02: Chat Route | ✅ Done | Agent@12:26 | Implemented POST /api/chat and GET history with mock responses |
 | T03: Report Routes | ⬜ Not Started | — | Depends on T01, T08 |
 | T04: Pazar Routes | ⬜ Not Started | — | Depends on T01, T08 |
 | T05: Admin Routes | ⬜ Not Started | — | Depends on T01, T03 |
@@ -105,7 +105,7 @@
 ## ⏭️ Next Recommended Actions (per lane)
 
 - **Frontend:** Start with **T01 App Shell + Layout** (no dependencies). Then T02–T07 in parallel (all depend on T01). T08 runs last. **Soft blocker:** tokens.css from Creative lane (use temp tokens until delivered).
-- **Backend:** Start with **T01 (BFF Scaffold)** and **T08 (In-Memory Store)** in parallel — both have no deps beyond the scaffold. Then proceed to T02–T06 (routes), T07 (tools), T09 (services), T10 (stores).
+- **Backend:** Proceed with **T08 (In-Memory Store)** to move conversation management out of the route file, or start **T03 (Report Routes)**.
 - **AI:** Start **T01 Gemini SDK Setup** (no dependencies). Then T02+T03 in parallel, then T04+T05 in parallel, then T06, then T07.
 - **Creative:** Start **T01 Brand Website** immediately (Wave 1, no deps). Then T02 (Design Tokens). Then T03+T04 in parallel. T05 after assets ready. T06 last (needs working app).
 - **Lead:** Delegation complete. Next: wait for Frontend T02, Backend T02, AI T01–T03 to finish, then run CP1 Integration (Lead T01) at ~14:00.
