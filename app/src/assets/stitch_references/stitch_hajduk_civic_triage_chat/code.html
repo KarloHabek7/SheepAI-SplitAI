@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<title>SplitAI Chat Interface</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,200;9..40,300;9..40,400;9..40,700&amp;family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "tertiary-fixed-dim": "#ebc246",
+                    "secondary": "#bb0013",
+                    "tertiary-fixed": "#ffe08b",
+                    "bg-card": "#FFFFFF",
+                    "tertiary-container": "#cda72c",
+                    "surface-bright": "#faf8ff",
+                    "surface": "#faf8ff",
+                    "surface-tint": "#2559bd",
+                    "on-surface-variant": "#434653",
+                    "surface-container-lowest": "#ffffff",
+                    "on-secondary-fixed-variant": "#93000d",
+                    "surface-container-low": "#f3f3fc",
+                    "on-secondary": "#ffffff",
+                    "error-container": "#ffdad6",
+                    "secondary-container": "#e22427",
+                    "surface-container-high": "#e7e7f0",
+                    "surface-container": "#ededf6",
+                    "outline-variant": "#c3c6d5",
+                    "on-primary-fixed": "#001946",
+                    "on-secondary-fixed": "#410002",
+                    "surface-dim": "#d9d9e2",
+                    "on-primary": "#ffffff",
+                    "on-primary-container": "#a5bdff",
+                    "on-secondary-container": "#fffbff",
+                    "inverse-on-surface": "#f0f0f9",
+                    "bg-elevated": "#F3F4F6",
+                    "error": "#ba1a1a",
+                    "primary": "#00327d",
+                    "on-tertiary-fixed": "#241a00",
+                    "outline": "#737784",
+                    "primary-fixed": "#dae2ff",
+                    "on-tertiary": "#ffffff",
+                    "background": "#faf8ff",
+                    "secondary-fixed": "#ffdad6",
+                    "on-error": "#ffffff",
+                    "primary-fixed-dim": "#b1c5ff",
+                    "bg-primary": "#F8F9FA",
+                    "on-surface": "#191b22",
+                    "secondary-fixed-dim": "#ffb4ab",
+                    "on-tertiary-container": "#4f3d00",
+                    "border": "rgba(0, 71, 171, 0.15)",
+                    "on-tertiary-fixed-variant": "#584400",
+                    "on-primary-fixed-variant": "#00419e",
+                    "surface-variant": "#e2e2eb",
+                    "on-background": "#191b22",
+                    "text-secondary": "#4B5563",
+                    "inverse-primary": "#b1c5ff",
+                    "surface-container-highest": "#e2e2eb",
+                    "primary-container": "#0047ab",
+                    "text-primary": "#111827",
+                    "success": "#10B981",
+                    "on-error-container": "#93000a",
+                    "tertiary": "#745b00",
+                    "inverse-surface": "#2e3037"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "lg": "56px",
+                    "xs": "8px",
+                    "sm": "16px",
+                    "xl": "128px",
+                    "md": "32px"
+            },
+            "fontFamily": {
+                    "h1": ["DM Sans"],
+                    "hero-lg-mobile": ["DM Sans"],
+                    "small": ["Inter"],
+                    "hero-lg": ["DM Sans"],
+                    "h2": ["DM Sans"],
+                    "body": ["Inter"]
+            },
+            "fontSize": {
+                    "h1": ["3rem", {"lineHeight": "1.1", "fontWeight": "200"}],
+                    "hero-lg-mobile": ["2.5rem", {"lineHeight": "1.1", "fontWeight": "300"}],
+                    "small": ["0.875rem", {"lineHeight": "1.5", "fontWeight": "300"}],
+                    "hero-lg": ["4.5rem", {"lineHeight": "1.05", "fontWeight": "200"}],
+                    "h2": ["2.25rem", {"lineHeight": "1.3", "fontWeight": "200"}],
+                    "body": ["1rem", {"lineHeight": "1.6", "fontWeight": "300"}]
+            }
+          },
+        }
+      }
+    </script>
+<style>
+        body {
+            -webkit-tap-highlight-color: transparent;
+        }
+        /* Custom scrollbar for horizontal scrolling areas */
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        .safe-area-pb {
+            padding-bottom: env(safe-area-inset-bottom, 20px);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background h-screen flex flex-col font-body font-body overflow-hidden">
+<!-- TopAppBar -->
+<header class="bg-white/85 dark:bg-on-surface/85 backdrop-blur-xl docked full-width top-0 sticky border-b border-border/10 shadow-sm shadow-primary/10 transition-all duration-300 ease-in-out z-50">
+<div class="flex justify-between items-center w-full px-sm h-lg">
+<button class="text-on-surface-variant hover:bg-surface-container-high/50 transition-colors p-2 rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined">bubble_chart</span>
+</button>
+<h1 class="font-h2 text-h2-mobile font-bold text-primary dark:text-primary-fixed-dim tracking-tight">SplitAI</h1>
+<button class="text-on-surface-variant hover:bg-surface-container-high/50 transition-colors p-2 rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined">sensors</span>
+</button>
+</div>
+</header>
+<!-- Main Chat Canvas -->
+<main class="flex-1 overflow-y-auto px-sm py-md flex flex-col gap-md hide-scrollbar pb-32">
+<!-- System Status / Date Divider -->
+<div class="flex justify-center">
+<span class="bg-surface-container-low text-text-secondary font-small text-small px-3 py-1 rounded-full text-xs">Today, 10:42 AM</span>
+</div>
+<!-- User Message -->
+<div class="flex flex-col items-end w-full">
+<div class="bg-primary text-on-primary rounded-xl rounded-tr-none p-sm max-w-[85%] shadow-sm shadow-primary/10">
+<p class="font-body text-body">I noticed a streetlight is out on Elm St near the park. It's been dark for two days.</p>
+</div>
+</div>
+<!-- AI Message -->
+<div class="flex flex-col items-start w-full">
+<div class="flex items-end gap-2 mb-1">
+<div class="w-8 h-8 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center shadow-sm shadow-primary/10">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">smart_toy</span>
+</div>
+<span class="font-small text-small text-text-secondary font-medium">SplitAI</span>
+</div>
+<div class="bg-bg-card border border-border/30 rounded-xl rounded-tl-none p-sm max-w-[90%] shadow-[0_4px_12px_rgba(0,71,171,0.06)] backdrop-blur-sm">
+<div class="prose prose-sm prose-blue max-w-none text-text-primary font-body text-body">
+<p class="mb-2">Thank you for reporting this. I've located the likely asset based on your description.</p>
+<ul class="list-disc pl-4 mb-3 text-text-secondary space-y-1">
+<li><strong>Location:</strong> Intersection of Elm St &amp; Park Ave</li>
+<li><strong>Asset ID:</strong> SL-8492-B</li>
+<li><strong>Status:</strong> Currently unassigned</li>
+</ul>
+<p class="mb-3">I can submit a formal maintenance request to the Public Works department for you. Would you like me to proceed?</p>
+</div>
+<!-- Citation Card -->
+<div class="mt-3 bg-surface-container-lowest border border-outline-variant/30 rounded-lg p-2 flex items-center gap-2 hover:bg-surface-container-low transition-colors cursor-pointer">
+<div class="bg-surface-container text-primary rounded p-1 flex items-center justify-center">
+<span class="material-symbols-outlined text-xs">link</span>
+</div>
+<div class="flex-1 overflow-hidden">
+<p class="font-small text-small text-text-primary truncate text-xs font-medium">Public Works Infrastructure Map</p>
+<p class="font-small text-small text-text-secondary truncate text-[10px]">city-data.gov/assets/lighting</p>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Fixed Bottom Area (Input + Nav) -->
+<div class="fixed bottom-0 w-full bg-bg-card/95 backdrop-blur-xl border-t border-border/10 shadow-[0_-4px_24px_rgba(0,71,171,0.06)] z-40 flex flex-col pt-2 pb-safe">
+<!-- Suggested Actions (Horizontal Scroll) -->
+<div class="flex gap-2 overflow-x-auto hide-scrollbar px-sm pb-3">
+<button class="flex-shrink-0 bg-surface-container-low border border-border/50 text-text-primary font-small text-small px-4 py-2 rounded-full hover:bg-surface-container-high transition-colors whitespace-nowrap">
+                Submit maintenance request
+            </button>
+<button class="flex-shrink-0 bg-surface-container-low border border-border/50 text-text-primary font-small text-small px-4 py-2 rounded-full hover:bg-surface-container-high transition-colors whitespace-nowrap">
+                Attach a photo
+            </button>
+<button class="flex-shrink-0 bg-surface-container-low border border-border/50 text-text-primary font-small text-small px-4 py-2 rounded-full hover:bg-surface-container-high transition-colors whitespace-nowrap">
+                Check other outages
+            </button>
+</div>
+<!-- Input Area -->
+<div class="px-sm pb-4 flex items-end gap-2">
+<!-- Attachment Preview (Mock) -->
+<button class="flex-shrink-0 w-10 h-10 rounded-full bg-surface-container-high text-on-surface-variant flex items-center justify-center hover:bg-surface-container-highest transition-colors mb-1">
+<span class="material-symbols-outlined">add_photo_alternate</span>
+</button>
+<div class="flex-1 bg-bg-elevated rounded-xl border border-transparent focus-within:border-primary/30 focus-within:shadow-[0_0_0_2px_rgba(0,71,171,0.1)] transition-all flex items-center px-3 py-1 min-h-[44px] max-h-[120px]">
+<textarea class="w-full bg-transparent border-none focus:ring-0 resize-none font-body text-body text-text-primary placeholder:text-text-secondary py-2 hide-scrollbar" placeholder="Type a message..." rows="1"></textarea>
+</div>
+<button class="flex-shrink-0 w-10 h-10 rounded-full bg-primary text-on-primary flex items-center justify-center shadow-sm shadow-primary/20 hover:bg-secondary transition-colors mb-1">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">send</span>
+</button>
+</div>
+<!-- BottomNavBar -->
+<nav class="w-full flex justify-around items-center px-sm py-xs border-t border-border/5">
+<button class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-full px-md py-xs scale-95 active:scale-90 transition-transform duration-200">
+<span class="material-symbols-outlined mb-1" style="font-variation-settings: 'FILL' 1;">chat_bubble</span>
+<span class="font-body text-small text-[10px] font-medium">Chat</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high dark:hover:bg-surface-container-highest rounded-full px-md py-xs scale-95 active:scale-90 transition-transform duration-200">
+<span class="material-symbols-outlined mb-1">assignment</span>
+<span class="font-body text-small text-[10px]">Reports</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high dark:hover:bg-surface-container-highest rounded-full px-md py-xs scale-95 active:scale-90 transition-transform duration-200">
+<span class="material-symbols-outlined mb-1">person</span>
+<span class="font-body text-small text-[10px]">Profile</span>
+</button>
+</nav>
+</div>
+</body></html>

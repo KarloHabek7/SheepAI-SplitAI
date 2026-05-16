@@ -2,56 +2,75 @@
   display: flex;
   flex-direction: column;
   height: 100%;
-  background: var(--color-bg-base);
+  background: var(--color-bg-primary);
 }
 
 .chat-page-container {
   flex: 1;
   overflow-y: auto;
-  padding-bottom: var(--space-xl);
   display: flex;
   flex-direction: column;
+  scrollbar-width: none;
+}
+
+.chat-page-container::-webkit-scrollbar {
+  display: none;
 }
 
 .chat-messages-list {
   display: flex;
   flex-direction: column;
-  padding: var(--space-md) 0;
+  gap: var(--space-sm);
+  padding: var(--space-md) var(--space-sm) 120px;
 }
 
 .chat-message-wrapper {
-  margin-bottom: var(--space-md);
+  display: flex;
+  flex-direction: column;
+  width: 100%;
 }
 
-.citation-wrapper, .tool-call-wrapper {
-  margin-left: var(--space-md);
+.citation-wrapper {
+  margin-top: -12px;
+  margin-bottom: var(--space-xs);
+  width: 90%;
+  max-width: 320px;
+}
+
+.tool-call-wrapper {
   margin-top: -8px;
   margin-bottom: var(--space-sm);
-  max-width: 80%;
+  max-width: 90%;
 }
 
 .chat-footer {
-  background: white;
-  border-top: 1px solid var(--color-border);
-  padding-bottom: env(safe-area-inset-bottom);
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  z-index: 40;
+  background: var(--color-bg-card);
+  box-shadow: 0 -4px 24px rgba(0, 71, 171, 0.06);
+  backdrop-filter: blur(12px);
 }
 
 /* Typing Indicator */
 .typing-indicator {
   display: flex;
   gap: 4px;
-  padding: var(--space-sm) var(--space-md);
+  padding: 12px 16px;
   background: var(--color-bg-card);
-  border-radius: var(--radius-lg);
+  border-radius: var(--radius-md);
+  border-top-left-radius: 0;
   width: fit-content;
-  margin-bottom: var(--space-md);
+  margin-top: 4px;
   border: 1px solid var(--color-border);
+  box-shadow: 0 4px 12px rgba(0, 71, 171, 0.04);
 }
 
 .typing-indicator span {
   width: 6px;
   height: 6px;
-  background: var(--color-text-secondary);
+  background: var(--color-primary);
   border-radius: 50%;
   opacity: 0.4;
   animation: bounce 1.4s infinite ease-in-out both;
@@ -61,6 +80,6 @@
 .typing-indicator span:nth-child(2) { animation-delay: -0.16s; }
 
 @keyframes bounce {
-  0%, 80%, 100% { transform: scale(0); }
-  40% { transform: scale(1); }
+  0%, 80%, 100% { transform: scale(0.3); opacity: 0.3; }
+  40% { transform: scale(1); opacity: 1; }
 }
