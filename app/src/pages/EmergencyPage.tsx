@@ -398,18 +398,20 @@ const EmergencyPage: React.FC = () => {
   const currentInfo = selectedType ? mockEmergencyData[language][selectedType] : null;
 
   return (
-    <PageContainer>
-      <div className="emergency-page">
-        <div className="emergency-header">
+    <div className="emergency-page-root">
+      <div className="emergency-hero-bg">
+        <div className="emergency-hero-overlay"></div>
+        <div className="emergency-hero-content">
           <div className="header-text">
+            <span className="material-symbols-rounded emergency-hero-icon">notifications_active</span>
             <h1 className="page-title">Siren Translator</h1>
-            <p className="page-subtitle">Instant safety instructions in your language</p>
+            <p className="page-subtitle">Instant safety instructions</p>
           </div>
-          <div className="language-switcher">
-            {(['hr', 'en', 'de'] as SupportedLanguage[]).map((lang) => (
+          <div className="language-switcher-glass">
+            {(['hr', 'en', 'de', 'it', 'fr'] as SupportedLanguage[]).map((lang) => (
               <button
                 key={lang}
-                className={`lang-btn ${language === lang ? 'active' : ''}`}
+                className={`lang-pill ${language === lang ? 'active' : ''}`}
                 onClick={() => setLanguage(lang)}
               >
                 {lang.toUpperCase()}
@@ -417,7 +419,9 @@ const EmergencyPage: React.FC = () => {
             ))}
           </div>
         </div>
+      </div>
 
+      <PageContainer>
         <div className="emergency-content">
           {!selectedType ? (
             <QRScanner onSelectType={handleSelectType} selectedType={selectedType} />
@@ -438,8 +442,8 @@ const EmergencyPage: React.FC = () => {
             <span>Official Civil Protection Protocol — City of Split</span>
           </div>
         </div>
-      </div>
-    </PageContainer>
+      </PageContainer>
+    </div>
   );
 };
 

@@ -1,21 +1,39 @@
 .severity-chart-card {
-  background: var(--color-bg-card);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-lg);
-  padding: var(--space-sm);
-  box-shadow: var(--shadow-card);
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius-2xl);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(0, 0, 0, 0.4);
+  padding: var(--space-lg);
   flex: 1;
 }
 
+.severity-chart-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: 
+    radial-gradient(220px 160px at 100% 0%, rgba(251,146,60,0.25), transparent 60%),
+    radial-gradient(260px 180px at 0% 100%, rgba(34,197,94,0.10), transparent 70%),
+    linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.00));
+}
+
 .chart-title {
+  position: relative;
+  z-index: 1;
   font-family: var(--font-display);
   font-size: var(--font-size-h3);
   margin-top: 0;
-  margin-bottom: var(--space-sm);
-  color: var(--color-text-primary);
+  margin-bottom: var(--space-md);
+  color: white;
+  font-weight: 600;
+  letter-spacing: -0.02em;
 }
 
 .chart-container {
+  position: relative;
+  z-index: 1;
   display: flex;
   flex-direction: column;
   gap: var(--space-sm);
@@ -37,13 +55,14 @@
 
 .label-value {
   font-weight: 700;
-  color: var(--color-text-primary);
+  color: white;
 }
 
 .row-track {
   width: 100%;
   height: 24px;
-  background: var(--color-bg-elevated);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: var(--radius-sm);
   overflow: hidden;
 }
@@ -62,21 +81,21 @@
   font-size: 10px;
   font-weight: 800;
   color: white;
-  text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+  text-shadow: 0 1px 2px rgba(0,0,0,0.5);
 }
 
 .bar-low {
-  background: linear-gradient(90deg, #10B981 0%, #34D399 100%);
+  background: linear-gradient(90deg, rgba(16, 185, 129, 0.6) 0%, rgba(52, 211, 153, 0.8) 100%);
 }
 
 .bar-medium {
-  background: linear-gradient(90deg, #F2C94C 0%, #FCD34D 100%);
+  background: linear-gradient(90deg, rgba(242, 201, 76, 0.6) 0%, rgba(252, 211, 77, 0.8) 100%);
 }
 
 .bar-high {
-  background: linear-gradient(90deg, #FF7E00 0%, #FFA040 100%);
+  background: linear-gradient(90deg, rgba(255, 126, 0, 0.6) 0%, rgba(255, 160, 64, 0.8) 100%);
 }
 
 .bar-critical {
-  background: linear-gradient(90deg, #D71920 0%, #EF4444 100%);
+  background: linear-gradient(90deg, rgba(215, 25, 32, 0.6) 0%, rgba(239, 68, 68, 0.8) 100%);
 }
