@@ -20,44 +20,96 @@ export function useMapboxMap() {
 
     mapboxgl.accessToken = MAPBOX_TOKEN;
 
-    const map = new mapboxgl.Map({
-      container: mapContainerRef.current,
-      style: 'mapbox://styles/mapbox/light-v11', // Starting with light-v11 for grayscale look
-      center: SPLIT_MAP_DEFAULTS.center,
-      zoom: SPLIT_MAP_DEFAULTS.zoom,
-      pitch: SPLIT_MAP_DEFAULTS.pitch,
-      bearing: SPLIT_MAP_DEFAULTS.bearing,
-      maxBounds: SPLIT_MAP_BOUNDS,
-      antialias: true,
-      dragRotate: false, // Lock rotation for isometric look
-      touchZoomRotate: false,
-    });
+    const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const styleUrl = isDarkMode ? 'mapbox://styles/mapbox/dark-v11' : 'mapbox://styles/mapbox/light-v11';
+    const buildingColor = isDarkMode ? '#242424' : '#aaa';
 
-    map.on('load', () => {
-      // Apply grayscale desaturation to map layers
-      // This makes issue markers pop
-      const layers = map.getStyle().layers;
-      if (layers) {
-        layers.forEach((layer) => {
-          if (layer.type === 'fill' || layer.type === 'line' || layer.type === 'background') {
-            // We'll apply filters or just trust the light-v11 style for now
+    try {
+      const map = new mapboxgl.Map({
+        container: mapContainerRef.current,
+        style: styleUrl,
+        center: SPLIT_MAP_DEFAULTS.center,
+        zoom: SPLIT_MAP_DEFAULTS.zoom,
+        pitch: SPLIT_MAP_DEFAULTS.pitch,
+        bearing: SPLIT_MAP_DEFAULTS.bearing,
+        maxBounds: SPLIT_MAP_BOUNDS,
+        antialias: true,
+        dragRotate: false,
+        touchZoomRotate: false,
+      });
+
+      map.on('load', () => {
+        // Add 3D buildings layer
+        const layers = map.getStyle().layers;
+        const labelLayerId = layers?.find(
+          (layer) => layer.type === 'symbol' && layer.layout && layer.layout['text-field']
+        )?.id;
+
+        map.addLayer(
+          {
+            'id': '3d-buildings',
+            'source': 'composite',
+            'source-layer': 'building',
+            'filter': ['==', 'extrude', 'true'],
+            'type': 'fill-extrusion',
+            'minzoom': 13,
+            'paint': {
+              'fill-extrusion-color': buildingColor,
+              'fill-extrusion-height': [
+                'interpolate',
+                ['linear'],
+                ['zoom'],
+                13,
+                0,
+                13.05,
+                ['get', 'height']
+              ],
+              'fill-extrusion-base': [
+                'interpolate',
+                ['linear'],
+                ['zoom'],
+                13,
+                0,
+                13.05,
+                ['get', 'min_height']
+              ],
+              'fill-extrusion-opacity': 0.6
+            }
+          },
+          labelLayerId
+        );
+
+        setMapInstance(map);
+        setIsLoaded(true);
+      });
+
+      const handleThemeChange = (e: MediaQueryListEvent) => {
+        const newStyle = e.matches ? 'mapbox://styles/mapbox/dark-v11' : 'mapbox://styles/mapbox/light-v11';
+        const newBuildingColor = e.matches ? '#242424' : '#aaa';
+        map.setStyle(newStyle);
+        map.once('style.load', () => {
+          if (map.getLayer('3d-buildings')) {
+            map.setPaintProperty('3d-buildings', 'fill-extrusion-color', newBuildingColor);
           }
         });
-      }
+      };
 
-      setIsLoaded(true);
-    });
+      const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+      mediaQuery.addEventListener('change', handleThemeChange);
 
-    map.on('error', (e) => {
-      console.error('Mapbox error:', e);
-      setError(e.error?.message || 'Failed to load map');
-    });
+      map.on('error', (e) => {
+        console.error('Mapbox error:', e);
+        setError('Failed to load map. Check console for details.');
+      });
 
-    setMapInstance(map);
-
-    return () => {
-      map.remove();
-    };
+      return () => {
+        mediaQuery.removeEventListener('change', handleThemeChange);
+        map.remove();
+      };
+    } catch (err: any) {
+      console.error('Map initialization failed:', err);
+      setError(err.message || 'Map initialization failed');
+    }
   }, []);
 
   return { mapContainerRef, mapInstance, isLoaded, error };
