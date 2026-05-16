@@ -10,25 +10,27 @@ description: "Use when writing commit messages, branching, or interacting with G
 
 1. **NEVER commit to `main`.** The `main` branch is protected. Only the Tech Lead (Karlo) merges to `main` during scheduled Integration Checkpoints. Agents must only commit to their lane's feature branch.
 
-2. **Branch naming format:** `lane/<lane-name>/<task-id>-<description>`
+2. **Branch naming format:** `lane/<lane-name>/task-<id>-<feature-description>`
    - All lowercase, hyphens for spaces, no special characters.
    - Use the Task ID from `Development_plans/` (e.g., `T01`, `T03.4`).
    - Lane names: `lead`, `frontend`, `backend`, `ai`, `creative`, `flex`.
+   - **MANDATORY:** Every new task must have its own unique branch. Never reuse a branch for a different task.
 
    ```bash
    # ✅ DO
-   lane/lead/T01-architecture-setup
-   lane/frontend/T02-dashboard-layout
-   lane/backend/T03-auth-state-store
-   lane/ai/T04-gemini-stream-hook
-   lane/creative/T05-hero-illustrations
-   lane/flex/T99-emergency-api-hotfix
+   lane/lead/task-00-architecture-setup
+   lane/frontend/task-01-dashboard-layout
+   lane/backend/task-02-auth-state-store
+   lane/ai/task-03-gemini-stream-hook
+   lane/creative/task-04-hero-illustrations
+   lane/flex/task-99-emergency-api-hotfix
 
    # ❌ DON'T
    feature/dashboard          # missing lane prefix
-   lane/backend/bff-scaffold   # too generic, missing task ID
-   lane/frontend/dashboard_layout  # underscores forbidden
-   lane/assets/hero-illustrations   # old lane name, use 'creative'
+   lane/frontend/dashboard    # missing task ID and description
+   lane/frontend/task-01      # missing description
+   lane/Frontend/Task-01      # uppercase forbidden
+   lane/frontend/task_01      # underscores forbidden
    ```
 
 3. **Commit message format:** `<type>(<scope>): <description>`
