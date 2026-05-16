@@ -19,17 +19,21 @@ export const useMapboxMap = () => {
       return;
     }
 
+    const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const styleUrl = isDarkMode ? 'mapbox://styles/mapbox/dark-v11' : 'mapbox://styles/mapbox/light-v11';
+    const buildingColor = isDarkMode ? '#242424' : '#aaa';
+
     try {
       const map = new mapboxgl.Map({
         container: mapContainerRef.current,
-        style: 'mapbox://styles/mapbox/light-v11', // Starting with light style
+        style: styleUrl,
         center: SPLIT_MAP_DEFAULTS.center,
         zoom: SPLIT_MAP_DEFAULTS.zoom,
         pitch: SPLIT_MAP_DEFAULTS.pitch,
         bearing: SPLIT_MAP_DEFAULTS.bearing,
         maxBounds: SPLIT_MAP_BOUNDS,
         antialias: true,
-        dragRotate: false, // Lock rotation for isometric feel
+        dragRotate: false,
         touchZoomRotate: false,
       });
 
@@ -49,7 +53,7 @@ export const useMapboxMap = () => {
             'type': 'fill-extrusion',
             'minzoom': 13,
             'paint': {
-              'fill-extrusion-color': '#aaa',
+              'fill-extrusion-color': buildingColor,
               'fill-extrusion-height': [
                 'interpolate',
                 ['linear'],
@@ -74,13 +78,23 @@ export const useMapboxMap = () => {
           labelLayerId
         );
 
-        // Apply grayscale filters to common layers if possible
-        // Note: For real desaturation, a custom style in Mapbox Studio is better.
-        // Here we just use the light-v11 style which is already quite neutral.
-
         setMapInstance(map);
         setIsLoaded(true);
       });
+
+      const handleThemeChange = (e: MediaQueryListEvent) => {
+        const newStyle = e.matches ? 'mapbox://styles/mapbox/dark-v11' : 'mapbox://styles/mapbox/light-v11';
+        const newBuildingColor = e.matches ? '#242424' : '#aaa';
+        map.setStyle(newStyle);
+        map.once('style.load', () => {
+          if (map.getLayer('3d-buildings')) {
+            map.setPaintProperty('3d-buildings', 'fill-extrusion-color', newBuildingColor);
+          }
+        });
+      };
+
+      const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+      mediaQuery.addEventListener('change', handleThemeChange);
 
       map.on('error', (e) => {
         console.error('Mapbox error:', e);
@@ -88,6 +102,7 @@ export const useMapboxMap = () => {
       });
 
       return () => {
+        mediaQuery.removeEventListener('change', handleThemeChange);
         map.remove();
       };
     } catch (err: any) {
