@@ -11,7 +11,7 @@
 
 ---
 
-## 📊 Overall Progress: 8/35 tasks complete (23%) — CP1 Integration in progress (Frontend & Backend branches merged to main; awaiting AI SDK & RAG setup)
+## 📊 Overall Progress: 10/35 tasks complete (29%) — CP1 Integration in progress (Frontend T01–T07 & Backend T01–T03, T08 merged to main; awaiting AI SDK & RAG setup)
 
 <!-- Updated by Team Lead at checkpoints -->
 
