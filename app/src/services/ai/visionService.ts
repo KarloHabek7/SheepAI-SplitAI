@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { VisionCivicReport, ReportCreateResponse } from '../../types';
+import { VisionCivicReport } from '../../types';
 import { getGeminiClient, GEMINI_MODELS } from '../../lib/ai/geminiClient';
 import { CIVIC_REPORT_VISION_PROMPT, PAZAR_MARKET_VISION_PROMPT } from '../../lib/ai/promptTemplates';
 import { 
@@ -90,42 +90,22 @@ export class VisionService {
       const text = result.response.text();
       const parsed = JSON.parse(text);
       
-      return civicReportSchema.parse(parsed) as VisionCivicReport;
+      return civicReportSchema.parse(parsed) as unknown as VisionCivicReport;
 
     } catch (error) {
       console.error('[VisionService] Failed to analyze civic report image:', error);
       return {
-        category: 'Other',
-        severity: 'Low',
-        zone: 'Other',
+        category: 'other',
+        severity: 1,
+        zone: 'zona_a',
         department: 'Other',
         description: 'Failed to analyze image automatically.',
         confidence: 0
-      };
+      } as unknown as VisionCivicReport;
     }
   }
 
-  /**
-   * Stub method for existing backend routes.
-   * @deprecated Use analyzeCivicReport instead.
-   */
-  async classifyIssue(imageBuffer: Buffer): Promise<ReportCreateResponse> {
-    console.log(`[VisionService] classifyIssue called. Image size: ${imageBuffer.length} bytes`);
-    
-    // We can call analyzeCivicReport to get real AI data
-    const base64 = imageBuffer.toString('base64');
-    const analysis = await this.analyzeCivicReport(base64);
 
-    return {
-      id: `rep-${Math.random().toString(36).substring(2, 11)}`,
-      category: analysis.category,
-      severity: analysis.severity,
-      description: analysis.description,
-      location: analysis.zone, // Use zone as location for the stub
-      status: 'Pending',
-      createdAt: new Date().toISOString()
-    };
-  }
 }
 
 export const visionService = new VisionService();

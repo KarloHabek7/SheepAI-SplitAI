@@ -9,8 +9,6 @@ import parkingRouter from './routes/parking.js';
 import transitRouter from './routes/transit.js';
 import crowdRouter from './routes/crowd.js';
 import emergencyRouter from './routes/emergency.js';
-import { seedReports } from './store.js';
-import reportsRouter from './routes/reports.js';
 import { errorHandler } from './middleware/errorHandler.js';
 
 const __filename = fileURLToPath(import.meta.url);
@@ -30,9 +28,6 @@ app.use('/api/chat', chatRouter);
 // Task 03 — Civic Reports
 app.use('/api/report', reportRouter);  // For /analyze and /submit
 app.use('/api/reports', reportRouter); // For listing
-
-// Vision Service integration
-app.use('/api/vision', reportsRouter);
 
 // TODO: Task 04 — POST /api/pazar/analyze, POST /api/pazar/submit, GET /api/pazar/feed
 // Task 05 — Admin Dashboard

@@ -5,8 +5,8 @@ import type { ChatRequest } from '../../types/index.js';
 const router = Router();
 
 router.post('/', async (req, res) => {
-  const { message, history } = req.body as ChatRequest;
-  const response = await chatService.generateResponse(message, history);
+  const { message } = req.body as ChatRequest;
+  const response = await chatService.generateResponse(message, []);
   res.json(response);
 });
 

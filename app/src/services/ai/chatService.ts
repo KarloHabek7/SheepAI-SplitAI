@@ -12,8 +12,14 @@ export class ChatService {
     await new Promise(resolve => setTimeout(resolve, 500));
 
     return {
-      reply: `This is a stubbed response for: "${message}". The AI Lane will replace this logic with Gemini RAG calls.`,
-      citations: ['Source: Local Stub Engine']
+      message: {
+        id: `msg-${Date.now()}`,
+        role: 'assistant',
+        content: `This is a stubbed response for: "${message}". The AI Lane will replace this logic with Gemini RAG calls.`,
+        citations: [{ sourceDocument: 'Local Stub Engine', excerpt: 'Stub' }],
+        timestamp: new Date().toISOString()
+      },
+      conversationId: 'mock-conversation'
     };
   }
 }

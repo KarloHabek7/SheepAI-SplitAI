@@ -286,6 +286,7 @@ function getLanguageName(lang: SupportedLanguage): string {
     en: 'English',
     it: 'Italian',
     de: 'German',
+    fr: 'French',
   };
   return names[lang] || 'English';
 }
@@ -370,6 +371,19 @@ The Dragon is here to help! 🐉`,
   de: `Hallo! 🐉 Ich bin der Split Zmaj (Drache von Split) — dein digitaler Assistent für alles rund um die Stadt Split.
 
 I'll respond in English for clarity — but feel free to write in German!
+
+Ask me about:
+• 🏛️ Urban planning & permits
+• 🧹 Municipal regulations
+• 🚨 Emergency contacts
+• 📸 Reporting city issues
+• 🏖️ Tourist tips
+
+The Dragon is here to help! 🐉`,
+
+  fr: `Bonjour! 🐉 Je suis le Split Zmaj (Dragon de Split) — votre assistant numérique.
+
+I'll respond in English to make things easier — but feel free to write in French!
 
 Ask me about:
 • 🏛️ Urban planning & permits
