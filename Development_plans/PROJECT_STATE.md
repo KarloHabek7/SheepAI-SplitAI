@@ -11,7 +11,7 @@
 
 ---
 
-## 📊 Overall Progress: 25/26 tasks complete (96%) — CP2 Integration in progress
+## 📊 Overall Progress: 26/26 tasks complete (100%) — Integration Wave 1 Complete
 
 ---
 
@@ -69,8 +69,11 @@
 
 ### Lane 0: Lead — 0/0 tasks done
 
+### Lane 5: Flex / Integration — 1/1 tasks done
+
 | Task | Status | Completed By | Notes |
 |---|---|---|---|
+| INT-05 Map GeoJSON | ✅ Done | Agent@17:28 | Wired useIssueGeoJson to reportService.getReports(). Removed mock data. |
 
 
 ---
@@ -109,4 +112,4 @@
 - **Backend:** T01, T02, T03, T04, T05, T06, T07, T08, T09, T10 Done. **All 10 Backend tasks complete! 🎉**
 - **AI:** T01-T07 Done (8/8). Next: All AI lane tasks completed.
 - **Creative:** Start **T01 Brand Website** immediately (Wave 1, no deps). Then T02 (Design Tokens). Then T03+T04 in parallel. T05 after assets ready. T06 last (needs working app).
-- **Lead:** CP2 Integration complete. Backend fully integrated. Unblocked Frontend T08.
+- **Lead:** Integration Wave 1 complete. All frontend pages wired to backend. Verified build (unrelated ChatPage errors detected). Ready for final sanity check and production build.

@@ -1,98 +1,65 @@
-import { useMemo } from 'react';
-import { IssueGeoJSONCollection, IssueGeoJSONFeature } from '@/types';
-
-const MOCK_ISSUES: IssueGeoJSONFeature[] = [
-  {
-    type: 'Feature',
-    geometry: { type: 'Point', coordinates: [16.4402, 43.5081] },
-    properties: {
-      id: '1',
-      title: 'Waste Overflow',
-      description: 'Garbage bins overflowing near the Riva entrance.',
-      category: 'waste_overflow',
-      status: 'open',
-      severity: 8,
-      imageUrl: '/mock-images/waste_overflow.png',
-      createdAt: new Date().toISOString(),
-      zone: 'unesco_buffer',
-      department: 'cistoca'
-    }
-  },
-  {
-    type: 'Feature',
-    geometry: { type: 'Point', coordinates: [16.4380, 43.5095] },
-    properties: {
-      id: '2',
-      title: 'Broken Infrastructure',
-      description: 'Lamp post #42 flickering and making noise.',
-      category: 'damaged_infrastructure',
-      status: 'in_progress',
-      severity: 4,
-      imageUrl: '/mock-images/broken_lamp.png',
-      createdAt: new Date().toISOString(),
-      zone: 'zona_a',
-      department: 'komunalni_redari'
-    }
-  },
-  {
-    type: 'Feature',
-    geometry: { type: 'Point', coordinates: [16.4420, 43.5110] },
-    properties: {
-      id: '3',
-      title: 'Pothole on Road',
-      description: 'Large pothole causing traffic slowdown.',
-      category: 'pothole',
-      status: 'open',
-      severity: 9,
-      imageUrl: '/mock-images/pothole.png',
-      createdAt: new Date().toISOString(),
-      zone: 'zona_b',
-      department: 'promet'
-    }
-  },
-  {
-    type: 'Feature',
-    geometry: { type: 'Point', coordinates: [16.4450, 43.5075] },
-    properties: {
-      id: '4',
-      title: 'Graffiti on Wall',
-      description: 'Unauthorized graffiti on a residential building.',
-      category: 'graffiti',
-      status: 'resolved',
-      severity: 2,
-      imageUrl: '/mock-images/graffiti.png',
-      createdAt: new Date().toISOString(),
-      zone: 'zona_c',
-      department: 'komunalni_redari'
-    }
-  },
-  {
-    type: 'Feature',
-    geometry: { type: 'Point', coordinates: [16.4350, 43.5060] },
-    properties: {
-      id: '5',
-      title: 'Illegal Parking',
-      description: 'Car blocking pedestrian access on the sidewalk.',
-      category: 'illegal_parking',
-      status: 'open',
-      severity: 6,
-      imageUrl: '/mock-images/illegal_parking.png',
-      createdAt: new Date().toISOString(),
-      zone: 'zona_a',
-      department: 'promet'
-    }
-  }
-];
+import { useState, useEffect, useCallback } from 'react';
+import { 
+  IssueGeoJSONCollection, 
+  IssueGeoJSONFeature, 
+  REPORT_TO_MAP_STATUS 
+} from '@/types';
+import { getReports } from '@/services/reportService';
 
 export const useIssueGeoJson = () => {
-  const geoJson = useMemo<IssueGeoJSONCollection>(() => ({
+  const [geoJson, setGeoJson] = useState<IssueGeoJSONCollection>({
     type: 'FeatureCollection',
-    features: MOCK_ISSUES,
-  }), []);
+    features: [],
+  });
+  const [isLoading, setIsLoading] = useState(false);
+
+  const refresh = useCallback(async () => {
+    setIsLoading(true);
+    try {
+      const response = await getReports();
+      if (response.success && response.data) {
+        const features: IssueGeoJSONFeature[] = response.data
+          .filter(report => report.location) // Only show reports with valid location
+          .map(report => ({
+            type: 'Feature',
+            geometry: { 
+              type: 'Point', 
+              coordinates: [report.location!.lng, report.location!.lat] 
+            },
+            properties: {
+              id: report.id,
+              title: report.classification.category,
+              description: report.classification.description,
+              category: report.classification.category,
+              status: REPORT_TO_MAP_STATUS[report.status] || 'open',
+              severity: report.classification.severity,
+              imageUrl: report.imageUrl,
+              createdAt: report.createdAt,
+              updatedAt: report.updatedAt,
+              department: report.classification.department,
+              zone: report.classification.zone,
+            }
+          }));
+        
+        setGeoJson({
+          type: 'FeatureCollection',
+          features,
+        });
+      }
+    } catch (err) {
+      console.error('[useIssueGeoJson] Fetch failed:', err);
+    } finally {
+      setIsLoading(false);
+    }
+  }, []);
+
+  useEffect(() => {
+    refresh();
+  }, [refresh]);
 
   return {
     geoJson,
-    isLoading: false,
-    refresh: async () => { console.log('Refreshing map data...'); }
+    isLoading,
+    refresh
   };
 };
