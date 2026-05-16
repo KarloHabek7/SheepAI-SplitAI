@@ -45,7 +45,7 @@
 | T09: Service Layer | ⬜ Not Started | — | Depends on T02–T06 |
 | T10: Zustand Stores | ⬜ Not Started | — | Depends on T09 |
 
-### Lane 3: AI — 6/8 tasks done
+### Lane 3: AI — 7/8 tasks done
 
 | Task | Status | Completed By | Notes |
 |---|---|---|---|
@@ -55,7 +55,7 @@
 | T04 Function Calling Schema | ✅ Done | AI Agent@13:00 | Implemented Civic, Utility, and Emergency tool declarations. |
 | T05 Vision Schemas (Zod) | ✅ Done | Agent@12:58 | T05.1 Civic Report schema complete. T05.2 Pazar next. |
 | T06.1 Vision Service | ✅ Done | AI Agent@14:06 | Implemented analyzeCivicReport and analyzePazarListing with Gemini. |
-| T06 Chat Orchestration | ⬜ Not Started | — | Depends on T01-T05 |
+| T06 Chat Orchestration | ✅ Done | AI Agent@14:45 | T06.2 chatOrchestrator.ts: session mgmt, citation parsing, function call detection, cache integration. |
 | T07 AI React Hooks | ⬜ Not Started | — | Depends on T06 + Backend T01/T02 |
 
 ### Lane 4: Creative — 0/0 tasks done
@@ -103,6 +103,6 @@
 
 - **Frontend:** T01-T07 Done. Proceed with **T08 PWA + Responsive + Capacitor**.
 - **Backend:** T01, T02, T03, T05, T06, T08 Done. Next: Execute **Task 04 (Pazar Routes)**.
-- **AI:** T01-T05, T06.1 Done. Next: Execute **T06 Chat Orchestration** and **T06.2 Chat Orchestrator**.
+- **AI:** T01-T06 Done (7/8). Next: Execute **T07 AI React Hooks** (depends on T06 + Backend T01/T02).
 - **Creative:** Start **T01 Brand Website** immediately (Wave 1, no deps). Then T02 (Design Tokens). Then T03+T04 in parallel. T05 after assets ready. T06 last (needs working app).
 - **Lead:** CP1/CP2 Integration complete. Build errors resolved. Unblocked Frontend T08, Backend T04, AI T06.
