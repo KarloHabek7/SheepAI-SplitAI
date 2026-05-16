@@ -60,6 +60,9 @@ graph LR
 - [ ] Task 1.10: Capacitor Init — install Capacitor, configure, add Android platform (Est. 0.5h)
 - [ ] Task 1.11: Capacitor Native Plugins — Camera, Geolocation, Haptics integration (Est. 1h)
 - [ ] Task 1.12: Android Build — build APK, test on device/emulator (Est. 0.5h)
+- [ ] Task 1.13: **3D Map Page — MapView + Mapbox GL JS init, 3D buildings, isometric camera, grayscale style** (Est. 2h)
+- [ ] Task 1.14: **Map Issue Layers — GeoJSON source, circle markers, clustering, status colors, click/hover handlers** (Est. 1.5h)
+- [ ] Task 1.15: **Map UI Overlays — IssueDetailPanel, MapFilters, StatusLegend, LocationButton, ReportPinOverlay** (Est. 1.5h)
 
 ### Lane 2: Backend / API / Data
 - [ ] Task 2.1: Express BFF Scaffold — server entry, CORS, env, health check (Est. 0.5h)
@@ -71,6 +74,7 @@ graph LR
 - [ ] Task 2.7: Mock Tool Implementations — all 6 function-call tools (Est. 1h)
 - [ ] Task 2.8: In-Memory Data Store — reports, listings, conversations (Est. 0.5h)
 - [ ] Task 2.9: Frontend Service Layer — API client wrappers for all endpoints (Est. 1h)
+- [ ] Task 2.10: **Reports Bbox Filter — Add `bbox`, `status`, `category`, `severity_min` query params to GET /api/reports** (Est. 0.5h)
 
 ### Lane 3: AI/ML Integration
 - [ ] Task 3.1: Gemini SDK Setup — client initialization, config, error handling (Est. 0.5h)
@@ -103,8 +107,8 @@ graph LR
 | **Wave 1** | L4-T4.1 (Brand Site), L0-T0.2 (Delegate), L3-T3.1 (SDK Setup) | Flash, Opus, Flash | Brand site and AI SDK have zero deps |
 | **Wave 2** | L4-T4.2 (Design Extract), L2-T2.1 (BFF Scaffold), L3-T3.2 (Context Cache), L3-T3.3 (Prompts) | Flash, Sonnet, Opus Thinking, Opus | After Wave 1 delivers brand site + SDK |
 | **Wave 3** | L1-T1.1 (App Shell), L2-T2.2–2.6 (Routes), L3-T3.4–3.5 (Schemas), L4-T4.3–4.4 (Assets) | Sonnet, Flash, Opus, Flash | After tokens.css + BFF scaffold |
-| **Wave 4** | L1-T1.2 (Chat UI), L1-T1.3 (Report UI), L2-T2.7–2.8 (Tools+Store), L3-T3.6–3.7 (Hooks) | Sonnet, Sonnet, Flash, Opus | Core feature pages |
-| **Wave 5** | L1-T1.4–1.7 (Remaining pages), L2-T2.9 (Service Layer) | Sonnet, Flash | Secondary features |
+| **Wave 4** | L1-T1.2 (Chat UI), L1-T1.3 (Report UI), **L1-T1.13 (3D Map Page)**, L2-T2.7–2.8 (Tools+Store), L3-T3.6–3.7 (Hooks) | Sonnet, Sonnet, **Sonnet**, Flash, Opus | Core feature pages + map |
+| **Wave 5** | L1-T1.4–1.7 (Remaining pages), **L1-T1.14–1.15 (Map Layers + Overlays)**, L2-T2.9–2.10 (Service Layer + Bbox) | Sonnet, **Sonnet**, Flash | Secondary features + map completion |
 | **Wave 6** | L1-T1.8–1.9 (PWA + Polish), L4-T4.5–4.6 (Pitch) | Flash, Opus | Final polish |
 | **Wave 7** | L1-T1.10–1.12 (Capacitor Mobile) | Flash | After web app is feature-complete |
 
@@ -202,5 +206,7 @@ gantt
 | Sub-second text response time | ✅ Verified at CP1 |
 | Multilingual (at least HR, EN, DE) | ✅ Working at CP1 |
 | Premium UI (glassmorphism, animations) | ✅ Polished at CP3 |
+| **3D isometric map showing issue markers on Split** | **✅ Working at CP2** |
+| **Map clustering + filters functional** | **✅ Working at CP2** |
 | Brand website live on Vercel | ✅ Working at Wave 1 |
 | 90-second demo script rehearsed | ✅ Done before pitch |

@@ -264,9 +264,9 @@ sequenceDiagram
 ### 6.1 Route Map
 
 ```
-/                     → Landing / Chat (default view)
+/                     → MapPage (3D isometric map with issue markers — primary home view)
 /chat                 → Full chat interface (SplitAI agent)
-/report               → Photo reporting flow
+/report               → Photo reporting flow (also triggered from map FAB)
 /pazar                → Pazar market feed (public view)
 /pazar/submit         → Vendor photo upload
 /emergency            → Emergency info / QR scanner
@@ -279,8 +279,9 @@ sequenceDiagram
 
 | Route | Page Component | Key Features |
 |---|---|---|
-| `/` or `/chat` | `ChatPage` | Conversational UI, message bubbles, citation cards, language auto-detect, suggested prompts |
-| `/report` | `ReportPage` | Camera/upload, AI classification preview, confirm & submit flow, ticket confirmation |
+| `/` | `MapPage` | **3D isometric map** — full-screen Mapbox view of Split with issue markers, clustering, filters, location button, report FAB |
+| `/chat` | `ChatPage` | Conversational UI, message bubbles, citation cards, language auto-detect, suggested prompts |
+| `/report` | `ReportPage` | Camera/upload, AI classification preview, confirm & submit flow, ticket confirmation, pin adjustment on map |
 | `/pazar` | `PazarFeedPage` | Scrollable product cards, price display, freshness indicators, vendor info |
 | `/pazar/submit` | `PazarSubmitPage` | Vendor photo upload, AI-extracted listing preview, edit & confirm |
 | `/emergency` | `EmergencyPage` | QR scanner, multilingual emergency instructions, contact info |
@@ -314,6 +315,7 @@ sequenceDiagram
 | `useReportStore` | Report feature | `currentImage`, `classification`, `submissionStatus`, `recentReports[]` | None |
 | `usePazarStore` | Pazar feature | `listings[]`, `isLoading`, `filters` | None |
 | `useAdminStore` | Admin feature | `reports[]`, `dashboardStats`, `filters`, `selectedReport` | None |
+| `useMapStore` | 3D Map feature | `camera`, `bounds`, `issuesGeoJson`, `selectedIssueId`, `filters`, `isReportMode`, `userLocation` | None |
 | `useAppStore` | Global | `language`, `theme`, `isOnline`, `cacheStatus` | LocalStorage |
 
 ---
@@ -399,6 +401,7 @@ graph LR
 | Routing | react-router-dom v7 | Already installed |
 | State | Zustand 5 | Minimal boilerplate, good DevTools |
 | Styling | Vanilla CSS + tokens.css | Max control, design token system |
+| 3D Map | Mapbox GL JS (`mapbox-gl`) | 3D isometric map with buildings, GeoJSON layers, clustering |
 | Icons | Lucide React | Already installed, consistent style |
 | i18n | i18next + react-i18next | Already installed, runtime language switching |
 | PWA | vite-plugin-pwa | Add-to-home-screen, offline shell |
@@ -450,20 +453,26 @@ SplitAI/
 │   │   ├── components/
 │   │   │   ├── ui/               # Button, Input, Badge, Card, Spinner, Modal
 │   │   │   ├── layout/           # AppShell, Header, BottomNav, PageContainer
+│   │   │   ├── map/              # MapView, IssueLayer, IssueDetailPanel, MapFilters, StatusLegend, LocationButton, ReportPinOverlay
 │   │   │   ├── chat/             # ChatBubble, ChatInput, CitationCard, SuggestedPrompts
 │   │   │   ├── report/           # PhotoUpload, ClassificationPreview, TicketConfirmation
 │   │   │   ├── pazar/            # ProductCard, PazarGrid, VendorUpload
 │   │   │   ├── admin/            # ReportTable, SeverityBadge, DashboardMetric, RouteMap
 │   │   │   └── emergency/        # QRScanner, EmergencyCard
 │   │   ├── hooks/
-│   │   │   └── ai/               # useChat, useVisionAnalysis, useRAG
+│   │   │   ├── ai/               # useChat, useVisionAnalysis, useRAG
+│   │   │   ├── useMapboxMap.ts   # Mapbox GL JS map initialization + lifecycle
+│   │   │   ├── useIssueGeoJson.ts # CivicReport[] → GeoJSON transformation + fetching
+│   │   │   ├── useMapBounds.ts   # Track map viewport bounds (debounced)
+│   │   │   ├── useMapFilters.ts  # Map filter state management
+│   │   │   └── useUserLocation.ts # Browser/Capacitor geolocation
 │   │   ├── i18n/
 │   │   │   ├── config.ts
 │   │   │   └── locales/          # en.json, hr.json, de.json, it.json, fr.json
 │   │   ├── lib/
 │   │   │   └── ai/               # geminiClient, promptTemplates, schemas
 │   │   ├── middleware/            # authGuard (admin routes)
-│   │   ├── pages/                # ChatPage, ReportPage, PazarFeedPage, AdminDashboard, etc.
+│   │   ├── pages/                # MapPage, ChatPage, ReportPage, PazarFeedPage, AdminDashboard, etc.
 │   │   ├── services/
 │   │   │   ├── ai/               # geminiService, cacheService, visionService
 │   │   │   ├── chatService.ts
@@ -475,7 +484,7 @@ SplitAI/
 │   │   │   ├── routes/           # chat.ts, report.ts, pazar.ts, admin.ts, emergency.ts
 │   │   │   ├── tools/            # Mock tool implementations
 │   │   │   └── cache/            # Context cache initialization
-│   │   ├── stores/               # useChatStore, useReportStore, usePazarStore, useAdminStore, useAppStore
+│   │   ├── stores/               # useChatStore, useReportStore, usePazarStore, useAdminStore, useAppStore, useMapStore
 │   │   ├── styles/
 │   │   │   └── tokens.css        # Design system tokens
 │   │   ├── types/
@@ -632,3 +641,174 @@ gantt
     Demo Rehearsal             :demo, 18:00, 0.5h
     CP3: Final Integration     :milestone, cp3, 18:30, 0
 ```
+
+---
+
+## 15. 3D Isometric Map Architecture (Mapbox GL JS)
+
+> **Added:** Integrates the colleague's "Gradsko Oko Split" 3D map concept as the spatial visualization layer for the existing civic reporting system. The map becomes the **primary home view** of the application.
+
+### 15.1 Overview
+
+The 3D isometric map is a **full-screen, stylized grayscale map of Split** centered on `[16.4402, 43.5081]` with a fixed isometric perspective (`pitch: 60°`, `bearing: -35°`). All civic reports from our existing `CivicReport[]` data are rendered as colored GeoJSON markers (red = open, yellow = in progress, green = resolved) on top of subtle 3D building extrusions.
+
+**This is NOT a separate product** — it's the visual anchor for our existing data. The map consumes the same `GET /api/reports` endpoint and transforms `CivicReport[]` → GeoJSON client-side.
+
+### 15.2 Technology
+
+| Concern | Technology | Rationale |
+|---|---|---|
+| Map Engine | Mapbox GL JS (`mapbox-gl` npm) | Best-in-class 3D WebGL map with buildings, clustering, custom styles |
+| React Binding | Direct `useRef` + `useEffect` (no wrapper lib) | Maximum control, avoid react-map-gl abstraction overhead |
+| Map Style | Custom Mapbox Studio style or programmatic | Grayscale/monochrome civic dashboard aesthetic |
+| Token Security | `VITE_MAPBOX_TOKEN` for client (public token) | Mapbox tokens are designed for client-side use (domain-restricted) |
+
+### 15.3 Map Configuration
+
+```typescript
+// Split map defaults — shared across components
+const SPLIT_MAP_CONFIG = {
+  center: [16.4402, 43.5081] as [number, number],
+  zoom: 13,
+  pitch: 60,
+  bearing: -35,
+  maxBounds: [[16.30, 43.45], [16.60, 43.60]] as [[number, number], [number, number]],
+  style: 'mapbox://styles/mapbox/light-v11', // base — customized programmatically
+};
+
+// Interaction restrictions (isometric lock)
+map.dragRotate.disable();
+map.touchZoomRotate.disableRotation();
+// pitchWithRotate: false in map constructor
+```
+
+### 15.4 Map Layers (Rendering Order)
+
+| Layer ID | Type | Source | Purpose |
+|---|---|---|---|
+| `3d-buildings` | `fill-extrusion` | `composite` / `building` | Subtle gray 3D building blocks (opacity 0.55) |
+| `issues-clusters` | `circle` | `issues-source` | Dark gray cluster circles with count |
+| `issues-cluster-count` | `symbol` | `issues-source` | White text showing cluster count |
+| `issues-unclustered` | `circle` | `issues-source` | Individual issue markers (red/yellow/green by status) |
+
+### 15.5 GeoJSON Data Flow
+
+```mermaid
+sequenceDiagram
+    participant Map as MapView Component
+    participant Hook as useIssueGeoJson Hook
+    participant Store as useMapStore
+    participant Service as reportService
+    participant BFF as BFF Server
+
+    Map->>Store: Subscribe to bounds changes
+    Store->>Hook: bounds changed (debounced 300ms)
+    Hook->>Service: GET /api/reports?bbox=west,south,east,north&status=...
+    Service->>BFF: HTTP GET
+    BFF-->>Service: CivicReport[]
+    Service-->>Hook: CivicReport[]
+    Hook->>Hook: civicReportsToGeoJson(reports)
+    Hook->>Store: setIssuesGeoJson(geoJsonCollection)
+    Store-->>Map: Re-render markers via source.setData()
+```
+
+### 15.6 Component Breakdown (Frontend Lane 1)
+
+| Component | Location | Responsibility |
+|---|---|---|
+| `MapView` | `components/map/MapView.tsx` | Full-screen Mapbox map container. Initializes map, adds layers, handles events. |
+| `IssueLayer` | `components/map/IssueLayer.tsx` | Manages the GeoJSON source + circle/cluster layers. Updates data when store changes. |
+| `IssueDetailPanel` | `components/map/IssueDetailPanel.tsx` | Side panel (desktop) / bottom sheet (mobile) showing clicked issue details. |
+| `MapFilters` | `components/map/MapFilters.tsx` | Filter bar: status, category, severity. Overlaid on map. |
+| `StatusLegend` | `components/map/StatusLegend.tsx` | Small legend showing red/yellow/green status meanings. |
+| `LocationButton` | `components/map/LocationButton.tsx` | "Locate me" GPS button overlaid on map. |
+| `ReportPinOverlay` | `components/map/ReportPinOverlay.tsx` | Draggable pin for adjusting report location during submission. |
+
+### 15.7 Hooks (Frontend Lane 1)
+
+| Hook | Location | Purpose |
+|---|---|---|
+| `useMapboxMap` | `hooks/useMapboxMap.ts` | Initializes Mapbox GL map instance, handles lifecycle, returns ref + instance. |
+| `useIssueGeoJson` | `hooks/useIssueGeoJson.ts` | Fetches reports by bounds, transforms to GeoJSON, manages refresh. |
+| `useMapBounds` | `hooks/useMapBounds.ts` | Tracks map viewport bounds on move events (debounced). |
+| `useMapFilters` | `hooks/useMapFilters.ts` | Manages filter state, computes active count. |
+| `useUserLocation` | `hooks/useUserLocation.ts` | Browser/Capacitor geolocation with error handling. |
+
+### 15.8 Map Style Requirements
+
+The map visual style is a **clean, minimal civic dashboard** — NOT photorealistic:
+
+| Element | Style |
+|---|---|
+| Roads | Light gray / medium gray lines |
+| Buildings (3D) | White/light gray, opacity 0.4–0.7, fill-extrusion |
+| Water / sea | Very light gray or dark charcoal (depends on theme) |
+| Parks / land | Neutral grayscale |
+| Labels | Minimal — major streets and landmarks only |
+| POIs | Disabled |
+| Issue markers | **Strong colors** — the ONLY vibrant elements on the map |
+| Background | Clean monochrome — map should feel like a stylized 3D model |
+
+### 15.9 Mobile vs Desktop UX
+
+| Concern | Mobile | Desktop |
+|---|---|---|
+| Issue details | Bottom sheet (slides up) | Right side panel |
+| Filters | Collapsible top bar | Always-visible top bar |
+| Report button | Floating Action Button (bottom-right) | Button in header or sidebar |
+| Location button | Bottom-left overlay | Bottom-left overlay |
+| Map gestures | Pinch zoom, drag pan | Scroll zoom, drag pan |
+| Marker size | Larger (touch targets) | Standard |
+
+### 15.10 Performance Strategy
+
+| Concern | Strategy |
+|---|---|
+| Marker rendering | Mapbox source + layer (NOT individual HTML markers) |
+| Many reports | Clustering with `clusterMaxZoom: 14`, `clusterRadius: 50` |
+| Viewport loading | Fetch only reports within current map bounds (`bbox` parameter) |
+| Debouncing | 300ms debounce on map `moveend` before refetching |
+| Map instance | Single instance, never re-created on React re-renders |
+| GeoJSON updates | `source.setData()` — direct update, no layer recreation |
+| Memoization | `useMemo` for GeoJSON transformation from `CivicReport[]` |
+
+### 15.11 API Extension
+
+One modification to the existing `GET /api/reports` endpoint:
+
+```
+GET /api/reports?bbox=west,south,east,north&status=open,in_progress&category=pothole,graffiti&severity_min=3
+```
+
+| Param | Type | Description |
+|---|---|---|
+| `bbox` | `string` | Comma-separated: `west,south,east,north` (lng,lat,lng,lat) |
+| `status` | `string` | Comma-separated `MapMarkerStatus` values to include |
+| `category` | `string` | Comma-separated `IssueCategory` values to include |
+| `severity_min` | `number` | Minimum severity to include (1-10) |
+
+### 15.12 Route Change
+
+The map becomes the **home screen**:
+
+```
+/                     → MapPage (3D isometric map with issue markers — NEW DEFAULT)
+/chat                 → ChatPage (SplitAI conversational agent)
+/report               → Photo reporting flow (can also be triggered from map)
+/pazar                → Pazar market feed
+/pazar/submit         → Vendor photo upload
+/emergency            → Emergency info / QR scanner
+/admin                → Admin triage dashboard
+/admin/reports        → Report management
+/admin/analytics      → Analytics overview
+```
+
+### 15.13 Environment Variable
+
+Add to `.env.example`:
+
+```env
+# Mapbox GL JS
+VITE_MAPBOX_TOKEN=your-mapbox-public-token-here
+```
+

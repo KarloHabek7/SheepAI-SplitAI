@@ -529,3 +529,183 @@ export interface UseAdminDashboardReturn {
   filters: AdminFilters;
   setFilters: (filters: Partial<AdminFilters>) => void;
 }
+
+// -----------------------------------------------------------------------------
+// 13. Map & GeoJSON Types (3D Isometric Mapbox Map)
+// -----------------------------------------------------------------------------
+
+/** Map marker status — simplified from ReportStatus for map display */
+export type MapMarkerStatus = 'open' | 'in_progress' | 'resolved';
+
+/** Mapping from ReportStatus to MapMarkerStatus for display on the map */
+export const REPORT_TO_MAP_STATUS: Record<ReportStatus, MapMarkerStatus> = {
+  analyzing: 'open',
+  classified: 'open',
+  submitted: 'open',
+  in_progress: 'in_progress',
+  resolved: 'resolved',
+  rejected: 'resolved',
+};
+
+/** Map marker colors by status */
+export const MAP_MARKER_COLORS: Record<MapMarkerStatus, string> = {
+  open: '#ff2d2d',
+  in_progress: '#ffb000',
+  resolved: '#16c784',
+};
+
+/** GeoJSON Feature properties for an issue marker */
+export interface IssueFeatureProperties {
+  id: string;
+  title: string;
+  description: string;
+  category: IssueCategory;
+  status: MapMarkerStatus;
+  severity: SeverityLevel;
+  imageUrl?: string;
+  createdAt: string;
+  updatedAt?: string;
+  department?: Department;
+  zone?: CityZone;
+  address?: string;
+}
+
+/** A GeoJSON Feature for a single issue */
+export interface IssueGeoJSONFeature {
+  type: 'Feature';
+  geometry: {
+    type: 'Point';
+    coordinates: [number, number]; // [lng, lat]
+  };
+  properties: IssueFeatureProperties;
+}
+
+/** A GeoJSON FeatureCollection for all issues */
+export interface IssueGeoJSONCollection {
+  type: 'FeatureCollection';
+  features: IssueGeoJSONFeature[];
+}
+
+/** Map bounding box for viewport-based issue fetching */
+export interface MapBoundingBox {
+  north: number;
+  south: number;
+  east: number;
+  west: number;
+}
+
+/** Map camera configuration */
+export interface MapCameraConfig {
+  center: [number, number]; // [lng, lat]
+  zoom: number;
+  pitch: number;
+  bearing: number;
+}
+
+/** Default map configuration for Split */
+export const SPLIT_MAP_DEFAULTS: MapCameraConfig = {
+  center: [16.4402, 43.5081],
+  zoom: 13,
+  pitch: 60,
+  bearing: -35,
+};
+
+/** Map boundary limits for Split area */
+export const SPLIT_MAP_BOUNDS: [[number, number], [number, number]] = [
+  [16.30, 43.45], // southwest
+  [16.60, 43.60], // northeast
+];
+
+/** Map filter options (public map view) */
+export interface MapFilters {
+  status?: MapMarkerStatus[];
+  category?: IssueCategory[];
+  dateRange?: { from: string; to: string };
+  severityMin?: SeverityLevel;
+}
+
+// -----------------------------------------------------------------------------
+// 14. Map Store State (Zustand)
+// -----------------------------------------------------------------------------
+
+/** Map store state */
+export interface MapStoreState {
+  /** Current map camera position */
+  camera: MapCameraConfig;
+  /** Current map bounding box (updated on move) */
+  bounds: MapBoundingBox | null;
+  /** Issues displayed on the map as GeoJSON */
+  issuesGeoJson: IssueGeoJSONCollection;
+  /** Currently selected issue (clicked marker) */
+  selectedIssueId: string | null;
+  /** Hovered issue (for highlight effect) */
+  hoveredIssueId: string | null;
+  /** Map filter state */
+  filters: MapFilters;
+  /** Whether map is fully loaded */
+  isMapLoaded: boolean;
+  /** Whether issues are being fetched */
+  isLoadingIssues: boolean;
+  /** User's current location */
+  userLocation: GeoLocation | null;
+  /** Whether the report creation mode is active (pin placement) */
+  isReportMode: boolean;
+  /** Draft report pin location (user-adjustable) */
+  draftReportLocation: GeoLocation | null;
+  /** Actions */
+  setCamera: (camera: Partial<MapCameraConfig>) => void;
+  setBounds: (bounds: MapBoundingBox) => void;
+  setIssuesGeoJson: (data: IssueGeoJSONCollection) => void;
+  selectIssue: (id: string | null) => void;
+  hoverIssue: (id: string | null) => void;
+  setFilters: (filters: Partial<MapFilters>) => void;
+  setMapLoaded: (loaded: boolean) => void;
+  setUserLocation: (location: GeoLocation | null) => void;
+  enterReportMode: () => void;
+  exitReportMode: () => void;
+  setDraftReportLocation: (location: GeoLocation | null) => void;
+  fetchIssuesByBounds: () => Promise<void>;
+}
+
+// -----------------------------------------------------------------------------
+// 15. Map Hook Return Types
+// -----------------------------------------------------------------------------
+
+/** Return type for useMapboxMap hook */
+export interface UseMapboxMapReturn {
+  /** Ref to attach to the map container div */
+  mapContainerRef: React.RefObject<HTMLDivElement>;
+  /** The Mapbox GL JS map instance (null until loaded) */
+  mapInstance: unknown; // mapboxgl.Map — typed as unknown to avoid hard dep in types
+  /** Whether the map has fully loaded */
+  isLoaded: boolean;
+  /** Error message if map failed to initialize */
+  error: string | null;
+}
+
+/** Return type for useIssueGeoJson hook */
+export interface UseIssueGeoJsonReturn {
+  /** GeoJSON data for the map source */
+  geoJson: IssueGeoJSONCollection;
+  /** Whether data is loading */
+  isLoading: boolean;
+  /** Refresh the data */
+  refresh: () => Promise<void>;
+}
+
+/** Return type for useMapFilters hook */
+export interface UseMapFiltersReturn {
+  filters: MapFilters;
+  setFilters: (filters: Partial<MapFilters>) => void;
+  resetFilters: () => void;
+  /** Active filter count for UI badge */
+  activeFilterCount: number;
+}
+
+/** Return type for useUserLocation hook */
+export interface UseUserLocationReturn {
+  location: GeoLocation | null;
+  isLocating: boolean;
+  error: string | null;
+  locate: () => Promise<void>;
+}

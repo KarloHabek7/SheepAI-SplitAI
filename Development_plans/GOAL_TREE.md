@@ -78,6 +78,21 @@
 
 ---
 
+### 🗺️ Pillar 6: Spatial Intelligence (The Map)
+
+> **Why it matters:** A 3D isometric map of Split with live issue markers is the **visual centerpiece** of the app. When judges see colored pins appearing on a grayscale 3D city map after a photo report, the product instantly feels real and deployable. The map unifies all civic data spatially — every report, every cluster, every hotspot is visible at a glance. This is the bridge between "cool chatbot" and "civic control center." It also delivers the colleague's core concept (Gradsko Oko) as an integrated feature rather than a standalone app.
+
+#### Feature 6.1: 3D Isometric Map View
+<!-- Populated by /delegate -->
+
+#### Feature 6.2: Issue Markers & Clustering
+<!-- Populated by /delegate -->
+
+#### Feature 6.3: Map Interaction & Overlays
+<!-- Populated by /delegate -->
+
+---
+
 ## Post-MVP Ideas
 
 <!-- Approved refinements that don't fit the current sprint. Populated by /refine when
