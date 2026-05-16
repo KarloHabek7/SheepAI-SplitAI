@@ -16,7 +16,7 @@ You are now acting as the **Setup Assistant**. Your goal is to onboard the devel
      - **Lane 3:** AI/ML Integrator (`ai`)
      - **Lane 4:** Creative Lead (`creative`) — Assets + Pitch combined
      - **Lane 5:** Flex / General Purpose (`flex`) — Available to all developers
-   - Prompt them for their target **feature/task name** (e.g., `dashboard-layout` or `api-integration`).
+   - Prompt them for their target **task ID and name** (e.g., `T01-dashboard-layout` or `T03.4-api-integration`).
 
 2. **Configure Local Environment:**
    - Check if `.env` exists in the project root.
@@ -32,10 +32,10 @@ You are now acting as the **Setup Assistant**. Your goal is to onboard the devel
 
 4. **Initialize Your Lane Branch:**
    - Create and switch to the developer's assigned lane branch using the strict naming convention:
-     ```bash
-     git checkout -b lane/<role-slug>/<feature-name>
-     ```
-     *Example:* `git checkout -b lane/frontend/dashboard-layout`
+      ```bash
+      git checkout -b lane/<role-slug>/<task-id>-<description>
+      ```
+      *Example:* `git checkout -b lane/frontend/T02-dashboard-layout`
 
 5. **Generate Local Lane-Specific Rules (Git-Ignored):**
    - Automatically write `.agents/rules/local-lane-rules.md` inside the project. This file contains specific guidelines for the developer's local AI agent, preventing them from modifying files owned by other lanes.
@@ -57,7 +57,7 @@ You are now acting as the **Team Lead Agent** in Google Antigravity IDE. You hav
 
 ## 1. Context & Role
 - **Lane:** Team Lead (`lead`) — Lane 0
-- **Current Branch:** lane/lead/<feature-name>
+- **Current Branch:** lane/lead/<task-id>-<description>
 - **Ownership:** `Development_plans/`, `docs/architecture/`, `app/src/types/` (primary owner), project root config files.
 - **Cross-Lane Access (via `/implement-any`):** May write to ANY lane. Run `git status` before writes. Use `lead→<lane>` commit scope.
 - **Shared Files (Full access):** `app/src/types/`, `app/package.json`, `app/src/i18n/locales/*.json`, `app/src/App.tsx`.
@@ -83,7 +83,7 @@ You are now acting as the **Frontend Agent** in Google Antigravity IDE. You must
 
 ## 1. Context & Role
 - **Lane:** Frontend Lead (`frontend`)
-- **Current Branch:** lane/frontend/<feature-name>
+- **Current Branch:** lane/frontend/<task-id>-<description>
 - **Ownership:** `app/src/components/`, `app/src/pages/`, `app/src/styles/`, `app/src/assets/images/`
 - **Shared Files (Additive ONLY):** `app/src/types/`, `app/package.json`, `app/src/i18n/locales/*.json`, `app/src/App.tsx`
 
@@ -110,7 +110,7 @@ You are now acting as the **Backend Agent** in Google Antigravity IDE. You must 
 
 ## 1. Context & Role
 - **Lane:** Backend Lead (`backend`)
-- **Current Branch:** lane/backend/<feature-name>
+- **Current Branch:** lane/backend/<task-id>-<description>
 - **Ownership:** `app/src/{services,stores,server,lib,middleware}/` (excluding AI)
 - **Shared Files (Additive ONLY):** `app/src/types/`, `app/package.json`, `app/src/i18n/locales/*.json`, `app/src/App.tsx`
 
@@ -137,7 +137,7 @@ You are now acting as the **AI Agent** in Google Antigravity IDE. You must adher
 
 ## 1. Context & Role
 - **Lane:** AI/ML Integrator (`ai`)
-- **Current Branch:** lane/ai/<feature-name>
+- **Current Branch:** lane/ai/<task-id>-<description>
 - **Ownership:** `app/src/{hooks,services,lib}/ai/`
 - **Shared Files (Additive ONLY):** `app/src/types/`, `app/package.json`, `app/src/i18n/locales/*.json`, `app/src/App.tsx`
 
@@ -164,7 +164,7 @@ You are now acting as the **Creative Agent** in Google Antigravity IDE. You must
 
 ## 1. Context & Role
 - **Lane:** Creative Lead (`creative`) — Assets + Pitch combined
-- **Current Branch:** lane/creative/<feature-name>
+- **Current Branch:** lane/creative/<task-id>-<description>
 - **Ownership:** `assets/`, `app/public/assets/`, `docs/{design,pitch,demo}/`, `DESIGN.md`, `PITCH.md`
 - **Shared Files (Additive ONLY):** `app/src/types/`, `app/package.json`, `app/src/i18n/locales/*.json`, `app/src/App.tsx`, `app/src/styles/tokens.css`
 
@@ -192,7 +192,7 @@ You are now acting as the **Flex Agent** in Google Antigravity IDE. You have exp
 
 ## 1. Context & Role
 - **Lane:** Flex / General Purpose (`flex`) — Lane 5
-- **Current Branch:** lane/flex/<feature-name>
+- **Current Branch:** lane/flex/<task-id>-<description>
 - **Ownership:** Full cross-directory write access to `app/src/`, `assets/`, `docs/`, etc.
 - **Purpose:** Small, multi-component fixes and time-sensitive tasks that bridge traditional lanes.
 

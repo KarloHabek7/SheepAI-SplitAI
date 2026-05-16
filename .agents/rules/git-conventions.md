@@ -10,22 +10,23 @@ description: "Use when writing commit messages, branching, or interacting with G
 
 1. **NEVER commit to `main`.** The `main` branch is protected. Only the Tech Lead (Karlo) merges to `main` during scheduled Integration Checkpoints. Agents must only commit to their lane's feature branch.
 
-2. **Branch naming format:** `lane/<lane-name>/<feature-description>`
+2. **Branch naming format:** `lane/<lane-name>/<task-id>-<description>`
    - All lowercase, hyphens for spaces, no special characters.
+   - Use the Task ID from `Development_plans/` (e.g., `T01`, `T03.4`).
    - Lane names: `lead`, `frontend`, `backend`, `ai`, `creative`, `flex`.
 
    ```bash
    # ✅ DO
-   lane/lead/architecture-setup
-   lane/frontend/dashboard-layout
-   lane/backend/auth-state-store
-   lane/ai/gemini-stream-hook
-   lane/creative/hero-illustrations
-   lane/flex/emergency-api-hotfix
+   lane/lead/T01-architecture-setup
+   lane/frontend/T02-dashboard-layout
+   lane/backend/T03-auth-state-store
+   lane/ai/T04-gemini-stream-hook
+   lane/creative/T05-hero-illustrations
+   lane/flex/T99-emergency-api-hotfix
 
    # ❌ DON'T
    feature/dashboard          # missing lane prefix
-   lane/Frontend/Dashboard    # uppercase forbidden
+   lane/backend/bff-scaffold   # too generic, missing task ID
    lane/frontend/dashboard_layout  # underscores forbidden
    lane/assets/hero-illustrations   # old lane name, use 'creative'
    ```
