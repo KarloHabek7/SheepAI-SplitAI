@@ -6,7 +6,7 @@ export class ChatService {
    * Generates a response using the AI (RAG) engine.
    * This bridges the legacy ChatService to the new ChatOrchestrator.
    */
-  async generateResponse(message: string, history: ChatMessage[], conversationId?: string): Promise<ChatResponse> {
+  async generateResponse(message: string, _history: ChatMessage[], conversationId?: string): Promise<ChatResponse> {
     const id = conversationId || `conv-${Date.now()}`;
     
     // Ensure session exists
