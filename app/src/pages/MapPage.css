@@ -1,13 +1,13 @@
 .map-page-container {
   width: 100%;
-  height: calc(100vh - 64px); /* Subtract Header height */
+  height: 100vh; /* Full screen map */
   position: relative;
   overflow: hidden;
 }
 
 .map-fab-container {
   position: absolute;
-  bottom: 80px; /* Above BottomNav */
+  bottom: 40px;
   left: 50%;
   transform: translateX(-50%);
   z-index: 10;
@@ -37,13 +37,9 @@
   font-size: 24px;
 }
 
-@media (max-width: 768px) {
-  .map-page-container {
-    height: calc(100vh - 64px - 72px); /* Subtract Header and BottomNav height */
-  }
-  
+@media (max-width: 900px) {
   .map-fab-container {
-    bottom: 100px;
+    bottom: 100px; /* Floating above bottom nav pill */
   }
   
   .fab-label {

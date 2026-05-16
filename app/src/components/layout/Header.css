@@ -10,25 +10,24 @@
 
 .header-pill {
   pointer-events: auto; /* Enable clicks on the pill itself */
-  max-width: 1100px;
+  max-width: 860px;
   margin: 0 auto;
-  height: 68px;
-  background: rgba(255, 255, 255, 0.85);
+  height: 54px;
+  background: var(--glass-bg);
   backdrop-filter: blur(20px) saturate(140%);
   -webkit-backdrop-filter: blur(20px) saturate(140%);
-  border: 1px solid var(--color-border);
+  border: 1px solid var(--glass-border);
   border-radius: var(--radius-full);
-  padding: 0 24px;
+  padding: 0 18px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  box-shadow: 0 12px 40px rgba(0, 71, 171, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  box-shadow: var(--glass-shadow), inset 0 1px 0 rgba(255, 255, 255, 0.2);
   transition: var(--transition-default);
 }
 
 .app-header.scrolled .header-pill {
-  background: rgba(255, 255, 255, 0.92);
-  box-shadow: 0 16px 50px rgba(0, 71, 171, 0.18), inset 0 1px 0 rgba(255, 255, 255, 1);
+  box-shadow: 0 16px 50px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.3);
   transform: translateY(-2px);
 }
 
@@ -36,7 +35,7 @@
   text-decoration: none;
   font-family: var(--font-display);
   font-weight: 800;
-  font-size: 1.6rem;
+  font-size: 1.35rem;
   color: var(--color-text-primary);
   display: flex;
   align-items: center;
@@ -53,32 +52,32 @@
 .desktop-nav {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 4px;
 }
 
 .nav-pill {
   display: flex;
   align-items: center;
   gap: 6px;
-  padding: 8px 18px;
+  padding: 6px 14px;
   border-radius: var(--radius-full);
   text-decoration: none;
   color: var(--color-text-secondary);
   font-weight: 600;
-  font-size: 0.95rem;
+  font-size: 0.86rem;
   transition: var(--transition-default);
   border: 1px solid transparent;
 }
 
 .nav-pill .nav-icon {
-  font-size: 20px;
+  font-size: 18px;
   transition: var(--transition-fast);
 }
 
 .nav-pill:hover {
   color: var(--color-primary);
-  background: rgba(0, 71, 171, 0.06);
-  border-color: rgba(0, 71, 171, 0.1);
+  background: rgba(0, 71, 171, 0.08);
+  border-color: rgba(0, 71, 171, 0.12);
   transform: translateY(-1px);
 }
 
@@ -95,32 +94,35 @@
 
 .header-actions {
   display: flex;
-  gap: 10px;
+  gap: 8px;
   align-items: center;
 }
 
 .pill-btn {
-  background: rgba(255, 255, 255, 0.8);
+  background: var(--color-bg-card);
   border: 1px solid var(--color-border);
   color: var(--color-text-secondary);
-  padding: 8px 14px;
+  padding: 6px 12px;
   border-radius: var(--radius-full);
   cursor: pointer;
   display: flex;
   align-items: center;
   gap: 6px;
   font-weight: 700;
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   transition: var(--transition-default);
-  box-shadow: 0 2px 8px rgba(0, 71, 171, 0.05);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.pill-btn .material-symbols-outlined {
+  font-size: 18px;
 }
 
 .pill-btn:hover {
-  background: var(--color-bg-card);
   color: var(--color-primary);
   border-color: var(--color-primary);
   transform: translateY(-1px);
-  box-shadow: 0 6px 16px rgba(0, 71, 171, 0.12);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
 }
 
 .pill-btn:active {
@@ -132,7 +134,7 @@
     display: none;
   }
   .header-pill {
-    padding: 0 20px;
-    height: 60px;
+    padding: 0 16px;
+    height: 52px;
   }
 }

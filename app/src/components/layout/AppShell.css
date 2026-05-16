@@ -11,13 +11,5 @@
   flex: 1;
   display: flex;
   flex-direction: column;
-  padding-top: 100px; /* Leave space for fixed Header pill */
-  padding-bottom: 24px;
-}
-
-@media (max-width: 900px) {
-  .main-content {
-    padding-top: 88px;
-    padding-bottom: 110px; /* Leave space for fixed BottomNav pill */
-  }
+  padding: 0; /* Content starts at 0, header and bottom nav float above */
 }

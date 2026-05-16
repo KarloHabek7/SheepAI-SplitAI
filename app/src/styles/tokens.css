@@ -25,6 +25,9 @@
 
   /* Colors — Border */
   --color-border: rgba(0, 71, 171, 0.15);
+  --glass-bg: rgba(255, 255, 255, 0.85);
+  --glass-border: rgba(0, 71, 171, 0.18);
+  --glass-shadow: 0 12px 40px rgba(0, 71, 171, 0.12);
 
   /* Typography */
   --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
@@ -60,4 +63,18 @@
   /* Transitions */
   --transition-default: all 0.3s cubic-bezier(0.215, 0.61, 0.355, 1);
   --transition-fast: all 0.15s ease;
+}
+
+[data-theme="dark"] {
+  --color-bg-primary: #0B0F19;
+  --color-bg-card: #131A2A;
+  --color-bg-elevated: #1E293B;
+  --color-text-primary: #F9FAFB;
+  --color-text-secondary: #9CA3AF;
+  --color-border: rgba(255, 255, 255, 0.12);
+  --glass-bg: rgba(19, 26, 42, 0.85);
+  --glass-border: rgba(255, 255, 255, 0.15);
+  --glass-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
+  --shadow-card: 0 12px 40px rgba(0, 0, 0, 0.4);
+  --shadow-elevated: 0 20px 50px rgba(0, 0, 0, 0.6);
 }
