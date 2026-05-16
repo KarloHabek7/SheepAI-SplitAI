@@ -19,7 +19,7 @@
 
 ## 🏗️ Lane Status
 
-### Lane 1: Frontend — 2/8 tasks done
+### Lane 1: Frontend — 4/8 tasks done
 
 | Task | Status | Completed By | Notes |
 |---|---|---|---|
