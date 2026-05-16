@@ -9,11 +9,11 @@ import parkingRouter from './routes/parking.js';
 import transitRouter from './routes/transit.js';
 import crowdRouter from './routes/crowd.js';
 import emergencyRouter from './routes/emergency.js';
+import { seedReports, seedPazarListings } from './store.js';
 import { errorHandler } from './middleware/errorHandler.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-
 const app = express();
 const port = 3001;
 
@@ -21,6 +21,10 @@ const port = 3001;
 app.use(cors());
 app.use(express.json());
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+
+// Initialize Data Store
+seedReports();
+seedPazarListings();
 
 // Routes
 app.use('/api/chat', chatRouter);

@@ -3,7 +3,7 @@
 > **Lane:** Backend
 > **Feature:** Admin Dashboard Stats + Report Management
 > **Parent Task:** `Task_05_Admin_Routes.md`
-> **Status:** 🆕 Planning
+> **Status:** ✅ Done (Agent@13:57)
 
 ---
 
@@ -30,9 +30,9 @@ PATCH /api/admin/reports/:id
 
 | # | Subtask | Target File | Effort |
 |---|---|---|---|
-| 5.1 | Dashboard Stats Endpoint | `app/src/server/routes/admin.ts` | S |
-| 5.2 | Report PATCH Endpoint | `app/src/server/routes/admin.ts` | S |
-| 5.3 | Mount & Verify | `app/src/server/index.ts` | S |
+| 5.1 | Dashboard Stats Endpoint | `app/src/server/routes/admin.ts` | S | ✅ |
+| 5.2 | Report PATCH Endpoint | `app/src/server/routes/admin.ts` | S | ✅ |
+| 5.3 | Mount & Verify | `app/src/server/index.ts` | S | ✅ |
 
 ---
 

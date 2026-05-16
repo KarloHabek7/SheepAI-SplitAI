@@ -4,6 +4,7 @@
 > **Parent Task:** `Task_06_Utility_Routes.md`
 > **Total Subtasks:** 5
 > **Estimated Total Effort:** S (<30min total)
+> **Status:** ✅ Done (Agent@14:15)
 
 ---
 
@@ -50,11 +51,11 @@ All types are defined and ready. No additions needed:
 
 | # | Subtask | File | Depends On | Effort |
 |---|---|---|---|---|
-| 6.1 | Parking Route | `server/routes/parking.ts` | None | XS |
-| 6.2 | Transit Route | `server/routes/transit.ts` | None | XS |
-| 6.3 | Crowd Route | `server/routes/crowd.ts` | None | XS |
-| 6.4 | Emergency Route | `server/routes/emergency.ts` | None | XS |
-| 6.5 | Mount All Routes | `server/index.ts` | 6.1–6.4 | XS |
+| 6.1 | Parking Route | `server/routes/parking.ts` | None | XS | ✅ |
+| 6.2 | Transit Route | `server/routes/transit.ts` | None | XS | ✅ |
+| 6.3 | Crowd Route | `server/routes/crowd.ts` | None | XS | ✅ |
+| 6.4 | Emergency Route | `server/routes/emergency.ts` | None | XS | ✅ |
+| 6.5 | Mount All Routes | `server/index.ts` | 6.1–6.4 | XS | ✅ |
 
 ---
 

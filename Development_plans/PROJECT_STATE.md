@@ -30,7 +30,7 @@
 | T07 Emergency Page | ✅ Done | Agent@14:00 | Multilingual Siren Translator with QR scanner placeholder and clickable contacts |
 | T08 PWA + Responsive + Capacitor | ⬜ Not Started | | PWA manifest, responsive audit, Android setup |
 
-### Lane 2: Backend — 5/10 tasks done
+### Lane 2: Backend — 7/10 tasks done (Task 08 Complete)
 
 | Task | Status | Completed By | Notes |
 |---|---|---|---|
@@ -40,8 +40,8 @@
 | T04: Pazar Routes | ⬜ Not Started | — | Depends on T01, T08 |
 | T05: Admin Routes | ✅ Done | Agent@13:57 | Tasks 5.1-5.3 complete: Dashboard stats and Report PATCH endpoints mounted and verified. |
 | T06: Utility Routes | ✅ Done | Agent@14:15 | Tasks 6.1-6.5 complete: all utility routes mounted and verified |
-| T07: Mock Tools | ⬜ Not Started | — | Depends on T01, T06 |
-| T08: In-Memory Store | ✅ Done | Agent@12:39 | Centralized data store in store.ts used by all routes |
+| T07: Mock Tools | ✅ Done | Agent@14:57 | All 6 tools + router implemented and verified. Ready for AI orchestration. |
+| T08: In-Memory Store | ✅ Done | Agent@13:02 | Tasks 8.1, 8.2, & 8.3 complete: store expanded with CRUD helpers, 15 reports, and 8 Pazar listings. Initialization wired in server/index.ts. |
 | T09: Service Layer | ⬜ Not Started | — | Depends on T02–T06 |
 | T10: Zustand Stores | ⬜ Not Started | — | Depends on T09 |
 
@@ -102,7 +102,7 @@
 ## ⏭️ Next Recommended Actions (per lane)
 
 - **Frontend:** T01-T07 Done. Proceed with **T08 PWA + Responsive + Capacitor**.
-- **Backend:** T01, T02, T03, T05, T06, T08 Done. Next: Execute **Task 04 (Pazar Routes)**.
+- **Backend:** T01, T02, T03, T05, T06, T07, T08 Done. Next: Execute **Task 04 (Pazar Routes)**.
 - **AI:** T01-T06 Done (7/8). Next: Execute **T07 AI React Hooks** (depends on T06 + Backend T01/T02).
 - **Creative:** Start **T01 Brand Website** immediately (Wave 1, no deps). Then T02 (Design Tokens). Then T03+T04 in parallel. T05 after assets ready. T06 last (needs working app).
 - **Lead:** CP1/CP2 Integration complete. Build errors resolved. Unblocked Frontend T08, Backend T04, AI T06.
