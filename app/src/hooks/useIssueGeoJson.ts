@@ -12,6 +12,7 @@ const MOCK_ISSUES: IssueGeoJSONFeature[] = [
       category: 'waste_overflow',
       status: 'open',
       severity: 8,
+      imageUrl: '/mock-images/waste_overflow.png',
       createdAt: new Date().toISOString(),
       zone: 'unesco_buffer',
       department: 'cistoca'
@@ -27,6 +28,7 @@ const MOCK_ISSUES: IssueGeoJSONFeature[] = [
       category: 'damaged_infrastructure',
       status: 'in_progress',
       severity: 4,
+      imageUrl: '/mock-images/broken_lamp.png',
       createdAt: new Date().toISOString(),
       zone: 'zona_a',
       department: 'komunalni_redari'
@@ -42,6 +44,7 @@ const MOCK_ISSUES: IssueGeoJSONFeature[] = [
       category: 'pothole',
       status: 'open',
       severity: 9,
+      imageUrl: '/mock-images/pothole.png',
       createdAt: new Date().toISOString(),
       zone: 'zona_b',
       department: 'promet'
@@ -57,6 +60,7 @@ const MOCK_ISSUES: IssueGeoJSONFeature[] = [
       category: 'graffiti',
       status: 'resolved',
       severity: 2,
+      imageUrl: '/mock-images/graffiti.png',
       createdAt: new Date().toISOString(),
       zone: 'zona_c',
       department: 'komunalni_redari'
@@ -72,6 +76,7 @@ const MOCK_ISSUES: IssueGeoJSONFeature[] = [
       category: 'illegal_parking',
       status: 'open',
       severity: 6,
+      imageUrl: '/mock-images/illegal_parking.png',
       createdAt: new Date().toISOString(),
       zone: 'zona_a',
       department: 'promet'

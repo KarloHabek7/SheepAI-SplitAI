@@ -1,107 +1,641 @@
+/* =============================================================================
+   ReportPage.css — Premium Marjan Vision Civic Reporting
+   Aura-inspired dark hero + glassmorphic flow cards
+   ============================================================================= */
+
+/* --- Page Root --- */
 .report-page-root {
-  min-height: calc(100vh - 64px);
-  background: var(--color-bg-primary);
-  padding-bottom: var(--space-xl);
+  min-height: 100vh;
+  background: #000;
+  color: #fff;
 }
 
-.report-header-bg {
-  background: linear-gradient(135deg, var(--color-secondary) 0%, #a0141a 100%);
-  color: white;
-  padding: var(--space-lg) 0;
-  margin-bottom: var(--space-md);
+/* --- Hero Section (Aura Portfolio Hero adapted) --- */
+.report-hero-section {
+  max-width: 1280px;
+  padding: 0 var(--space-sm);
+  margin: 0 auto;
+  padding-top: var(--space-lg);
+  padding-bottom: var(--space-md);
 }
 
-.report-hero h1 {
+.report-hero-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-md);
+  align-items: center;
+}
+
+@media (min-width: 1024px) {
+  .report-hero-grid {
+    grid-template-columns: 7fr 5fr;
+  }
+}
+
+/* Hero text column */
+.report-hero-text h1 {
   font-family: var(--font-display);
-  font-size: var(--font-size-h1);
-  font-weight: 800;
-  margin: 0 0 8px 0;
-}
-
-.report-hero p {
-  font-size: 1.1rem;
-  opacity: 0.9;
+  color: #fff;
+  line-height: 1;
+  letter-spacing: -0.03em;
   margin: 0;
 }
 
+.report-hero-text h1 span {
+  display: block;
+  font-size: clamp(2.8rem, 8vw, 5.5rem);
+  font-weight: 600;
+  letter-spacing: -0.04em;
+}
+
+.report-hero-description {
+  margin-top: var(--space-sm);
+  font-size: clamp(1rem, 2.5vw, 1.5rem);
+  line-height: 1.5;
+  max-width: 640px;
+  color: rgba(255, 255, 255, 0.7);
+  letter-spacing: -0.01em;
+}
+
+/* CTA buttons */
+.report-hero-ctas {
+  margin-top: var(--space-md);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+@media (min-width: 640px) {
+  .report-hero-ctas {
+    flex-direction: row;
+  }
+}
+
+.report-cta-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border-radius: var(--radius-full);
+  padding: 12px 20px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  color: #fff;
+  background: var(--color-primary);
+  border: 1px solid rgba(0, 71, 171, 0.5);
+  cursor: pointer;
+  transition: var(--transition-default);
+  box-shadow: var(--shadow-primary);
+}
+
+.report-cta-primary:hover {
+  background: #003d96;
+  transform: translateY(-1px);
+}
+
+.report-cta-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #fff;
+  letter-spacing: -0.01em;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-full);
+  padding: 12px 20px;
+  backdrop-filter: blur(8px);
+  cursor: pointer;
+  transition: var(--transition-default);
+}
+
+.report-cta-secondary:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+/* Stat pills */
+.report-hero-stats {
+  margin-top: var(--space-md);
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-sm);
+}
+
+@media (min-width: 640px) {
+  .report-hero-stats {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.report-stat-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding-top: var(--space-sm);
+}
+
+.report-stat-item .material-symbols-outlined {
+  font-size: 18px;
+  color: rgba(255, 255, 255, 0.5);
+  margin-top: 2px;
+}
+
+.report-stat-item p {
+  margin: 0;
+}
+
+.report-stat-title {
+  font-size: 0.875rem;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  color: #fff;
+}
+
+.report-stat-sub {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.6);
+  margin-top: 2px !important;
+}
+
+/* Hero Image Column */
+.report-hero-image-wrapper {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.35);
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+@media (min-width: 640px) {
+  .report-hero-image-wrapper {
+    aspect-ratio: 5 / 6;
+  }
+}
+
+.report-hero-image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: saturate(0.7) contrast(1.1);
+}
+
+.report-hero-image-gradient {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.4), transparent, transparent);
+  pointer-events: none;
+}
+
+/* Bottom stat cards on hero image */
+.report-hero-overlay-stats {
+  position: absolute;
+  bottom: var(--space-sm);
+  left: var(--space-sm);
+  right: var(--space-sm);
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.report-overlay-stat {
+  border-radius: var(--radius-md);
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  padding: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.report-overlay-stat-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+
+.report-overlay-stat-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.5);
+}
+
+.report-overlay-stat-value {
+  font-size: 1.1rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: #fff;
+}
+
+.report-overlay-stat-label {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/* --- Report Flow Section (below hero) --- */
+.report-flow-section {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: var(--space-lg) var(--space-sm) var(--space-xl);
+}
+
 .report-flow-container {
-  max-width: 800px;
+  max-width: 720px;
   margin: 0 auto;
 }
 
-/* Analyzing State with Scanner Effect */
-.analyzing-state {
+/* --- Step Flow Card (Timeline Aura card adapted) --- */
+.report-step-card {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 24px;
+  padding: 24px;
+  animation: report-fade-in 0.4s ease-out;
+}
+
+.report-step-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.report-step-tabs {
+  display: flex;
+  align-items: center;
+  border-radius: var(--radius-full);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 4px;
+}
+
+.report-step-tab {
+  padding: 6px 12px;
+  border-radius: var(--radius-full);
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.7);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: var(--transition-fast);
+}
+
+.report-step-tab.active {
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.report-step-count {
+  height: 32px;
+  width: 32px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+/* Step rows */
+.report-step-list {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.report-step-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.report-step-row:last-child {
+  border-bottom: none;
+}
+
+.report-step-row-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+}
+
+.report-step-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.report-step-dot.done {
+  background: var(--color-success);
+}
+
+.report-step-dot.active {
+  background: var(--color-primary);
+  box-shadow: 0 0 8px rgba(0, 71, 171, 0.5);
+}
+
+.report-step-dot.pending {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.report-step-name {
+  font-size: 0.875rem;
+  color: #fff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.report-step-sub {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.5);
+  margin-top: 2px;
+}
+
+.report-step-badge {
+  padding: 4px 8px;
+  font-size: 11px;
+  border-radius: 4px;
+  white-space: nowrap;
+}
+
+.report-step-badge.done {
+  background: rgba(16, 185, 129, 0.1);
+  border: 1px solid rgba(16, 185, 129, 0.2);
+  color: var(--color-success);
+}
+
+.report-step-badge.active {
+  background: rgba(0, 71, 171, 0.1);
+  border: 1px solid rgba(0, 71, 171, 0.3);
+  color: #4d8fd6;
+}
+
+.report-step-badge.pending {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/* Upload area inside the step card */
+.report-upload-area {
+  position: relative;
+  margin-top: var(--space-sm);
+  overflow: hidden;
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.05);
+  cursor: pointer;
+  transition: var(--transition-default);
+}
+
+.report-upload-area:hover {
+  border-color: rgba(0, 71, 171, 0.5);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.report-upload-inner {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: var(--space-xl) 0;
-  animation: fade-in 0.3s ease-out;
+  padding: var(--space-lg) var(--space-md);
+  text-align: center;
 }
 
-.ai-scanner {
+.report-upload-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: rgba(0, 71, 171, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: var(--space-sm);
+}
+
+.report-upload-icon .material-symbols-outlined {
+  font-size: 28px;
+  color: #4d8fd6;
+}
+
+.report-upload-title {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #fff;
+  margin: 0 0 4px;
+}
+
+.report-upload-subtitle {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.5);
+  margin: 0;
+}
+
+.report-upload-btn {
+  margin-top: var(--space-sm);
+  padding: 8px 20px;
+  border-radius: var(--radius-full);
+  background: var(--color-primary);
+  color: #fff;
+  border: none;
+  font-size: 0.8rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: var(--transition-default);
+}
+
+.report-upload-btn:hover {
+  background: #003d96;
+}
+
+/* Preview after upload */
+.report-upload-preview {
   position: relative;
-  width: 280px;
-  height: 200px;
+  width: 100%;
+  max-height: 350px;
+  overflow: hidden;
+  background: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.report-upload-preview img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  max-height: 350px;
+}
+
+.report-upload-preview-overlay {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  display: flex;
+  gap: 8px;
+}
+
+.report-remove-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(8px);
+  color: #fff;
+  border: none;
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition-fast);
+}
+
+.report-remove-btn:hover {
+  background: var(--color-error);
+}
+
+.report-remove-btn .material-symbols-outlined {
+  font-size: 16px;
+}
+
+.report-upload-gradient {
+  pointer-events: none;
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 40px;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.4), transparent);
+}
+
+/* --- Analyzing State --- */
+.report-analyzing-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-lg) 0;
+  animation: report-fade-in 0.3s ease-out;
+}
+
+.report-ai-scanner {
+  position: relative;
+  width: 100%;
+  max-width: 320px;
+  aspect-ratio: 4 / 3;
   border-radius: var(--radius-md);
   overflow: hidden;
-  margin-bottom: var(--space-lg);
+  margin-bottom: var(--space-md);
   box-shadow: var(--shadow-elevated);
   background: #000;
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.scanning-image {
+.report-scanning-image {
   width: 100%;
   height: 100%;
   object-fit: cover;
   opacity: 0.6;
 }
 
-.scan-line {
+.report-scan-line {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 2px;
   background: var(--color-primary);
-  box-shadow: 0 0 15px var(--color-primary);
-  animation: scan 2s ease-in-out infinite;
+  box-shadow: 0 0 20px var(--color-primary), 0 0 40px rgba(0, 71, 171, 0.3);
+  animation: report-scan 2s ease-in-out infinite;
   z-index: 2;
 }
 
-.analyzing-text {
+.report-analyzing-info {
   text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.spinner-small {
+.report-spinner {
   width: 24px;
   height: 24px;
-  border: 2px solid var(--color-border);
+  border: 2px solid rgba(255, 255, 255, 0.15);
   border-top-color: var(--color-primary);
   border-radius: 50%;
-  animation: spin 0.8s linear infinite;
+  animation: report-spin 0.8s linear infinite;
   margin-bottom: 12px;
 }
 
-@keyframes scan {
+.report-analyzing-info h3 {
+  margin: 0 0 4px;
+  font-size: 1rem;
+  color: #fff;
+}
+
+.report-analyzing-info p {
+  margin: 0;
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+/* --- Animations --- */
+@keyframes report-fade-in {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes report-scan {
   0%, 100% { top: 0; }
-  50% { top: 100%; }
+  50%      { top: calc(100% - 2px); }
 }
 
-@keyframes fade-in {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
-@keyframes spin {
+@keyframes report-spin {
   to { transform: rotate(360deg); }
 }
 
+@keyframes report-slide-up {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes report-scale-in {
+  from { opacity: 0; transform: scale(0.92); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+/* --- Mobile adjustments --- */
 @media (max-width: 768px) {
-  .report-hero h1 {
-    font-size: var(--font-size-h2);
+  .report-hero-section {
+    padding-top: var(--space-md);
+  }
+  .report-hero-text h1 span {
+    font-size: clamp(2.2rem, 12vw, 3.5rem);
+  }
+  .report-hero-overlay-stats {
+    gap: 8px;
+  }
+  .report-overlay-stat {
+    padding: 8px;
+  }
+  .report-overlay-stat-value {
+    font-size: 0.9rem;
+  }
+  .report-flow-section {
+    padding-top: var(--space-md);
   }
 }

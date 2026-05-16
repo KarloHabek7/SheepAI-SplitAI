@@ -6,26 +6,13 @@ import SuggestedPrompts from '@/components/chat/SuggestedPrompts';
 import CitationCard from '@/components/chat/CitationCard';
 import ToolCallCard from '@/components/chat/ToolCallCard';
 import { ChatMessage } from '@/types';
+import { MOCK_PROMPTS, INITIAL_MESSAGE, generateMockResponse } from '@/utils/mockChatData';
 import './ChatPage.css';
-
-const MOCK_PROMPTS = [
-  "Can I build a terrace in Varoš?",
-  "Where can I park near Riva?",
-  "Koji je red za odvoz smeća?",
-  "Is the fish market open?",
-  "Report a broken street light"
-];
-
-const INITIAL_MESSAGE: ChatMessage = {
-  id: '1',
-  role: 'assistant',
-  content: "Dobar dan! I am Split Zmaj, your personal municipal assistant. I've been trained on the city's regulations (GUP), waste management protocols, and local services. How can I help you today?",
-  timestamp: new Date().toISOString(),
-};
 
 const ChatPage: React.FC = () => {
   const [messages, setMessages] = useState<ChatMessage[]>([INITIAL_MESSAGE]);
   const [isStreaming, setIsStreaming] = useState(false);
+  const [showPopover, setShowPopover] = useState(true);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   const scrollToBottom = () => {
@@ -34,7 +21,7 @@ const ChatPage: React.FC = () => {
 
   useEffect(() => {
     scrollToBottom();
-  }, [messages]);
+  }, [messages, isStreaming]);
 
   const handleSendMessage = (content: string) => {
     const userMessage: ChatMessage = {
@@ -47,38 +34,14 @@ const ChatPage: React.FC = () => {
     setMessages(prev => [...prev, userMessage]);
     setIsStreaming(true);
 
-    // Mock assistant response logic
+    // Mock assistant response logic simulating streaming
     setTimeout(() => {
-      let responseContent = `I understand you're asking about: "${content}". `;
-      let citations = undefined;
-      let toolCall = undefined;
-
-      if (content.toLowerCase().includes('varo')) {
-        responseContent = "According to the General Urbanistic Plan (GUP) of Split, Varoš is part of the protected historical buffer zone. Building a terrace requires a special conservation permit.";
-        citations = [
-          {
-            sourceDocument: "GUP Grada Splita",
-            article: "47",
-            page: 112,
-            excerpt: "U povijesnim predgrađima (Varoš, Dobri, Manus, Lučac), svaka vanjska intervencija mora biti odobrena od strane Konzervatorskog odjela."
-          }
-        ];
-      } else if (content.toLowerCase().includes('park')) {
-        responseContent = "I've checked the real-time parking data for the Riva area.";
-        toolCall = {
-          toolName: "check_parking_availability",
-          args: { zone: "Zone A", location: "Riva" },
-          result: { available_spots: 12, price: "1.50€/hr" }
-        };
-      }
+      const mockResponse = generateMockResponse(content);
 
       const assistantMessage: ChatMessage = {
         id: (Date.now() + 1).toString(),
-        role: 'assistant',
-        content: responseContent,
         timestamp: new Date().toISOString(),
-        citations,
-        toolCall
+        ...mockResponse
       };
 
       setMessages(prev => [...prev, assistantMessage]);
@@ -89,43 +52,108 @@ const ChatPage: React.FC = () => {
   return (
     <div className="chat-page-root">
       <PageContainer className="chat-page-container">
-        <div className="chat-messages-list">
-          {messages.map(msg => (
-            <div key={msg.id} className="chat-message-group">
-              <ChatBubble message={msg} />
-              {msg.citations && (
-                <div className="citations-list">
-                  {msg.citations.map((cite, i) => (
-                    <CitationCard key={i} citation={cite} />
+        <div className="aura-chat-wrapper">
+          
+          {/* Main Chat Card */}
+          <div className="aura-chat-card group">
+            
+            {/* Popover Tip (Top Right) */}
+            {showPopover && (
+              <div className="aura-floating-popover">
+                <div className="popover-header">
+                  <div className="popover-icon-box">
+                    <span className="material-symbols-outlined popover-wand-icon">auto_awesome</span>
+                  </div>
+                  <button 
+                    aria-label="Dismiss" 
+                    className="popover-dismiss-btn"
+                    onClick={() => setShowPopover(false)}
+                  >
+                    <span className="material-symbols-outlined">close</span>
+                  </button>
+                </div>
+                <div className="popover-body">
+                  <h4 className="popover-title">Ask Split Zmaj to assist you!</h4>
+                  <p className="popover-subtitle">The more details you share, the better municipal advice it delivers.</p>
+                </div>
+                {/* Pointer triangle */}
+                <div className="popover-arrow"></div>
+              </div>
+            )}
+
+            {/* Background glowing accent */}
+            <div className="aura-card-glow"></div>
+
+            <div className="aura-card-content">
+              {/* Header Info */}
+              <div className="aura-card-header">
+                <span className="aura-ai-badge">
+                  <span className="aura-ai-pulse"></span>
+                  AI Assistant
+                </span>
+                <div className="aura-online-status">
+                  <span className="aura-online-pulse"></span>
+                  <span className="aura-online-label">Online</span>
+                </div>
+              </div>
+
+              <h3 className="aura-card-title">Split Zmaj Assistant</h3>
+              <p className="aura-card-subtitle">
+                Ask me anything! I can help with municipal regulations (GUP), parking spots near Riva, waste schedules, and city services. Just type your question below.
+              </p>
+
+              {/* Chat Messages Interface Box (#1C1C1E) */}
+              <div className="aura-messages-box">
+                <div className="aura-messages-scroll">
+                  {messages.map(msg => (
+                    <div key={msg.id} className="chat-message-group">
+                      <ChatBubble message={msg} />
+                      {msg.citations && (
+                        <div className="citations-list">
+                          {msg.citations.map((cite, i) => (
+                            <CitationCard key={i} citation={cite} />
+                          ))}
+                        </div>
+                      )}
+                      {msg.toolCall && <ToolCallCard toolCall={msg.toolCall} />}
+                    </div>
                   ))}
+
+                  {isStreaming && (
+                    <div className="aura-streaming-row">
+                      <div className="aura-avatar">
+                        <span className="material-symbols-outlined">smart_toy</span>
+                      </div>
+                      <div className="aura-streaming-dots">
+                        <div className="sdot"></div>
+                        <div className="sdot"></div>
+                        <div className="sdot"></div>
+                      </div>
+                    </div>
+                  )}
+                  <div ref={messagesEndRef} />
+                </div>
+              </div>
+
+              {/* Suggested Prompts before input */}
+              {messages.length === 1 && (
+                <div className="aura-suggested-section">
+                  <SuggestedPrompts 
+                    prompts={MOCK_PROMPTS} 
+                    onSelect={handleSendMessage} 
+                  />
                 </div>
               )}
-              {msg.toolCall && <ToolCallCard toolCall={msg.toolCall} />}
+
+              {/* Input Area */}
+              <div className="aura-input-section">
+                <ChatInput onSend={handleSendMessage} disabled={isStreaming} />
+              </div>
+
             </div>
-          ))}
-          {isStreaming && (
-            <div className="streaming-indicator">
-              <div className="dot"></div>
-              <div className="dot"></div>
-              <div className="dot"></div>
-            </div>
-          )}
-          <div ref={messagesEndRef} />
+          </div>
         </div>
       </PageContainer>
-      
-      <div className="chat-sticky-footer">
-        {messages.length === 1 && (
-          <div className="prompts-wrapper">
-            <p className="suggested-label">Try asking:</p>
-            <SuggestedPrompts 
-              prompts={MOCK_PROMPTS} 
-              onSelect={handleSendMessage} 
-            />
-          </div>
-        )}
-        <ChatInput onSend={handleSendMessage} disabled={isStreaming} />
-      </div>
     </div>
   );
 };

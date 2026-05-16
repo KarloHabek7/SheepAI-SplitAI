@@ -20,22 +20,20 @@ const DashboardMetric: React.FC<DashboardMetricProps> = ({
   color = 'primary'
 }) => {
   return (
-    <div className={`metric-card metric-card--${color}`}>
+    <div className={`metric-card metric-card--${color} animate-scale-in`}>
       <div className="metric-header">
         <span className="material-symbols-outlined metric-icon">{icon}</span>
-        {trend && (
-          <div className={`metric-trend ${trend.isUp ? 'trend--up' : 'trend--down'}`}>
-            <span className="material-symbols-outlined trend-icon">
-              {trend.isUp ? 'trending_up' : 'trending_down'}
-            </span>
-            <span className="trend-value">{trend.value}%</span>
-          </div>
-        )}
+        <span className="metric-label">{label}</span>
       </div>
-      <div className="metric-body">
-        <h2 className="metric-value">{value}</h2>
-        <p className="metric-label">{label}</p>
-      </div>
+      <p className="metric-value">{value}</p>
+      {trend && (
+        <p className="metric-trend">
+          <span className={trend.isUp ? 'trend-up' : 'trend-down'}>
+            {trend.isUp ? '+' : '-'}{trend.value}%
+          </span>
+          {' '}vs last month
+        </p>
+      )}
     </div>
   );
 };

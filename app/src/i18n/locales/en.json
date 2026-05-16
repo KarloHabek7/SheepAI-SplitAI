@@ -1,3 +1,43 @@
 {
-  "welcome": "Welcome to Hackathon Project"
+  "welcome": "Welcome to SplitAI",
+  "common": {
+    "loading": "Loading...",
+    "error": "An error occurred",
+    "submit": "Submit",
+    "cancel": "Cancel",
+    "back": "Back",
+    "next": "Next",
+    "save": "Save",
+    "delete": "Delete",
+    "edit": "Edit",
+    "search": "Search",
+    "filter": "Filter",
+    "all": "All"
+  },
+  "nav": {
+    "map": "City Map",
+    "assistant": "AI Assistant",
+    "pazar": "Pazar Market",
+    "report": "Report Issue",
+    "emergency": "Siren",
+    "admin": "Admin Panel",
+    "login": "Login",
+    "logout": "Logout"
+  },
+  "auth": {
+    "login": "Login",
+    "register": "Register",
+    "email": "Email Address",
+    "password": "Password",
+    "forgot_password": "Forgot password?",
+    "no_account": "Don't have an account?",
+    "have_account": "Already have an account?"
+  },
+  "emergency": {
+    "title": "Emergency Services",
+    "subtitle": "Immediate help and siren translations",
+    "scan_qr": "Scan QR Code",
+    "call_112": "Call 112",
+    "contacts": "Emergency Contacts"
+  }
 }

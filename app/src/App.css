@@ -1,7 +1,3 @@
-/* App specific styles */
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
-}
+/* App-scoped layout styles
+   NOTE: Vite template defaults (max-width, padding, text-align) removed.
+   The AppShell handles all layout concerns. */

@@ -8,23 +8,37 @@ interface ToolCallCardProps {
 
 const ToolCallCard: React.FC<ToolCallCardProps> = ({ toolCall }) => {
   return (
-    <div className="tool-call-card">
-      <div className="tool-header">
-        <span className="material-symbols-outlined tool-icon">terminal</span>
-        <span className="tool-name">{toolCall.toolName.replace(/_/g, ' ')}</span>
+    <div className="tool-call-box">
+      <div className="tool-call-header">
+        <div className="tool-header-left">
+          <span className="material-symbols-outlined tool-pulse-icon">build_circle</span>
+          <span className="tool-exec-title">{toolCall.toolName.replace(/_/g, ' ')}</span>
+        </div>
+        <div className="tool-status-pill">
+          <span className="status-dot animate-pulse"></span>
+          <span>Executed</span>
+        </div>
       </div>
-      <div className="tool-body">
-        <div className="tool-args">
+      
+      <div className="tool-call-body">
+        <div className="tool-section-label">Parameters</div>
+        <div className="tool-args-grid">
           {Object.entries(toolCall.args).map(([key, val]) => (
-            <div key={key} className="arg-row">
-              <span className="arg-key">{key}:</span>
-              <span className="arg-val">{String(val)}</span>
+            <div key={key} className="tool-arg-item">
+              <span className="arg-label">{key}:</span>
+              <span className="arg-value">{String(val)}</span>
             </div>
           ))}
         </div>
-        <div className="tool-result">
-          <span className="result-label">Status:</span>
-          <span className="result-val">SUCCESS</span>
+        
+        <div className="tool-section-label mt-2">Result</div>
+        <div className="tool-result-panel">
+          {Object.entries(toolCall.result).map(([key, val]) => (
+            <div key={key} className="tool-result-item">
+              <span className="result-key">{key}:</span>
+              <span className="result-val">{String(val)}</span>
+            </div>
+          ))}
         </div>
       </div>
     </div>

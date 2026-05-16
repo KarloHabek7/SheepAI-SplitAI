@@ -1,88 +1,61 @@
 import React from 'react';
 import PageContainer from '@/components/layout/PageContainer';
 import PazarGrid from '@/components/pazar/PazarGrid';
-import { PazarListing } from '@/types';
+import { MOCK_PAZAR_LISTINGS } from '@/utils/mockPazarData';
 import './PazarFeedPage.css';
 
-const MOCK_LISTINGS: PazarListing[] = [
-  {
-    id: '1',
-    vendor: 'OPG Marić',
-    freshness: 'morning',
-    createdAt: new Date().toISOString(),
-    expiresAt: new Date(Date.now() + 4 * 3600000).toISOString(),
-    isActive: true,
-    items: [
-      { name: 'Brancin (divlji)', category: 'fish', price: 28, unit: 'kg' },
-      { name: 'Orada', category: 'fish', price: 22, unit: 'kg' },
-      { name: 'Trlja', category: 'fish', price: 12, unit: 'kg' }
-    ]
-  },
-  {
-    id: '2',
-    vendor: 'Obrt Zeleno',
-    freshness: 'morning',
-    createdAt: new Date().toISOString(),
-    expiresAt: new Date(Date.now() + 4 * 3600000).toISOString(),
-    isActive: true,
-    items: [
-      { name: 'Blitva', category: 'vegetable', price: 2.5, unit: 'bunch' },
-      { name: 'Mladi luk', category: 'vegetable', price: 1.5, unit: 'bunch' },
-      { name: 'Krumpir (mladi)', category: 'vegetable', price: 1.8, unit: 'kg' }
-    ]
-  },
-  {
-    id: '3',
-    vendor: 'Domaće Masline',
-    freshness: 'midday',
-    createdAt: new Date(Date.now() - 2 * 3600000).toISOString(),
-    expiresAt: new Date(Date.now() + 2 * 3600000).toISOString(),
-    isActive: true,
-    items: [
-      { name: 'Maslinovo ulje (extra djevičansko)', category: 'olive_oil', price: 15, unit: 'liter' },
-      { name: 'Crne masline', category: 'olive_oil', price: 10, unit: 'kg' }
-    ]
-  },
-  {
-    id: '4',
-    vendor: 'Sir & Pršut Brač',
-    freshness: 'afternoon',
-    createdAt: new Date(Date.now() - 4 * 3600000).toISOString(),
-    expiresAt: new Date(Date.now() + 1 * 3600000).toISOString(),
-    isActive: true,
-    items: [
-      { name: 'Paški sir', category: 'cheese', price: 35, unit: 'kg' },
-      { name: 'Pršut (narezani)', category: 'meat', price: 45, unit: 'kg' }
-    ]
-  },
-  {
-    id: '5',
-    vendor: 'Jagode Vrgorac',
-    freshness: 'morning',
-    createdAt: new Date().toISOString(),
-    expiresAt: new Date(Date.now() + 6 * 3600000).toISOString(),
-    isActive: true,
-    items: [
-      { name: 'Jagode (mjerica)', category: 'fruit', price: 4, unit: 'measure' },
-      { name: 'Trešnje', category: 'fruit', price: 8, unit: 'kg' }
-    ]
-  }
-];
+import imgFish from '@/assets/images/pazar_fish.png';
+import imgFruit from '@/assets/images/pazar_fruit.png';
+import imgCheese from '@/assets/images/pazar_cheese.png';
 
 const PazarFeedPage: React.FC = () => {
+  // Use our locally generated images repeatedly for the marquee
+  const images = [
+    imgFish, imgFruit, imgCheese, imgFish, imgFruit, imgCheese, imgFish, imgFruit
+  ];
+
   return (
     <div className="pazar-feed-page">
-      <div className="page-header-bg">
-        <PageContainer>
-          <div className="hero-section">
-            <h1 className="hero-title">Daily Pazar Feed</h1>
-            <p className="hero-subtitle">Real-time prices from Split's central market. Fresh from the source.</p>
+      <section className="pazar-hero">
+        <div className="pazar-hero-content">
+          <span className="pazar-badge">
+            <span className="material-symbols-outlined" style={{ fontSize: '14px' }}>storefront</span>
+            Daily Market Feed
+          </span>
+          <h1 className="pazar-hero-title">Fresh from Split's central market</h1>
+          <p className="pazar-hero-subtitle">
+            Real-time prices and availability from local vendors. Support local, eat fresh.
+          </p>
+          <div className="pazar-hero-actions">
+            <button className="pazar-cta-btn">
+              Explore Produce
+              <span className="material-symbols-outlined">arrow_right_alt</span>
+            </button>
           </div>
-        </PageContainer>
-      </div>
+        </div>
+
+        <div className="pazar-marquee-wrapper">
+          <div className="pazar-marquee">
+            <div className="pazar-marquee-track">
+              {images.map((src, idx) => (
+                <div key={`img1-${idx}`} className="pazar-marquee-item">
+                  <img src={src} alt="Market produce" />
+                </div>
+              ))}
+            </div>
+            <div className="pazar-marquee-track">
+              {images.map((src, idx) => (
+                <div key={`img2-${idx}`} className="pazar-marquee-item">
+                  <img src={src} alt="Market produce" />
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
       
       <PageContainer>
-        <PazarGrid listings={MOCK_LISTINGS} />
+        <PazarGrid listings={MOCK_PAZAR_LISTINGS} />
       </PageContainer>
     </div>
   );

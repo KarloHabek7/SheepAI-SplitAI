@@ -11,7 +11,7 @@ const FreshnessIndicator: React.FC<FreshnessIndicatorProps> = ({ freshness }) =>
       case 'morning':
         return { label: 'Freshly Posted', class: 'fresh' };
       case 'midday':
-        return { label: 'Updated at Midday', class: 'mid' };
+        return { label: 'Updated Midday', class: 'mid' };
       case 'afternoon':
         return { label: 'Selling Out', class: 'late' };
       default:

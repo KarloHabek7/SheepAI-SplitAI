@@ -1,13 +1,39 @@
 .category-breakdown-card {
-  background: var(--color-bg-card);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-lg);
-  padding: var(--space-sm);
-  box-shadow: var(--shadow-card);
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius-2xl);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(0, 0, 0, 0.4);
+  padding: var(--space-lg);
   flex: 1;
 }
 
+.category-breakdown-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: 
+    radial-gradient(220px 160px at 8% 100%, rgba(139,92,246,0.25), transparent 60%),
+    radial-gradient(260px 180px at 100% 0%, rgba(59,130,246,0.10), transparent 70%),
+    linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.00));
+}
+
+.chart-title {
+  position: relative;
+  z-index: 1;
+  font-family: var(--font-display);
+  font-size: var(--font-size-h3);
+  margin-top: 0;
+  margin-bottom: var(--space-md);
+  color: white;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
 .category-list {
+  position: relative;
+  z-index: 1;
   display: flex;
   flex-direction: column;
   gap: 8px;
@@ -21,7 +47,7 @@
 }
 
 .category-list::-webkit-scrollbar-thumb {
-  background: var(--color-border);
+  background: rgba(255, 255, 255, 0.2);
   border-radius: var(--radius-full);
 }
 
@@ -30,13 +56,14 @@
   justify-content: space-between;
   align-items: center;
   padding: 10px 12px;
-  background: var(--color-bg-elevated);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: var(--radius-md);
   transition: var(--transition-fast);
 }
 
 .category-item:hover {
-  background: rgba(0, 71, 171, 0.05);
+  background: rgba(255, 255, 255, 0.1);
   transform: translateX(4px);
 }
 
@@ -60,10 +87,10 @@
 
 .cat-count {
   font-weight: 700;
-  color: var(--color-primary);
-  background: white;
+  color: white;
+  background: rgba(0, 0, 0, 0.4);
   padding: 2px 8px;
   border-radius: var(--radius-sm);
   font-size: 12px;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }

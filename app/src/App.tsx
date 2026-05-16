@@ -13,12 +13,16 @@ const PazarSubmitPage = lazy(() => import('@/pages/PazarSubmitPage'));
 const EmergencyPage = lazy(() => import('@/pages/EmergencyPage'));
 const AdminDashboardPage = lazy(() => import('@/pages/AdminDashboardPage'));
 const AdminReportsPage = lazy(() => import('@/pages/AdminReportsPage'));
+const AuthPage = lazy(() => import('@/pages/AuthPage'));
 
 function App() {
   return (
     <BrowserRouter>
       <Suspense fallback={<Spinner />}>
         <Routes>
+          {/* Standalone Routes */}
+          <Route path="/auth" element={<AuthPage />} />
+          
           <Route path="/" element={<AppShell />}>
             {/* Main Application Routes */}
             <Route index element={<MapPage />} />
