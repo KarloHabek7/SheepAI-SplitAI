@@ -8,12 +8,12 @@ interface SuggestedPromptsProps {
 
 const SuggestedPrompts: React.FC<SuggestedPromptsProps> = ({ prompts, onSelect }) => {
   return (
-    <div className="suggested-prompts-container">
-      <div className="suggested-prompts-scroll">
+    <div className="suggested-prompts">
+      <div className="prompts-container">
         {prompts.map((prompt, index) => (
-          <button
-            key={index}
-            className="suggested-prompt-chip"
+          <button 
+            key={index} 
+            className="prompt-chip"
             onClick={() => onSelect(prompt)}
           >
             {prompt}

@@ -19,7 +19,7 @@ const MOCK_PROMPTS = [
 const INITIAL_MESSAGE: ChatMessage = {
   id: '1',
   role: 'assistant',
-  content: "Dobar dan! I am Split Zmaj, your personal municipal assistant. How can I help you today?",
+  content: "Dobar dan! I am Split Zmaj, your personal municipal assistant. I've been trained on the city's regulations (GUP), waste management protocols, and local services. How can I help you today?",
   timestamp: new Date().toISOString(),
 };
 
@@ -47,24 +47,43 @@ const ChatPage: React.FC = () => {
     setMessages(prev => [...prev, userMessage]);
     setIsStreaming(true);
 
-    // Mock assistant response
+    // Mock assistant response logic
     setTimeout(() => {
+      let responseContent = `I understand you're asking about: "${content}". `;
+      let citations = undefined;
+      let toolCall = undefined;
+
+      if (content.toLowerCase().includes('varo')) {
+        responseContent = "According to the General Urbanistic Plan (GUP) of Split, Varoš is part of the protected historical buffer zone. Building a terrace requires a special conservation permit.";
+        citations = [
+          {
+            sourceDocument: "GUP Grada Splita",
+            article: "47",
+            page: 112,
+            excerpt: "U povijesnim predgrađima (Varoš, Dobri, Manus, Lučac), svaka vanjska intervencija mora biti odobrena od strane Konzervatorskog odjela."
+          }
+        ];
+      } else if (content.toLowerCase().includes('park')) {
+        responseContent = "I've checked the real-time parking data for the Riva area.";
+        toolCall = {
+          toolName: "check_parking_availability",
+          args: { zone: "Zone A", location: "Riva" },
+          result: { available_spots: 12, price: "1.50€/hr" }
+        };
+      }
+
       const assistantMessage: ChatMessage = {
         id: (Date.now() + 1).toString(),
         role: 'assistant',
-        content: `I understand you're asking about: "${content}". This is a mock response. In the full version, I would query the Split city regulations and provide a detailed answer with citations.`,
+        content: responseContent,
         timestamp: new Date().toISOString(),
-        citations: content.toLowerCase().includes('varo') ? [
-          {
-            sourceDocument: "GUP Grada Splita",
-            article: "42",
-            excerpt: "U staroj gradskoj jezgri (Varoš) gradnja terasa podliježe posebnim uvjetima konzervatorskog odjela."
-          }
-        ] : undefined
+        citations,
+        toolCall
       };
+
       setMessages(prev => [...prev, assistantMessage]);
       setIsStreaming(false);
-    }, 1000);
+    }, 1200);
   };
 
   return (
@@ -72,35 +91,38 @@ const ChatPage: React.FC = () => {
       <PageContainer className="chat-page-container">
         <div className="chat-messages-list">
           {messages.map(msg => (
-            <div key={msg.id} className="chat-message-wrapper">
+            <div key={msg.id} className="chat-message-group">
               <ChatBubble message={msg} />
-              {msg.citations && msg.citations.map((cite, i) => (
-                <div key={i} className="citation-wrapper">
-                  <CitationCard citation={cite} />
-                </div>
-              ))}
-              {msg.toolCall && (
-                <div className="tool-call-wrapper">
-                  <ToolCallCard toolCall={msg.toolCall} />
+              {msg.citations && (
+                <div className="citations-list">
+                  {msg.citations.map((cite, i) => (
+                    <CitationCard key={i} citation={cite} />
+                  ))}
                 </div>
               )}
+              {msg.toolCall && <ToolCallCard toolCall={msg.toolCall} />}
             </div>
           ))}
           {isStreaming && (
-            <div className="typing-indicator assistant">
-              <span></span><span></span><span></span>
+            <div className="streaming-indicator">
+              <div className="dot"></div>
+              <div className="dot"></div>
+              <div className="dot"></div>
             </div>
           )}
           <div ref={messagesEndRef} />
         </div>
       </PageContainer>
       
-      <div className="chat-footer">
+      <div className="chat-sticky-footer">
         {messages.length === 1 && (
-          <SuggestedPrompts 
-            prompts={MOCK_PROMPTS} 
-            onSelect={handleSendMessage} 
-          />
+          <div className="prompts-wrapper">
+            <p className="suggested-label">Try asking:</p>
+            <SuggestedPrompts 
+              prompts={MOCK_PROMPTS} 
+              onSelect={handleSendMessage} 
+            />
+          </div>
         )}
         <ChatInput onSend={handleSendMessage} disabled={isStreaming} />
       </div>

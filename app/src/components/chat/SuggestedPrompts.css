@@ -1,43 +1,38 @@
-.suggested-prompts-container {
+.suggested-prompts {
   width: 100%;
-  padding: var(--space-sm) 0;
-  overflow: hidden;
-  background: var(--color-bg-card);
+  padding: 12px var(--space-sm);
+  background: transparent;
 }
 
-.suggested-prompts-scroll {
+.prompts-container {
   display: flex;
-  gap: var(--space-xs);
-  padding: 0 var(--space-sm);
+  gap: 8px;
   overflow-x: auto;
   scrollbar-width: none;
-  -ms-overflow-style: none;
+  padding: 4px 0;
 }
 
-.suggested-prompts-scroll::-webkit-scrollbar {
+.prompts-container::-webkit-scrollbar {
   display: none;
 }
 
-.suggested-prompt-chip {
-  flex-shrink: 0;
-  padding: 8px 16px;
-  background: var(--color-bg-elevated);
+.prompt-chip {
+  white-space: nowrap;
+  padding: 10px 18px;
+  background: var(--color-bg-card);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-full);
-  font-size: 13px;
+  color: var(--color-text-secondary);
+  font-size: 0.85rem;
   font-weight: 500;
-  color: var(--color-text-primary);
   cursor: pointer;
   transition: var(--transition-default);
-  white-space: nowrap;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
-.suggested-prompt-chip:hover {
-  background: var(--color-bg-card);
+.prompt-chip:hover {
   border-color: var(--color-primary);
   color: var(--color-primary);
-}
-
-.suggested-prompt-chip:active {
-  transform: scale(0.95);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 71, 171, 0.1);
 }
