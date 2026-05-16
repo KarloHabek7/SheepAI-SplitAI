@@ -495,6 +495,7 @@ export interface AppStoreState {
 export interface UseChatReturn {
   messages: ChatMessage[];
   isStreaming: boolean;
+  error: string | null;
   suggestedPrompts: string[];
   sendMessage: (message: string, image?: string) => Promise<void>;
   clearChat: () => void;
