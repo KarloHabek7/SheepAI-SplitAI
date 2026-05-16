@@ -1,5 +1,5 @@
 import { Suspense, lazy } from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import AppShell from '@/components/layout/AppShell';
 import Spinner from '@/components/ui/Spinner';
 import './App.css';
@@ -20,6 +20,7 @@ function App() {
       <Suspense fallback={<Spinner />}>
         <Routes>
           <Route path="/" element={<AppShell />}>
+            {/* Main Application Routes */}
             <Route index element={<MapPage />} />
             <Route path="chat" element={<ChatPage />} />
             <Route path="report" element={<ReportPage />} />
@@ -31,8 +32,12 @@ function App() {
             <Route path="admin" element={<AdminDashboardPage />} />
             <Route path="admin/reports" element={<AdminReportsPage />} />
             
-            {/* 404 Fallback */}
-            <Route path="*" element={<div>404 Page Not Found</div>} />
+            {/* Redirection / Fallback */}
+            <Route path="map" element={<Navigate to="/" replace />} />
+            <Route path="*" element={<div style={{ padding: '2rem', textAlign: 'center' }}>
+              <h2>404</h2>
+              <p>Ova stranica ne postoji.</p>
+            </div>} />
           </Route>
         </Routes>
       </Suspense>
