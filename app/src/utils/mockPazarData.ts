@@ -9,6 +9,7 @@ export const MOCK_PAZAR_LISTINGS: PazarListing[] = [
     createdAt: new Date().toISOString(),
     expiresAt: new Date(Date.now() + 4 * 3600000).toISOString(),
     isActive: true,
+    imageUrl: '/mock-images/pazar_fish.png',
     items: [
       { name: 'Brancin (divlji)', category: 'fish', price: 28, unit: 'kg' },
       { name: 'Orada', category: 'fish', price: 22, unit: 'kg' },
@@ -22,6 +23,7 @@ export const MOCK_PAZAR_LISTINGS: PazarListing[] = [
     createdAt: new Date().toISOString(),
     expiresAt: new Date(Date.now() + 4 * 3600000).toISOString(),
     isActive: true,
+    imageUrl: '/mock-images/pazar_veggies.png',
     items: [
       { name: 'Blitva', category: 'vegetable', price: 2.5, unit: 'bunch' },
       { name: 'Mladi luk', category: 'vegetable', price: 1.5, unit: 'bunch' },
@@ -35,6 +37,7 @@ export const MOCK_PAZAR_LISTINGS: PazarListing[] = [
     createdAt: new Date(Date.now() - 2 * 3600000).toISOString(),
     expiresAt: new Date(Date.now() + 2 * 3600000).toISOString(),
     isActive: true,
+    imageUrl: '/mock-images/pazar_olive_oil.png',
     items: [
       { name: 'Maslinovo ulje (extra djevičansko)', category: 'olive_oil', price: 15, unit: 'liter' },
       { name: 'Crne masline', category: 'olive_oil', price: 10, unit: 'kg' }
@@ -47,6 +50,7 @@ export const MOCK_PAZAR_LISTINGS: PazarListing[] = [
     createdAt: new Date(Date.now() - 4 * 3600000).toISOString(),
     expiresAt: new Date(Date.now() + 1 * 3600000).toISOString(),
     isActive: true,
+    imageUrl: '/mock-images/pazar_cheese_prsut.png',
     items: [
       { name: 'Paški sir', category: 'cheese', price: 35, unit: 'kg' },
       { name: 'Pršut (narezani)', category: 'meat', price: 45, unit: 'kg' }
@@ -59,6 +63,7 @@ export const MOCK_PAZAR_LISTINGS: PazarListing[] = [
     createdAt: new Date().toISOString(),
     expiresAt: new Date(Date.now() + 6 * 3600000).toISOString(),
     isActive: true,
+    imageUrl: '/mock-images/pazar_fruit.png',
     items: [
       { name: 'Jagode (mjerica)', category: 'fruit', price: 4, unit: 'measure' },
       { name: 'Trešnje', category: 'fruit', price: 8, unit: 'kg' }

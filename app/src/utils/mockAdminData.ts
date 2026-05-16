@@ -16,12 +16,22 @@ export const generateMockReports = (count: number): CivicReport[] => {
     const date = new Date();
     date.setDate(date.getDate() - Math.floor(Math.random() * 30));
 
+    const categoryImages: Record<string, string> = {
+      pothole: '/mock-images/pothole.png',
+      graffiti: '/mock-images/graffiti.png',
+      illegal_parking: '/mock-images/illegal_parking.png',
+      waste_overflow: '/mock-images/waste_overflow.png',
+      damaged_infrastructure: '/mock-images/broken_lamp.png',
+    };
+
+    const imageUrl = categoryImages[category] || 'https://images.unsplash.com/photo-1584467541268-b040f83be3fd?q=80&w=2070&auto=format&fit=crop';
+
     return {
       id: `report-${Math.random().toString(36).substr(2, 9)}`,
       status,
       createdAt: date.toISOString(),
       updatedAt: new Date().toISOString(),
-      imageUrl: 'https://images.unsplash.com/photo-1584467541268-b040f83be3fd?q=80&w=2070&auto=format&fit=crop',
+      imageUrl,
       classification: {
         category,
         severity,
