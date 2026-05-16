@@ -3,20 +3,10 @@ import PageContainer from '@/components/layout/PageContainer';
 import PhotoUpload from '@/components/report/PhotoUpload';
 import ClassificationPreview from '@/components/report/ClassificationPreview';
 import TicketConfirmation from '@/components/report/TicketConfirmation';
-import { CivicReportClassification } from '@/types';
+import { MOCK_CLASSIFICATION, generateTicketId } from '@/utils/mockReportData';
 import './ReportPage.css';
 
 type ReportStep = 'upload' | 'analyzing' | 'review' | 'success';
-
-const MOCK_CLASSIFICATION: CivicReportClassification = {
-  category: 'waste_overflow',
-  severity: 8,
-  zone: 'unesco_buffer',
-  department: 'cistoca',
-  description: "Large quantity of household waste overflowed near a public container. Obstructing pedestrian path.",
-  suggestedAction: "Immediate pickup required.",
-  confidence: 0.94
-};
 
 const ReportPage: React.FC = () => {
   const [step, setStep] = useState<ReportStep>('upload');
@@ -39,7 +29,7 @@ const ReportPage: React.FC = () => {
     setStep('analyzing'); // Show loading during submission too
     
     setTimeout(() => {
-      setTicketId(`GR-${new Date().getFullYear()}-${Math.floor(Math.random() * 10000)}`);
+      setTicketId(generateTicketId());
       setStep('success');
     }, 1500);
   };
