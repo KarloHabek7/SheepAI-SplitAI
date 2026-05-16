@@ -3,114 +3,98 @@ import PageContainer from '@/components/layout/PageContainer';
 import PhotoUpload from '@/components/report/PhotoUpload';
 import ClassificationPreview from '@/components/report/ClassificationPreview';
 import TicketConfirmation from '@/components/report/TicketConfirmation';
-import Spinner from '@/components/ui/Spinner';
 import { CivicReportClassification } from '@/types';
 import './ReportPage.css';
 
-type ReportStep = 'upload' | 'analyzing' | 'confirm' | 'submitting' | 'success';
+type ReportStep = 'upload' | 'analyzing' | 'review' | 'success';
 
 const MOCK_CLASSIFICATION: CivicReportClassification = {
   category: 'waste_overflow',
-  severity: 7,
-  zone: 'unesco_core',
+  severity: 8,
+  zone: 'unesco_buffer',
   department: 'cistoca',
-  description: "Large pile of construction waste and household trash overflowing from container near the palace wall.",
-  suggestedAction: "Immediate dispatch of garbage truck and fine investigation.",
+  description: "Large quantity of household waste overflowed near a public container. Obstructing pedestrian path.",
+  suggestedAction: "Immediate pickup required.",
   confidence: 0.94
 };
 
 const ReportPage: React.FC = () => {
   const [step, setStep] = useState<ReportStep>('upload');
-  const [image, setImage] = useState<string | null>(null);
-  const [userNote, setUserNote] = useState('');
-  const [ticketId, setTicketId] = useState('');
+  const [imageUrl, setImageUrl] = useState<string | null>(null);
+  const [ticketId, setTicketId] = useState<string | null>(null);
 
-  const handleImageSelected = (img: string) => {
-    setImage(img);
+  const handleImageSelect = (url: string) => {
+    setImageUrl(url);
     setStep('analyzing');
     
-    // Mock analysis delay
+    // Simulate AI Analysis
     setTimeout(() => {
-      setStep('confirm');
+      setStep('review');
+    }, 2000);
+  };
+
+  const handleConfirm = (note: string) => {
+    // In a real app, this would be a POST request
+    console.log('Submitting report with note:', note);
+    setStep('analyzing'); // Show loading during submission too
+    
+    setTimeout(() => {
+      setTicketId(`GR-${new Date().getFullYear()}-${Math.floor(Math.random() * 10000)}`);
+      setStep('success');
     }, 1500);
   };
 
-  const handleSubmit = () => {
-    setStep('submitting');
-    
-    // Mock submission delay
-    setTimeout(() => {
-      setTicketId(`GR-2026-${Math.floor(Math.random() * 9000) + 1000}`);
-      setStep('success');
-    }, 1200);
-  };
-
   const resetFlow = () => {
-    setImage(null);
-    setUserNote('');
     setStep('upload');
+    setImageUrl(null);
+    setTicketId(null);
   };
 
   return (
-    <PageContainer className="report-page">
-      <div className="report-flow-header">
-        <h1>Report Issue</h1>
-        <p>Your photo will be analyzed by Gemini AI</p>
+    <div className="report-page-root">
+      <div className="report-header-bg">
+        <PageContainer>
+          <div className="report-hero">
+            <h1>Marjan Vision</h1>
+            <p>Smart civic reporting for the City of Split.</p>
+          </div>
+        </PageContainer>
       </div>
 
-      <div className="report-content">
-        {step === 'upload' && (
-          <div className="step-content animate-in">
-            <PhotoUpload onImageSelected={handleImageSelected} currentImage={image} />
-          </div>
-        )}
+      <PageContainer>
+        <div className="report-flow-container">
+          {step === 'upload' && (
+            <PhotoUpload onImageSelect={handleImageSelect} />
+          )}
 
-        {step === 'analyzing' && (
-          <div className="step-content centered animate-in">
-            <Spinner />
-            <p className="status-text">AI is identifying the issue...</p>
-          </div>
-        )}
-
-        {step === 'confirm' && (
-          <div className="step-content animate-in">
-            <div className="report-preview-layout">
-              <div className="preview-image-mini">
-                <img src={image!} alt="Selected" />
+          {step === 'analyzing' && (
+            <div className="analyzing-state">
+              <div className="ai-scanner">
+                {imageUrl && <img src={imageUrl} alt="Analyzing" className="scanning-image" />}
+                <div className="scan-line"></div>
               </div>
-              <ClassificationPreview classification={MOCK_CLASSIFICATION} />
+              <div className="analyzing-text">
+                <div className="spinner-small"></div>
+                <h3>Gemini is analyzing...</h3>
+                <p>Identifying category, severity, and department.</p>
+              </div>
             </div>
+          )}
 
-            <div className="note-section">
-              <label>Additional Note (Optional)</label>
-              <textarea 
-                placeholder="Anything else we should know?"
-                value={userNote}
-                onChange={(e) => setUserNote(e.target.value)}
-              />
-            </div>
+          {step === 'review' && (
+            <ClassificationPreview 
+              classification={MOCK_CLASSIFICATION} 
+              onConfirm={handleConfirm}
+              onBack={() => setStep('upload')}
+            />
+          )}
 
-            <div className="action-bar">
-              <button className="secondary-btn" onClick={() => setStep('upload')}>Back</button>
-              <button className="primary-btn" onClick={handleSubmit}>Submit Report</button>
-            </div>
-          </div>
-        )}
-
-        {step === 'submitting' && (
-          <div className="step-content centered animate-in">
-            <Spinner />
-            <p className="status-text">Creating official ticket...</p>
-          </div>
-        )}
-
-        {step === 'success' && (
-          <div className="step-content animate-in">
+          {step === 'success' && ticketId && (
             <TicketConfirmation ticketId={ticketId} onReset={resetFlow} />
-          </div>
-        )}
-      </div>
-    </PageContainer>
+          )}
+        </div>
+      </PageContainer>
+    </div>
   );
 };
 

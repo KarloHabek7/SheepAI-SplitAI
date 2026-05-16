@@ -1,12 +1,12 @@
-import { ReactNode } from 'react';
+import React from 'react';
 import './PageContainer.css';
 
 interface PageContainerProps {
-  children: ReactNode;
+  children: React.ReactNode;
   className?: string;
 }
 
-const PageContainer = ({ children, className = '' }: PageContainerProps) => {
+const PageContainer: React.FC<PageContainerProps> = ({ children, className = '' }) => {
   return (
     <main className={`page-container ${className}`}>
       {children}

@@ -6,15 +6,15 @@ const StatusLegend: React.FC = () => {
   return (
     <div className="status-legend">
       <div className="legend-item">
-        <span className="dot" style={{ backgroundColor: MAP_MARKER_COLORS.open }} />
+        <span className="dot" style={{ background: MAP_MARKER_COLORS.open }}></span>
         <span>Open</span>
       </div>
       <div className="legend-item">
-        <span className="dot" style={{ backgroundColor: MAP_MARKER_COLORS.in_progress }} />
+        <span className="dot" style={{ background: MAP_MARKER_COLORS.in_progress }}></span>
         <span>In Progress</span>
       </div>
       <div className="legend-item">
-        <span className="dot" style={{ backgroundColor: MAP_MARKER_COLORS.resolved }} />
+        <span className="dot" style={{ background: MAP_MARKER_COLORS.resolved }}></span>
         <span>Resolved</span>
       </div>
     </div>

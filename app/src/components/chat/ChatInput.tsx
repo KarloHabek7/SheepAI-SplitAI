@@ -7,14 +7,14 @@ interface ChatInputProps {
 }
 
 const ChatInput: React.FC<ChatInputProps> = ({ onSend, disabled }) => {
-  const [text, setText] = useState('');
+  const [message, setMessage] = useState('');
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
   const handleSubmit = (e?: React.FormEvent) => {
     e?.preventDefault();
-    if (text.trim() && !disabled) {
-      onSend(text.trim());
-      setText('');
+    if (message.trim() && !disabled) {
+      onSend(message);
+      setMessage('');
     }
   };
 
@@ -25,40 +25,40 @@ const ChatInput: React.FC<ChatInputProps> = ({ onSend, disabled }) => {
     }
   };
 
-  // Auto-resize textarea
   useEffect(() => {
     if (textareaRef.current) {
       textareaRef.current.style.height = 'auto';
-      textareaRef.current.style.height = `${Math.min(textareaRef.current.scrollHeight, 120)}px`;
+      textareaRef.current.style.height = `${Math.min(textareaRef.current.scrollHeight, 150)}px`;
     }
-  }, [text]);
+  }, [message]);
 
   return (
-    <div className="chat-input-container">
-      <button className="chat-attachment-button" type="button" aria-label="Attach photo">
-        <span className="material-symbols-outlined">add_photo_alternate</span>
-      </button>
-      <form className="chat-input-wrapper" onSubmit={handleSubmit}>
+    <form className="chat-input-form" onSubmit={handleSubmit}>
+      <div className="input-wrapper">
+        <button type="button" className="action-btn" aria-label="Attach Photo">
+          <span className="material-symbols-outlined">add_a_photo</span>
+        </button>
+        
         <textarea
           ref={textareaRef}
-          className="chat-input-field"
-          placeholder="Type a message..."
-          value={text}
-          onChange={(e) => setText(e.target.value)}
+          value={message}
+          onChange={(e) => setMessage(e.target.value)}
           onKeyDown={handleKeyDown}
-          disabled={disabled}
+          placeholder="Ask anything about Split..."
           rows={1}
+          disabled={disabled}
         />
-      </form>
-      <button 
-        type="button" 
-        className="chat-send-button"
-        onClick={handleSubmit}
-        disabled={!text.trim() || disabled}
-      >
-        <span className="material-symbols-outlined">send</span>
-      </button>
-    </div>
+        
+        <button 
+          type="submit" 
+          className={`send-btn ${message.trim() ? 'active' : ''}`}
+          disabled={!message.trim() || disabled}
+          aria-label="Send Message"
+        >
+          <span className="material-symbols-outlined">send</span>
+        </button>
+      </div>
+    </form>
   );
 };
 

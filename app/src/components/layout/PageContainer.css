@@ -1,15 +1,14 @@
 .page-container {
+  width: 100%;
   max-width: 1200px;
   margin: 0 auto;
-  padding: var(--space-sm);
-  width: 100%;
-  min-height: calc(100vh - 64px);
+  padding: var(--space-md) var(--space-sm);
+  min-height: calc(100vh - 120px); /* Adjust based on header/footer height */
   box-sizing: border-box;
 }
 
 @media (max-width: 768px) {
   .page-container {
-    padding: var(--space-xs);
-    min-height: calc(100vh - 64px - 64px);
+    padding-bottom: 80px; /* Space for BottomNav */
   }
 }
