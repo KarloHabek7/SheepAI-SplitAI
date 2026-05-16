@@ -1,23 +1,39 @@
 import React from 'react';
+import { useUserLocation } from '@/hooks/useUserLocation';
 import './LocationButton.css';
 
 interface LocationButtonProps {
-  onLocate: () => void;
-  isLoading?: boolean;
+  map: mapboxgl.Map | null;
 }
 
-const LocationButton: React.FC<LocationButtonProps> = ({ onLocate, isLoading }) => {
+const LocationButton: React.FC<LocationButtonProps> = ({ map }) => {
+  const { location, isLocating, locate } = useUserLocation();
+
+  const handleLocate = async () => {
+    await locate();
+  };
+
+  // Fly to location when it changes
+  React.useEffect(() => {
+    if (location && map) {
+      map.flyTo({
+        center: [location.lng, location.lat],
+        zoom: 15,
+        essential: true
+      });
+    }
+  }, [location, map]);
+
   return (
     <button 
-      className={`location-button ${isLoading ? 'loading' : ''}`} 
-      onClick={onLocate}
-      aria-label="Find my location"
+      className={`location-button ${isLocating ? 'locating' : ''}`} 
+      onClick={handleLocate}
+      disabled={isLocating}
+      title="Find my location"
     >
-      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M12 21C16.9706 21 21 16.9706 21 12C21 7.02944 16.9706 3 12 3C7.02944 3 3 7.02944 3 12C3 16.9706 7.02944 21 12 21Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-        <path d="M12 15C13.6569 15 15 13.6569 15 12C15 10.3431 13.6569 9 12 9C10.3431 9 9 10.3431 9 12C9 13.6569 10.3431 15 12 15Z" fill="currentColor"/>
-        <path d="M12 3V5M12 19V21M3 12H5M19 12H21" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-      </svg>
+      <span className="material-symbols-outlined">
+        {isLocating ? 'near_me_disabled' : 'near_me'}
+      </span>
     </button>
   );
 };

@@ -1,11 +1,12 @@
 import { useEffect, useRef, useState } from 'react';
 import mapboxgl from 'mapbox-gl';
-import { SPLIT_MAP_DEFAULTS, SPLIT_MAP_BOUNDS } from '@/types';
 import 'mapbox-gl/dist/mapbox-gl.css';
+import { SPLIT_MAP_DEFAULTS, SPLIT_MAP_BOUNDS } from '@/types';
 
-const MAPBOX_TOKEN = import.meta.env.VITE_MAPBOX_TOKEN;
+// Access token from env
+mapboxgl.accessToken = import.meta.env.VITE_MAPBOX_TOKEN || '';
 
-export function useMapboxMap() {
+export const useMapboxMap = () => {
   const mapContainerRef = useRef<HTMLDivElement>(null);
   const [mapInstance, setMapInstance] = useState<mapboxgl.Map | null>(null);
   const [isLoaded, setIsLoaded] = useState(false);
@@ -13,12 +14,10 @@ export function useMapboxMap() {
 
   useEffect(() => {
     if (!mapContainerRef.current) return;
-    if (!MAPBOX_TOKEN) {
-      setError('Mapbox token is missing. Please add VITE_MAPBOX_TOKEN to your .env file.');
+    if (!mapboxgl.accessToken) {
+      setError('Mapbox access token is missing. Please check your .env file.');
       return;
     }
-
-    mapboxgl.accessToken = MAPBOX_TOKEN;
 
     const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
     const styleUrl = isDarkMode ? 'mapbox://styles/mapbox/dark-v11' : 'mapbox://styles/mapbox/light-v11';
@@ -42,7 +41,7 @@ export function useMapboxMap() {
         // Add 3D buildings layer
         const layers = map.getStyle().layers;
         const labelLayerId = layers?.find(
-          (layer) => layer.type === 'symbol' && layer.layout && layer.layout['text-field']
+          (layer) => layer.type === 'symbol' && layer.layout?.['text-field']
         )?.id;
 
         map.addLayer(
@@ -113,4 +112,4 @@ export function useMapboxMap() {
   }, []);
 
   return { mapContainerRef, mapInstance, isLoaded, error };
-}
+};

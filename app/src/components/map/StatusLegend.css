@@ -1,38 +1,36 @@
 .status-legend {
   position: absolute;
-  bottom: 24px;
-  right: 24px;
-  background: rgba(255, 255, 255, 0.85);
+  bottom: 80px; /* Above BottomNav */
+  right: 16px;
+  background: rgba(255, 255, 255, 0.8);
   backdrop-filter: blur(8px);
-  padding: 10px 14px;
+  padding: 8px 12px;
   border-radius: var(--radius-md);
   border: 1px solid var(--color-border);
-  box-shadow: var(--shadow-card);
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  z-index: 50;
+  gap: 6px;
+  z-index: 5;
+  pointer-events: none;
 }
 
 .legend-item {
   display: flex;
   align-items: center;
   gap: 8px;
-  font-size: 12px;
-  font-weight: 500;
+  font-size: 0.75rem;
+  font-weight: 700;
   color: var(--color-text-primary);
 }
 
 .dot {
-  width: 10px;
-  height: 10px;
+  width: 8px;
+  height: 8px;
   border-radius: 50%;
-  border: 1.5px solid white;
-  box-shadow: 0 0 0 1px rgba(0,0,0,0.1);
 }
 
-@media (max-width: 767px) {
+@media (max-width: 768px) {
   .status-legend {
-    display: none; /* Hide on mobile to save space */
+    bottom: 150px; /* Above FAB and BottomNav */
   }
 }
