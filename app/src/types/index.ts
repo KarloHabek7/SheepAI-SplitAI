@@ -508,6 +508,7 @@ export interface AuthStoreState {
   isLoading: boolean;
   error: string | null;
   login: (email: string, password: string) => Promise<void>;
+  loginDemo: (role: 'admin' | 'user') => void;
   register: (data: Partial<User> & { password: string }) => Promise<void>;
   logout: () => void;
   clearError: () => void;

@@ -13,11 +13,10 @@ export default function AuthPage() {
   const [oib, setOib] = useState('');
   const [phone, setPhone] = useState('');
   const [address, setAddress] = useState('');
-  const [twoFactor, setTwoFactor] = useState('');
   
   const navigate = useNavigate();
   const location = useLocation();
-  const { login, register, isLoading, error, isAuthenticated, clearError } = useAuthStore();
+  const { login, loginDemo, register, isLoading, error, isAuthenticated, clearError } = useAuthStore();
 
   const from = (location.state as any)?.from?.pathname || '/';
 
@@ -32,8 +31,20 @@ export default function AuthPage() {
     if (activeTab === 'login') {
       await login(email, password);
     } else {
-      await register({ email, password, fullName, oib, phone, address });
+      await register({ 
+        email, 
+        password, 
+        fullName: fullName || 'Demo User', 
+        oib: oib || '12345678901', 
+        phone: phone || '+3850000000', 
+        address: address || 'Split' 
+      });
     }
+  };
+
+  const handleDemoLogin = async (role: 'admin' | 'citizen') => {
+    console.log(`[AuthPage] Demo login initiated for role: ${role}`);
+    loginDemo(role === 'admin' ? 'admin' : 'user');
   };
 
   return (
@@ -92,10 +103,9 @@ export default function AuthPage() {
                 <span className="material-symbols-rounded auth-input-icon">badge</span>
                 <input 
                   type="text" 
-                  placeholder="OIB (11 znamenki)" 
+                  placeholder="OIB (opcionalno)" 
                   value={oib}
                   onChange={(e) => setOib(e.target.value)}
-                  required 
                   pattern="\d{11}" 
                 />
               </div>
@@ -148,17 +158,7 @@ export default function AuthPage() {
             />
           </div>
 
-          <div className="auth-input-group full-width special-2fa">
-            <span className="material-symbols-rounded auth-input-icon">bolt</span>
-            <input 
-              type="text" 
-              placeholder="2FA Google Auth Kod (6 znamenki)" 
-              value={twoFactor}
-              onChange={(e) => setTwoFactor(e.target.value)}
-              required 
-              pattern="\d{6}"
-            />
-          </div>
+          {/* 2FA removed for pitch simplicity */}
 
           <button type="submit" className="auth-submit-btn" disabled={isLoading}>
             {isLoading ? (
@@ -170,6 +170,34 @@ export default function AuthPage() {
               </>
             )}
           </button>
+
+          {activeTab === 'login' && (
+            <div className="demo-login-section">
+              <div className="demo-divider">
+                <span>Ili brzi pristup za pitch</span>
+              </div>
+              <div className="demo-buttons">
+                <button 
+                  type="button" 
+                  className="demo-btn admin"
+                  onClick={() => handleDemoLogin('admin')}
+                  disabled={isLoading}
+                >
+                  <span className="material-symbols-rounded">admin_panel_settings</span>
+                  Admin Demo
+                </button>
+                <button 
+                  type="button" 
+                  className="demo-btn citizen"
+                  onClick={() => handleDemoLogin('citizen')}
+                  disabled={isLoading}
+                >
+                  <span className="material-symbols-rounded">person</span>
+                  Građanin Demo
+                </button>
+              </div>
+            </div>
+          )}
         </form>
       </div>
 

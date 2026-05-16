@@ -42,6 +42,23 @@ export const useAuthStore = create<AuthStoreState>()(
         }
       },
 
+      loginDemo: (role: 'admin' | 'user') => {
+        set({ isLoading: true });
+        // Simulate a short delay for "wow" factor
+        setTimeout(() => {
+          const demoUser: any = role === 'admin' 
+            ? { id: 'u1', email: 'admin@split.hr', fullName: 'Admin User', role: 'admin' }
+            : { id: 'u2', email: 'citizen@gmail.com', fullName: 'Marija Horvat', role: 'user' };
+          
+          set({
+            user: demoUser,
+            token: `demo-token-${role}`,
+            isAuthenticated: true,
+            isLoading: false,
+          });
+        }, 800);
+      },
+
       register: async (data) => {
         set({ isLoading: true, error: null });
         try {

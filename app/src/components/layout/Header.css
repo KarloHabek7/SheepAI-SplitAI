@@ -34,7 +34,17 @@
   color: var(--color-text-primary);
   display: flex;
   align-items: center;
+  gap: 12px;
   letter-spacing: -0.5px;
+}
+
+.logo-icon {
+  height: 36px;
+  width: auto;
+  object-fit: contain;
+  /* If the logo has a white background, we can use mix-blend-mode to make it transparent on dark backgrounds */
+  mix-blend-mode: screen; 
+  filter: brightness(1.2);
 }
 
 .logo-accent {

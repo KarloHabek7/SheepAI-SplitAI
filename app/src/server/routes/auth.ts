@@ -23,10 +23,12 @@ const users = [
 // POST /api/auth/login
 router.post('/login', (req, res) => {
   const { email, password } = req.body;
+  console.log(`[AUTH] Login attempt for: ${email}`);
   
   const user = users.find(u => u.email === email && u.password === password);
   
   if (user) {
+    console.log(`[AUTH] Login successful for: ${email}`);
     // Remove password from response
     const { password: _, ...userWithoutPassword } = user;
     res.json({
@@ -38,6 +40,7 @@ router.post('/login', (req, res) => {
       timestamp: new Date().toISOString()
     });
   } else {
+    console.log(`[AUTH] Login failed for: ${email}`);
     res.status(401).json({
       success: false,
       error: {

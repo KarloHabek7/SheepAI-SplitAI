@@ -18,6 +18,7 @@ import {
 export interface GetReportsParams {
   status?: ReportStatus;
   severity?: SeverityLevel;
+  severity_min?: number;
   category?: IssueCategory;
   bbox?: MapBoundingBox;
 }
@@ -59,6 +60,7 @@ export async function getReports(params: GetReportsParams = {}): Promise<APIResp
   
   if (params.status) query.append('status', params.status);
   if (params.severity) query.append('severity', String(params.severity));
+  if (params.severity_min) query.append('severity_min', String(params.severity_min));
   if (params.category) query.append('category', params.category);
   
   if (params.bbox) {

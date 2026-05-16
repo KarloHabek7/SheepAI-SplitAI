@@ -11,7 +11,7 @@
 
 ---
 
-## 📊 Overall Progress: 30/30 tasks complete (100%) — Full Backend Integration Complete
+## 📊 Overall Progress: 31/31 tasks complete (100%) — Full Backend Integration & Map Refinements Complete
 
 ---
 
@@ -77,6 +77,8 @@
 | INT-04 PazarPages Integration | ✅ Done | Agent@17:35 | Wired PazarFeed and PazarSubmit to usePazarStore |
 | INT-05 MapGeoJson Integration | ✅ Done | Agent@17:28 | Wired useIssueGeoJson to reportService.getReports() |
 | Pitch Data Expansion | ✅ Done | Agent@17:38 | Expanded mock reports (25+) and Pazar listings (10+) for pitch presentation. |
+| MAP-01 Map Filters | ✅ Done | Agent@17:42 | Wired MapFilters to MapStore, implemented severity_min & category filters, refactored bounds syncing. |
+| AUTH-01 Simplify Auth | ✅ Done | Lead@17:56 | Added Demo Login buttons and simplified registration for pitch. |
 
 
 ---
@@ -115,4 +117,4 @@
 - **Backend:** T01, T02, T03, T04, T05, T06, T07, T08, T09, T10 Done. **All 10 Backend tasks complete! 🎉**
 - **AI:** T01-T07 Done (8/8). Next: All AI lane tasks completed.
 - **Creative:** Start **T01 Brand Website** immediately (Wave 1, no deps). Then T02 (Design Tokens). Then T03+T04 in parallel. T05 after assets ready. T06 last (needs working app).
-- **Lead:** All 5 Integration tasks complete! **Backend and Frontend are now fully wired.** 🎉
+- **Lead:** All 5 Integration tasks + Map Filter functionality complete! **Backend and Frontend are now fully wired and filtered.** 🎉
