@@ -1,77 +1,103 @@
+/* =============================================================================
+   TicketConfirmation.css — Dark-theme success card
+   ============================================================================= */
+
 .ticket-confirmation {
   width: 100%;
   max-width: 500px;
   margin: 0 auto;
   text-align: center;
-  padding: var(--space-xl) 0;
-  animation: scale-in 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  padding: var(--space-lg) 0;
+  animation: tc-scale-in 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
-.success-animation {
+.tc-success-icon {
   color: var(--color-success);
   margin-bottom: var(--space-md);
 }
 
-.check-icon {
+.tc-success-icon .material-symbols-outlined {
   font-size: 80px;
   font-variation-settings: 'FILL' 1;
+  filter: drop-shadow(0 0 20px rgba(16, 185, 129, 0.4));
 }
 
-h2 {
+.ticket-confirmation h2 {
   font-family: var(--font-display);
   font-size: var(--font-size-h2);
-  margin-bottom: 8px;
+  color: #fff;
+  margin: 0 0 8px;
 }
 
-p {
-  color: var(--color-text-secondary);
-  margin-bottom: var(--space-lg);
+.ticket-confirmation > p {
+  color: rgba(255, 255, 255, 0.6);
+  margin: 0 0 var(--space-md);
+  font-size: 0.95rem;
 }
 
-.ticket-card {
-  background: var(--color-bg-card);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-lg);
+/* Glassmorphic ticket card */
+.tc-ticket-card {
+  position: relative;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.04));
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 1.2em;
   padding: var(--space-md);
-  margin-bottom: var(--space-lg);
-  box-shadow: var(--shadow-card);
+  margin-bottom: var(--space-md);
+  text-align: left;
 }
 
-.ticket-row {
+.tc-ticket-row {
   display: flex;
   justify-content: space-between;
   padding: 12px 0;
-  border-bottom: 1px dashed var(--color-border);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
-.ticket-row:last-child {
+.tc-ticket-row:last-child {
   border-bottom: none;
 }
 
-.ticket-row .label {
+.tc-ticket-row .tc-label {
   font-size: 0.85rem;
-  color: var(--color-text-secondary);
+  color: rgba(255, 255, 255, 0.5);
 }
 
-.ticket-row .value {
+.tc-ticket-row .tc-value {
   font-weight: 700;
-  color: var(--color-text-primary);
+  color: #fff;
 }
 
-.status-badge {
+.tc-status-badge {
   background: rgba(16, 185, 129, 0.1);
   color: var(--color-success) !important;
   padding: 2px 8px;
   border-radius: 4px;
+  border: 1px solid rgba(16, 185, 129, 0.2);
+  font-size: 0.8rem;
 }
 
-.primary-btn.wide {
+.tc-reset-btn {
   width: 100%;
   padding: 14px;
   font-size: 1rem;
+  font-weight: 500;
+  background: var(--color-primary);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  transition: var(--transition-default);
+  box-shadow: var(--shadow-primary);
 }
 
-@keyframes scale-in {
-  from { opacity: 0; transform: scale(0.9); }
-  to { opacity: 1; transform: scale(1); }
+.tc-reset-btn:hover {
+  background: #003d96;
+  transform: translateY(-1px);
+}
+
+@keyframes tc-scale-in {
+  from { opacity: 0; transform: scale(0.92); }
+  to   { opacity: 1; transform: scale(1); }
 }

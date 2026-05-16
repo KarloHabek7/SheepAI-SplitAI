@@ -17,20 +17,23 @@
   display: flex;
   align-items: center;
   gap: 10px;
-  background: var(--color-primary);
+  background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
   color: white;
-  border: none;
+  border: 1px solid rgba(255, 255, 255, 0.2);
   padding: 12px 24px;
   border-radius: var(--radius-full);
   font-weight: 700;
-  box-shadow: var(--shadow-primary);
+  box-shadow: 0 8px 32px rgba(0, 71, 171, 0.3);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   cursor: pointer;
   transition: var(--transition-default);
 }
 
 .map-report-fab:hover {
-  transform: translateY(-4px) scale(1.05);
-  box-shadow: 0 8px 25px rgba(0, 71, 171, 0.4);
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 12px 40px rgba(0, 71, 171, 0.5);
+  border-color: rgba(255, 255, 255, 0.4);
 }
 
 .map-report-fab .material-symbols-outlined {

@@ -17,31 +17,32 @@
 }
 
 .filter-chip {
-  background: var(--glass-bg);
+  background: rgba(15, 20, 30, 0.75);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border: 1px solid var(--glass-border);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: var(--radius-full);
   padding: 8px 16px;
   font-size: 0.85rem;
-  font-weight: 600;
-  color: var(--color-text-secondary);
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.7);
   cursor: pointer;
-  box-shadow: var(--glass-shadow);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
   transition: var(--transition-fast);
   white-space: nowrap;
 }
 
 .filter-chip:hover {
-  border-color: var(--color-primary);
-  color: var(--color-primary);
+  border-color: rgba(255, 255, 255, 0.2);
+  color: #fff;
   transform: translateY(-1px);
 }
 
 .filter-chip.active {
   background: var(--color-primary);
   color: white;
-  border-color: var(--color-primary);
+  border-color: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 12px rgba(0, 71, 171, 0.4);
 }
 
 .filter-actions {
@@ -51,23 +52,23 @@
 .icon-action-btn {
   width: 38px;
   height: 38px;
-  background: var(--glass-bg);
+  background: rgba(15, 20, 30, 0.75);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border: 1px solid var(--glass-border);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  box-shadow: var(--glass-shadow);
-  color: var(--color-text-primary);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  color: rgba(255, 255, 255, 0.7);
   transition: var(--transition-fast);
 }
 
 .icon-action-btn:hover {
-  color: var(--color-primary);
-  border-color: var(--color-primary);
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.2);
   transform: translateY(-1px);
 }
 
