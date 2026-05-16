@@ -1,49 +1,93 @@
 import { useMemo } from 'react';
-import { IssueGeoJSONCollection, IssueGeoJSONFeature, IssueCategory, SeverityLevel, MapMarkerStatus } from '@/types';
+import { IssueGeoJSONCollection, IssueGeoJSONFeature } from '@/types';
 
-// Mock issues data
-const MOCK_ISSUES: Array<{
-  id: string;
-  lngLat: [number, number];
-  title: string;
-  category: IssueCategory;
-  status: MapMarkerStatus;
-  severity: SeverityLevel;
-}> = [
-  { id: '1', lngLat: [16.4391, 43.5085], title: 'Broken Pavement', category: 'damaged_infrastructure', status: 'open', severity: 6 },
-  { id: '2', lngLat: [16.4421, 43.5095], title: 'Graffiti on Heritage Wall', category: 'graffiti', status: 'in_progress', severity: 4 },
-  { id: '3', lngLat: [16.4351, 43.5075], title: 'Trash Overflow', category: 'waste_overflow', status: 'open', severity: 8 },
-  { id: '4', lngLat: [16.4402, 43.5115], title: 'Illegal Parking', category: 'illegal_parking', status: 'resolved', severity: 3 },
-  { id: '5', lngLat: [16.4451, 43.5065], title: 'Broken Street Light', category: 'damaged_infrastructure', status: 'open', severity: 5 },
-  { id: '6', lngLat: [16.4371, 43.5125], title: 'Vandalism in Park', category: 'vandalism', status: 'in_progress', severity: 7 },
-  { id: '7', lngLat: [16.4411, 43.5055], title: 'Pothole on Main Road', category: 'pothole', status: 'open', severity: 9 },
-  { id: '8', lngLat: [16.4381, 43.5105], title: 'Noise Complaint', category: 'noise_complaint', status: 'resolved', severity: 2 },
+const MOCK_ISSUES: IssueGeoJSONFeature[] = [
+  {
+    type: 'Feature',
+    geometry: { type: 'Point', coordinates: [16.4402, 43.5081] },
+    properties: {
+      id: '1',
+      title: 'Waste Overflow',
+      description: 'Garbage bins overflowing near the Riva entrance.',
+      category: 'waste_overflow',
+      status: 'open',
+      severity: 8,
+      createdAt: new Date().toISOString(),
+      zone: 'unesco_buffer',
+      department: 'cistoca'
+    }
+  },
+  {
+    type: 'Feature',
+    geometry: { type: 'Point', coordinates: [16.4380, 43.5095] },
+    properties: {
+      id: '2',
+      title: 'Broken Infrastructure',
+      description: 'Lamp post #42 flickering and making noise.',
+      category: 'damaged_infrastructure',
+      status: 'in_progress',
+      severity: 4,
+      createdAt: new Date().toISOString(),
+      zone: 'zona_a',
+      department: 'komunalni_redari'
+    }
+  },
+  {
+    type: 'Feature',
+    geometry: { type: 'Point', coordinates: [16.4420, 43.5110] },
+    properties: {
+      id: '3',
+      title: 'Pothole on Road',
+      description: 'Large pothole causing traffic slowdown.',
+      category: 'pothole',
+      status: 'open',
+      severity: 9,
+      createdAt: new Date().toISOString(),
+      zone: 'zona_b',
+      department: 'promet'
+    }
+  },
+  {
+    type: 'Feature',
+    geometry: { type: 'Point', coordinates: [16.4450, 43.5075] },
+    properties: {
+      id: '4',
+      title: 'Graffiti on Wall',
+      description: 'Unauthorized graffiti on a residential building.',
+      category: 'graffiti',
+      status: 'resolved',
+      severity: 2,
+      createdAt: new Date().toISOString(),
+      zone: 'zona_c',
+      department: 'komunalni_redari'
+    }
+  },
+  {
+    type: 'Feature',
+    geometry: { type: 'Point', coordinates: [16.4350, 43.5060] },
+    properties: {
+      id: '5',
+      title: 'Illegal Parking',
+      description: 'Car blocking pedestrian access on the sidewalk.',
+      category: 'illegal_parking',
+      status: 'open',
+      severity: 6,
+      createdAt: new Date().toISOString(),
+      zone: 'zona_a',
+      department: 'promet'
+    }
+  }
 ];
 
-export function useIssueGeoJson() {
-  const geoJson = useMemo((): IssueGeoJSONCollection => {
-    const features: IssueGeoJSONFeature[] = MOCK_ISSUES.map((issue) => ({
-      type: 'Feature',
-      geometry: {
-        type: 'Point',
-        coordinates: issue.lngLat,
-      },
-      properties: {
-        id: issue.id,
-        title: issue.title,
-        description: `Description for ${issue.title}`,
-        category: issue.category,
-        status: issue.status,
-        severity: issue.severity,
-        createdAt: new Date().toISOString(),
-      },
-    }));
+export const useIssueGeoJson = () => {
+  const geoJson = useMemo<IssueGeoJSONCollection>(() => ({
+    type: 'FeatureCollection',
+    features: MOCK_ISSUES,
+  }), []);
 
-    return {
-      type: 'FeatureCollection',
-      features,
-    };
-  }, []);
-
-  return { geoJson, isLoading: false, refresh: async () => {} };
-}
+  return {
+    geoJson,
+    isLoading: false,
+    refresh: async () => { console.log('Refreshing map data...'); }
+  };
+};

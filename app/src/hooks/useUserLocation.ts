@@ -1,37 +1,40 @@
 import { useState, useCallback } from 'react';
-import { GeoLocation } from '@/types';
+import { GeoLocation, UseUserLocationReturn } from '@/types';
 
-export function useUserLocation() {
+export const useUserLocation = (): UseUserLocationReturn => {
   const [location, setLocation] = useState<GeoLocation | null>(null);
   const [isLocating, setIsLocating] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   const locate = useCallback(async () => {
-    setIsLocating(true);
-    setError(null);
-
     if (!navigator.geolocation) {
       setError('Geolocation is not supported by your browser');
-      setIsLocating(false);
       return;
     }
+
+    setIsLocating(true);
+    setError(null);
 
     navigator.geolocation.getCurrentPosition(
       (position) => {
         setLocation({
           lat: position.coords.latitude,
           lng: position.coords.longitude,
-          accuracy: position.coords.accuracy,
         });
         setIsLocating(false);
       },
       (err) => {
-        setError(err.message);
+        console.error('Geolocation error:', err);
+        setError('Failed to get your location. Please check permissions.');
         setIsLocating(false);
       },
-      { enableHighAccuracy: true, timeout: 5000, maximumAge: 0 }
+      {
+        enableHighAccuracy: true,
+        timeout: 5000,
+        maximumAge: 0,
+      }
     );
   }, []);
 
   return { location, isLocating, error, locate };
-}
+};
