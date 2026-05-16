@@ -1,0 +1,35 @@
+.severity-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 10px;
+  border-radius: var(--radius-full);
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+}
+
+.severity-low {
+  background: rgba(16, 185, 129, 0.1);
+  color: var(--color-success);
+  border: 1px solid rgba(16, 185, 129, 0.2);
+}
+
+.severity-medium {
+  background: rgba(242, 201, 76, 0.1);
+  color: #B28B00; /* Darker yellow for readability */
+  border: 1px solid rgba(242, 201, 76, 0.2);
+}
+
+.severity-high {
+  background: rgba(255, 126, 0, 0.1); /* Orange */
+  color: #E67E00;
+  border: 1px solid rgba(255, 126, 0, 0.2);
+}
+
+.severity-critical {
+  background: rgba(215, 25, 32, 0.1);
+  color: var(--color-error);
+  border: 1px solid rgba(215, 25, 32, 0.2);
+}

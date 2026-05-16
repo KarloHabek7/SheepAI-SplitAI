@@ -1,0 +1,102 @@
+.report-table-container {
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-card);
+}
+
+.report-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: var(--font-size-small);
+}
+
+.report-table th {
+  background: var(--color-bg-elevated);
+  padding: 16px;
+  font-weight: 600;
+  color: var(--color-text-secondary);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.report-table td {
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--color-border);
+  color: var(--color-text-primary);
+  vertical-align: middle;
+}
+
+.report-table tr:hover {
+  background: rgba(0, 71, 171, 0.02);
+}
+
+.col-id {
+  font-family: monospace;
+  font-weight: 700;
+  color: var(--color-primary);
+}
+
+.cat-pill {
+  display: inline-block;
+  padding: 2px 8px;
+  background: rgba(0, 71, 171, 0.05);
+  border-radius: var(--radius-sm);
+  text-transform: capitalize;
+}
+
+.col-dept {
+  text-transform: capitalize;
+  font-size: 12px;
+}
+
+.col-zone {
+  text-transform: uppercase;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--color-text-secondary);
+}
+
+.status-select {
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--color-border);
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  outline: none;
+  background-color: white;
+}
+
+.status-submitted { color: var(--color-primary); border-color: var(--color-primary); }
+.status-progress { color: #F59E0B; border-color: #F59E0B; }
+.status-resolved { color: var(--color-success); border-color: var(--color-success); }
+.status-rejected { color: var(--color-error); border-color: var(--color-error); }
+
+.view-btn {
+  background: none;
+  border: none;
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  padding: 4px;
+  border-radius: var(--radius-sm);
+  transition: var(--transition-fast);
+}
+
+.view-btn:hover {
+  background: var(--color-bg-elevated);
+  color: var(--color-primary);
+}
+
+.empty-state {
+  padding: 48px;
+  text-align: center;
+  color: var(--color-text-secondary);
+}
+
+.empty-icon {
+  font-size: 48px;
+  opacity: 0.3;
+  margin-bottom: 16px;
+}
