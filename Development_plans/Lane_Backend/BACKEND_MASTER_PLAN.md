@@ -2,7 +2,7 @@
 
 > **Lane:** Backend / API / Data (Viktor Smokvina)
 > **Role:** Establish the BFF infrastructure, API endpoints, mock data services, and client state stores.
-> **Current Status:** 2/10 Tasks Done (BFF Scaffold, Chat Route)
+> **Current Status:** 10/10 Tasks Done (All Backend features implemented and verified)
 
 ---
 
@@ -12,14 +12,14 @@
 |---|---|---|---|---|
 | **Wave 2** | T01 | **BFF Scaffold** | Sonnet 3.5 | ✅ Done |
 | **Wave 3** | T02 | **Chat Route** | Gemini 3.0 Flash | ✅ Done |
-| **Wave 3** | T03 | **Report Routes** | Gemini 3.0 Flash | ⬜ Not Started |
-| **Wave 3** | T04 | **Pazar Routes** | Gemini 3.0 Flash | ⬜ Not Started |
-| **Wave 3** | T05 | **Admin Routes** | Gemini 3.0 Flash | ⬜ Not Started |
-| **Wave 3** | T06 | **Utility Routes** | Gemini 3.0 Flash | ⬜ Not Started |
-| **Wave 4** | T07 | **Mock Tools** | Gemini 3.0 Flash | ⬜ Not Started |
-| **Wave 4** | T08 | **In-Memory Store** | Gemini 3.0 Flash | ⬜ Not Started |
-| **Wave 5** | T09 | **Service Layer** | Gemini 3.0 Flash | ⬜ Not Started |
-| **Wave 5** | T10 | **Zustand Stores** | Gemini 3.0 Flash | ⬜ Not Started |
+| **Wave 3** | T03 | **Report Routes** | Gemini 3.0 Flash | ✅ Done |
+| **Wave 3** | T04 | **Pazar Routes** | Gemini 3.0 Flash | ✅ Done |
+| **Wave 3** | T05 | **Admin Routes** | Gemini 3.0 Flash | ✅ Done |
+| **Wave 3** | T06 | **Utility Routes** | Gemini 3.0 Flash | ✅ Done |
+| **Wave 4** | T07 | **Mock Tools** | Gemini 3.0 Flash | ✅ Done |
+| **Wave 4** | T08 | **In-Memory Store** | Gemini 3.0 Flash | ✅ Done |
+| **Wave 5** | T09 | **Service Layer** | Gemini 3.0 Flash | ✅ Done |
+| **Wave 5** | T10 | **Zustand Stores** | Gemini 3.0 Flash | ✅ Done |
 
 ---
 
@@ -80,5 +80,5 @@
 
 ## ⏭️ Next Step
 
-1. Execute **Task 08: In-Memory Store** (to decouple state) OR **Task 03: Report Routes**.
-2. Run `/execute Development_plans/Lane_Backend/Task_08_InMemory_Store.md`
+1. **Frontend Lane** can now proceed with finalizing PWA + Responsive design (T08), knowing all backend connections are live.
+2. The Backend Lane is officially complete! 🎉

@@ -11,7 +11,7 @@
 
 ---
 
-## 📊 Overall Progress: 17/26 tasks complete (65%) — CP1/CP2 Integration Complete
+## 📊 Overall Progress: 25/26 tasks complete (96%) — CP2 Integration in progress
 
 ---
 
@@ -30,20 +30,20 @@
 | T07 Emergency Page | ✅ Done | Agent@14:00 | Multilingual Siren Translator with QR scanner placeholder and clickable contacts |
 | T08 PWA + Responsive + Capacitor | ⬜ Not Started | | PWA manifest, responsive audit, Android setup |
 
-### Lane 2: Backend — 7/10 tasks done (Task 08 Complete)
+### Lane 2: Backend — 9/10 tasks done
 
 | Task | Status | Completed By | Notes |
 |---|---|---|---|
 | T01: BFF Scaffold | ✅ Done | Agent@12:26 | Basic Express setup with health checks |
 | T02: Chat Route | ✅ Done | Agent@12:26 | Implemented POST /api/chat and GET history with mock responses |
 | T03: Report Routes | ✅ Done | Agent@12:39 | Implemented /analyze, /submit, and /list with Split seed data |
-| T04: Pazar Routes | ⬜ Not Started | — | Depends on T01, T08 |
+| T04: Pazar Routes | ✅ Done | Agent@15:49 | POST /analyze, POST /submit, GET /feed implemented with expiry sweep. Mounted at /api/pazar. |
 | T05: Admin Routes | ✅ Done | Agent@13:57 | Tasks 5.1-5.3 complete: Dashboard stats and Report PATCH endpoints mounted and verified. |
 | T06: Utility Routes | ✅ Done | Agent@14:15 | Tasks 6.1-6.5 complete: all utility routes mounted and verified |
 | T07: Mock Tools | ✅ Done | Agent@14:57 | All 6 tools + router implemented and verified. Ready for AI orchestration. |
 | T08: In-Memory Store | ✅ Done | Agent@13:02 | Tasks 8.1, 8.2, & 8.3 complete: store expanded with CRUD helpers, 15 reports, and 8 Pazar listings. Initialization wired in server/index.ts. |
-| T09: Service Layer | ⬜ Not Started | — | Depends on T02–T06 |
-| T10: Zustand Stores | ⬜ Not Started | — | Depends on T09 |
+| T09: Service Layer | ✅ Done | Agent@15:26 | All 6 services + apiClient implemented and verified. |
+| T10: Zustand Stores | ✅ Done | Agent@15:42 | All 6 stores (App, Pazar, Chat, Report, Admin, Map) implemented and verified with build. |
 
 ### Lane 3: AI — 8/8 tasks done
 
@@ -102,7 +102,7 @@
 ## ⏭️ Next Recommended Actions (per lane)
 
 - **Frontend:** T01-T07 Done. Proceed with **T08 PWA + Responsive + Capacitor**.
-- **Backend:** T01, T02, T03, T05, T06, T07, T08 Done. Next: Execute **Task 04 (Pazar Routes)**.
-- **AI:** T01-T07 Done (8/8). All tasks completed and audited. Ready for Backend integration.
+- **Backend:** T01, T02, T03, T04, T05, T06, T07, T08, T09, T10 Done. **All 10 Backend tasks complete! 🎉**
+- **AI:** T01-T07 Done (8/8). Next: All AI lane tasks completed.
 - **Creative:** Start **T01 Brand Website** immediately (Wave 1, no deps). Then T02 (Design Tokens). Then T03+T04 in parallel. T05 after assets ready. T06 last (needs working app).
-- **Lead:** CP1/CP2 Integration complete. Build errors resolved. Unblocked Frontend T08, Backend T04, AI T06.
+- **Lead:** CP2 Integration complete. Backend fully integrated. Unblocked Frontend T08.

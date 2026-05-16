@@ -5,6 +5,7 @@ import { fileURLToPath } from 'url';
 import chatRouter from './routes/chat.js';
 import reportRouter from './routes/report.js';
 import adminRouter from './routes/admin.js';
+import pazarRouter from './routes/pazar.js';
 import parkingRouter from './routes/parking.js';
 import transitRouter from './routes/transit.js';
 import crowdRouter from './routes/crowd.js';
@@ -33,7 +34,9 @@ app.use('/api/chat', chatRouter);
 app.use('/api/report', reportRouter);  // For /analyze and /submit
 app.use('/api/reports', reportRouter); // For listing
 
-// TODO: Task 04 — POST /api/pazar/analyze, POST /api/pazar/submit, GET /api/pazar/feed
+// Task 04 — Pazar Market
+app.use('/api/pazar', pazarRouter);
+
 // Task 05 — Admin Dashboard
 app.use('/api/admin', adminRouter);
 
