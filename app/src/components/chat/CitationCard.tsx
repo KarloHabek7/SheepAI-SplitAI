@@ -8,18 +8,18 @@ interface CitationCardProps {
 
 const CitationCard: React.FC<CitationCardProps> = ({ citation }) => {
   return (
-    <div className="citation-card">
+    <div className="citation-card-container">
       <div className="citation-header">
-        <span className="material-symbols-outlined citation-icon">description</span>
-        <span className="source-name">{citation.sourceDocument}</span>
-        {citation.article && <span className="article-tag">Art. {citation.article}</span>}
+        <span className="material-symbols-outlined citation-book-icon">menu_book</span>
+        <span className="citation-source-title">{citation.sourceDocument}</span>
+        {citation.article && <span className="citation-article-pill">Art. {citation.article}</span>}
       </div>
       <div className="citation-body">
-        <p className="excerpt">"{citation.excerpt}"</p>
+        <p className="citation-excerpt">"{citation.excerpt}"</p>
       </div>
       {citation.page && (
         <div className="citation-footer">
-          <span className="page-number">Page {citation.page}</span>
+          <span className="citation-page-num">Page {citation.page}</span>
         </div>
       )}
     </div>

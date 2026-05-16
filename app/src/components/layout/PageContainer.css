@@ -2,13 +2,13 @@
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
-  padding: var(--space-md) var(--space-sm);
-  min-height: calc(100vh - 120px); /* Adjust based on header/footer height */
+  padding: 88px var(--space-sm) var(--space-md); /* 88px top padding leaves space for floating header */
+  min-height: 100vh;
   box-sizing: border-box;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 900px) {
   .page-container {
-    padding-bottom: 80px; /* Space for BottomNav */
+    padding-bottom: 110px; /* Space for floating BottomNav pill */
   }
 }

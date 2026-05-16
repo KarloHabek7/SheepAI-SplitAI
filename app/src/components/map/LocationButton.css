@@ -2,24 +2,27 @@
   position: absolute;
   bottom: 80px; /* Above BottomNav */
   left: 16px;
-  width: 44px;
-  height: 44px;
-  background: var(--color-bg-card);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-md);
+  width: 48px;
+  height: 48px;
+  background: rgba(15, 20, 30, 0.75);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius-full);
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  box-shadow: var(--shadow-card);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
   z-index: 5;
-  color: var(--color-text-primary);
-  transition: var(--transition-fast);
+  color: rgba(255, 255, 255, 0.7);
+  transition: var(--transition-default);
 }
 
 .location-button:hover {
-  color: var(--color-primary);
-  background: var(--color-bg-elevated);
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.2);
+  background: rgba(15, 20, 30, 0.85);
 }
 
 .location-button.locating span {
