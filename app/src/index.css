@@ -1,0 +1,18 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-bg-primary: #0a0b10;
+  --color-bg-card: #12131a;
+  --color-primary: #10b981; /* Emerald */
+  --color-secondary: #8b5cf6; /* Purple */
+  --font-sans: 'Outfit', sans-serif;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  background-color: var(--color-bg-primary);
+  color: #ffffff;
+}
