@@ -76,7 +76,7 @@ router.post('/', (req: Request<{}, {}, ChatRequest>, res: Response) => {
     const activeId = conversationId || uuidv4();
     
     // 2. Initialize history if new
-    // 2. Initialize history if new (already handled by store.appendMessage internally if needed, but we can call it to be sure or just ignore)
+    // 2. Initialize history if new (already handled by store.appendMessage internally if needed)
 
     // 3. Store user message
     const userMsg: ChatMessage = {

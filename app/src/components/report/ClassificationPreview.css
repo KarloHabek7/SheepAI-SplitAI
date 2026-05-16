@@ -1,0 +1,104 @@
+.classification-card {
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-md);
+  box-shadow: var(--shadow-card);
+  margin-top: var(--space-md);
+  animation: fadeIn 0.4s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.classification-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--space-md);
+  padding-bottom: var(--space-sm);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.classification-badge {
+  background: var(--gradient-primary);
+  color: white;
+  font-size: 11px;
+  font-weight: bold;
+  padding: 4px 10px;
+  border-radius: var(--radius-full);
+  text-transform: uppercase;
+}
+
+.confidence-meter {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--color-primary);
+}
+
+.classification-body {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-md);
+}
+
+.field-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.field-group.suggested, .field-group:last-child {
+  grid-column: span 2;
+}
+
+.field-group label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-text-secondary);
+  font-weight: 600;
+}
+
+.field-value {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--color-text-primary);
+}
+
+.field-value.capitalize {
+  text-transform: capitalize;
+}
+
+.field-value.description, .field-value.action {
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.severity-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.severity-bar-bg {
+  flex: 1;
+  height: 8px;
+  background: var(--color-border);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+}
+
+.severity-bar-fill {
+  height: 100%;
+  border-radius: var(--radius-full);
+  transition: width 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.severity-text {
+  font-size: 12px;
+  font-weight: bold;
+  min-width: 32px;
+}

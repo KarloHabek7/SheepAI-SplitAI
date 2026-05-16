@@ -1,18 +1,45 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import './styles/tokens.css';
 
 :root {
-  --color-bg-primary: #0a0b10;
-  --color-bg-card: #12131a;
-  --color-primary: #10b981; /* Emerald */
-  --color-secondary: #8b5cf6; /* Purple */
-  --font-sans: 'Outfit', sans-serif;
+  font-family: var(--font-sans);
+  line-height: 1.5;
+  font-weight: 400;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 body {
   margin: 0;
-  font-family: var(--font-sans);
+  display: flex;
+  min-width: 320px;
+  min-height: 100vh;
   background-color: var(--color-bg-primary);
-  color: #ffffff;
+  color: var(--color-text-primary);
+}
+
+#root {
+  width: 100%;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  color: var(--color-primary);
+  margin-top: 0;
+}
+
+a {
+  color: var(--color-primary);
+  text-decoration: none;
+  transition: var(--transition-fast);
+}
+
+a:hover {
+  opacity: 0.8;
 }
