@@ -4,6 +4,11 @@ import cors from 'cors';
 import { requestLogger } from './middleware/requestLogger.js';
 import { errorHandler } from './middleware/errorHandler.js';
 import chatRouter from './routes/chat.js';
+import reportRouter from './routes/report.js';
+import { seedReports } from './store.js';
+
+// Seed demo data on startup
+seedReports();
 
 // Load environment variables from .env file
 dotenv.config({ path: '../.env' });
@@ -67,7 +72,9 @@ app.post('/api/cache/init', (_req, res) => {
 // Task 02 — POST /api/chat
 app.use('/api/chat', chatRouter);
 
-// TODO: Task 03 — POST /api/report/analyze, POST /api/report/submit, GET /api/reports
+// Task 03 — Civic Reports
+app.use('/api/report', reportRouter);  // For /analyze and /submit
+app.use('/api/reports', reportRouter); // For listing
 // TODO: Task 04 — POST /api/pazar/analyze, POST /api/pazar/submit, GET /api/pazar/feed
 // TODO: Task 05 — GET /api/admin/dashboard, PATCH /api/admin/reports/:id
 // TODO: Task 06 — GET /api/emergency/:type, GET /api/parking/:zone, GET /api/transit/:line, GET /api/crowd/:area

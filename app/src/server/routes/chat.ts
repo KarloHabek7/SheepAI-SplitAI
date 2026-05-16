@@ -7,12 +7,11 @@ import {
   APIResponse, 
   SupportedLanguage 
 } from '../../types/index.js';
+import { store } from '../store.js';
 
 const router = Router();
 
-// In-memory conversation store (Local fallback for Task_08)
-// Key: conversationId, Value: ChatMessage[]
-const conversations = new Map<string, ChatMessage[]>();
+// In-memory conversation store now managed by centralized store.ts
 
 /**
  * Stub AI function to generate a mock response.
@@ -77,10 +76,7 @@ router.post('/', (req: Request<{}, {}, ChatRequest>, res: Response) => {
     const activeId = conversationId || uuidv4();
     
     // 2. Initialize history if new
-    if (!conversations.has(activeId)) {
-      conversations.set(activeId, []);
-    }
-    const history = conversations.get(activeId)!;
+    // 2. Initialize history if new (already handled by store.appendMessage internally if needed, but we can call it to be sure or just ignore)
 
     // 3. Store user message
     const userMsg: ChatMessage = {
@@ -90,11 +86,11 @@ router.post('/', (req: Request<{}, {}, ChatRequest>, res: Response) => {
       language,
       timestamp: new Date().toISOString()
     };
-    history.push(userMsg);
+    store.appendMessage(activeId, userMsg);
 
     // 4. Generate mock response
     const assistantMsg = generateMockChatResponse(message, activeId, language);
-    history.push(assistantMsg);
+    store.appendMessage(activeId, assistantMsg);
 
     // 5. Return response
     const response: APIResponse<ChatResponse> = {
@@ -124,7 +120,7 @@ router.post('/', (req: Request<{}, {}, ChatRequest>, res: Response) => {
 router.get('/history/:conversationId', (req: Request, res: Response) => {
   try {
     const { conversationId } = req.params;
-    const history = conversations.get(conversationId as string) || [];
+    const history = store.getConversation(conversationId as string);
 
     const response: APIResponse<ChatMessage[]> = {
       success: true,
