@@ -1,6 +1,7 @@
 import { Suspense, lazy } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import AppShell from '@/components/layout/AppShell';
+import ProtectedRoute from '@/components/layout/ProtectedRoute';
 import Spinner from '@/components/ui/Spinner';
 import './App.css';
 
@@ -23,7 +24,11 @@ function App() {
           {/* Standalone Routes */}
           <Route path="/auth" element={<AuthPage />} />
           
-          <Route path="/" element={<AppShell />}>
+          <Route path="/" element={
+            <ProtectedRoute>
+              <AppShell />
+            </ProtectedRoute>
+          }>
             {/* Main Application Routes */}
             <Route index element={<MapPage />} />
             <Route path="chat" element={<ChatPage />} />
@@ -33,8 +38,16 @@ function App() {
             <Route path="emergency" element={<EmergencyPage />} />
             
             {/* Admin Routes */}
-            <Route path="admin" element={<AdminDashboardPage />} />
-            <Route path="admin/reports" element={<AdminReportsPage />} />
+            <Route path="admin" element={
+              <ProtectedRoute requireAdmin>
+                <AdminDashboardPage />
+              </ProtectedRoute>
+            } />
+            <Route path="admin/reports" element={
+              <ProtectedRoute requireAdmin>
+                <AdminReportsPage />
+              </ProtectedRoute>
+            } />
             
             {/* Redirection / Fallback */}
             <Route path="map" element={<Navigate to="/" replace />} />

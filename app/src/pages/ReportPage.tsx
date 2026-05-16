@@ -1,45 +1,81 @@
-import React, { useState, useRef } from 'react';
-import { MOCK_CLASSIFICATION, generateTicketId } from '@/utils/mockReportData';
+import React, { useState, useRef, useEffect } from 'react';
+import { useReportStore } from '@/stores/useReportStore';
 import ClassificationPreview from '@/components/report/ClassificationPreview';
 import TicketConfirmation from '@/components/report/TicketConfirmation';
 import './ReportPage.css';
 
 type ReportStep = 'upload' | 'analyzing' | 'review' | 'success';
 
+const fileToBase64 = (file: File): Promise<string> => {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => resolve(reader.result as string);
+    reader.onerror = (error) => reject(error);
+  });
+};
+
 const ReportPage: React.FC = () => {
   const [step, setStep] = useState<ReportStep>('upload');
-  const [imageUrl, setImageUrl] = useState<string | null>(null);
-  const [ticketId, setTicketId] = useState<string | null>(null);
+  const [localImageUrl, setLocalImageUrl] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  const handleImageSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const { 
+    currentImage, 
+    classification, 
+    submissionStatus, 
+    submittedTicketId,
+    isAnalyzing, 
+    isSubmitting,
+    analyzeImage,
+    submitReport,
+    reset
+  } = useReportStore();
+
+  // Sync step with store state
+  useEffect(() => {
+    if (isAnalyzing || isSubmitting) {
+      setStep('analyzing');
+    } else if (submissionStatus === 'submitted') {
+      setStep('success');
+    } else if (classification) {
+      setStep('review');
+    } else if (!currentImage) {
+      setStep('upload');
+    }
+  }, [isAnalyzing, isSubmitting, classification, submissionStatus, currentImage]);
+
+  const handleImageSelect = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
+      // Local preview URL for immediate feedback
       const url = URL.createObjectURL(file);
-      setImageUrl(url);
-      setStep('analyzing');
-      setTimeout(() => setStep('review'), 2000);
+      setLocalImageUrl(url);
+      
+      try {
+        const base64 = await fileToBase64(file);
+        await analyzeImage(base64);
+      } catch (err) {
+        console.error('Failed to process image:', err);
+        setStep('upload');
+      }
     }
   };
 
-  const handleConfirm = (note: string) => {
-    console.log('Submitting report with note:', note);
-    setStep('analyzing');
-    setTimeout(() => {
-      setTicketId(generateTicketId());
-      setStep('success');
-    }, 1500);
+  const handleConfirm = async (note: string) => {
+    await submitReport(note);
   };
 
   const resetFlow = () => {
+    reset();
+    setLocalImageUrl(null);
     setStep('upload');
-    setImageUrl(null);
-    setTicketId(null);
   };
 
   const clearImage = (e: React.MouseEvent) => {
     e.stopPropagation();
-    setImageUrl(null);
+    reset();
+    setLocalImageUrl(null);
     setStep('upload');
   };
 
@@ -54,10 +90,9 @@ const ReportPage: React.FC = () => {
 
   return (
     <div className="report-page-root">
-      {/* === Hero Section (Aura Portfolio Hero adapted) === */}
+      {/* === Hero Section === */}
       <section className="report-hero-section">
         <div className="report-hero-grid">
-          {/* Text column */}
           <div className="report-hero-text">
             <h1>
               <span>Marjan</span>
@@ -109,7 +144,6 @@ const ReportPage: React.FC = () => {
             </div>
           </div>
 
-          {/* Image column */}
           <div className="report-hero-image-wrapper">
             <img
               src="/assets/images/split-civic-hero.png"
@@ -148,7 +182,6 @@ const ReportPage: React.FC = () => {
       {/* === Report Flow Section === */}
       <section className="report-flow-section" id="report-flow">
         <div className="report-flow-container">
-          {/* Step progress card */}
           <div className="report-step-card" style={{ marginBottom: 24 }}>
             <div className="report-step-header">
               <div className="report-step-tabs">
@@ -184,7 +217,6 @@ const ReportPage: React.FC = () => {
             </div>
           </div>
 
-          {/* Dynamic content area */}
           {step === 'upload' && (
             <div className="report-step-card">
               <input
@@ -199,7 +231,7 @@ const ReportPage: React.FC = () => {
                 className="report-upload-area"
                 onClick={() => fileInputRef.current?.click()}
               >
-                {!imageUrl ? (
+                {!localImageUrl ? (
                   <div className="report-upload-inner">
                     <div className="report-upload-icon">
                       <span className="material-symbols-outlined">add_a_photo</span>
@@ -214,7 +246,7 @@ const ReportPage: React.FC = () => {
                   </div>
                 ) : (
                   <div className="report-upload-preview">
-                    <img src={imageUrl} alt="Problem preview" />
+                    <img src={localImageUrl} alt="Problem preview" />
                     <div className="report-upload-preview-overlay">
                       <button className="report-remove-btn" onClick={clearImage}>
                         <span className="material-symbols-outlined">delete</span>
@@ -231,28 +263,28 @@ const ReportPage: React.FC = () => {
             <div className="report-step-card">
               <div className="report-analyzing-state">
                 <div className="report-ai-scanner">
-                  {imageUrl && <img src={imageUrl} alt="Analyzing" className="report-scanning-image" />}
+                  {localImageUrl && <img src={localImageUrl} alt="Analyzing" className="report-scanning-image" />}
                   <div className="report-scan-line" />
                 </div>
                 <div className="report-analyzing-info">
                   <div className="report-spinner" />
-                  <h3>Gemini is analyzing…</h3>
-                  <p>Identifying category, severity, and department</p>
+                  <h3>{isSubmitting ? 'Submitting report...' : 'Gemini is analyzing…'}</h3>
+                  <p>{isSubmitting ? 'Saving to municipal database' : 'Identifying category, severity, and department'}</p>
                 </div>
               </div>
             </div>
           )}
 
-          {step === 'review' && (
+          {step === 'review' && classification && (
             <ClassificationPreview
-              classification={MOCK_CLASSIFICATION}
+              classification={classification}
               onConfirm={handleConfirm}
-              onBack={() => setStep('upload')}
+              onBack={() => reset()}
             />
           )}
 
-          {step === 'success' && ticketId && (
-            <TicketConfirmation ticketId={ticketId} onReset={resetFlow} />
+          {step === 'success' && submittedTicketId && (
+            <TicketConfirmation ticketId={submittedTicketId} onReset={resetFlow} />
           )}
         </div>
       </section>

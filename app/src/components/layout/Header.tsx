@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import appLogo from '@/assets/images/app_logo.png';
 import './Header.css';
 
 const Header: React.FC = () => {
@@ -37,6 +38,7 @@ const Header: React.FC = () => {
     <header className={`app-header ${scrolled ? 'scrolled' : ''}`}>
       <div className="header-container">
         <Link to="/" className="logo">
+          <img src={appLogo} alt="SplitAI Logo" className="logo-icon" />
           <span className="logo-text">Split<span className="logo-accent">AI</span></span>
         </Link>
         

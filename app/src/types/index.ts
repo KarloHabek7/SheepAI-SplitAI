@@ -428,6 +428,7 @@ export interface ReportStoreState {
   currentImage: string | null;
   classification: CivicReportClassification | null;
   submissionStatus: ReportStatus | null;
+  submittedTicketId: string | null;
   recentReports: CivicReport[];
   isAnalyzing: boolean;
   isSubmitting: boolean;
@@ -485,6 +486,32 @@ export interface AppStoreState {
   setTheme: (theme: Theme) => void;
   setOnline: (isOnline: boolean) => void;
   setCacheStatus: (status: AppStoreState['cacheStatus']) => void;
+}
+
+/** User profile information */
+export interface User {
+  id: string;
+  email: string;
+  fullName: string;
+  oib?: string;
+  phone?: string;
+  address?: string;
+  role: 'user' | 'admin';
+  avatarUrl?: string;
+}
+
+/** Auth store state */
+export interface AuthStoreState {
+  user: User | null;
+  token: string | null;
+  isAuthenticated: boolean;
+  isLoading: boolean;
+  error: string | null;
+  login: (email: string, password: string) => Promise<void>;
+  loginDemo: (role: 'admin' | 'user') => void;
+  register: (data: Partial<User> & { password: string }) => Promise<void>;
+  logout: () => void;
+  clearError: () => void;
 }
 
 // -----------------------------------------------------------------------------

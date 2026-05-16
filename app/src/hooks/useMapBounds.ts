@@ -1,9 +1,11 @@
 import { useEffect, useState } from 'react';
 import { MapBoundingBox } from '@/types';
+import { useMapStore } from '@/stores/useMapStore';
 import type { Map } from 'mapbox-gl';
 
 export function useMapBounds(map: Map | null) {
-  const [bounds, setBounds] = useState<MapBoundingBox | null>(null);
+  const [bounds, setLocalBounds] = useState<MapBoundingBox | null>(null);
+  const setStoreBounds = useMapStore(state => state.setBounds);
 
   useEffect(() => {
     if (!map) return;
@@ -12,12 +14,15 @@ export function useMapBounds(map: Map | null) {
       const b = map.getBounds();
       if (!b) return;
       
-      setBounds({
+      const newBounds = {
         north: b.getNorth(),
         south: b.getSouth(),
         east: b.getEast(),
         west: b.getWest(),
-      });
+      };
+      
+      setLocalBounds(newBounds);
+      setStoreBounds(newBounds);
     };
 
     map.on('moveend', updateBounds);
@@ -26,7 +31,7 @@ export function useMapBounds(map: Map | null) {
     return () => {
       map.off('moveend', updateBounds);
     };
-  }, [map]);
+  }, [map, setStoreBounds]);
 
   return bounds;
 }

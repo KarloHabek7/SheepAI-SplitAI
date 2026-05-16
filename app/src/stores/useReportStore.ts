@@ -10,6 +10,7 @@ export const useReportStore = create<ReportStoreState>()((set, get) => ({
   currentImage: null,
   classification: null,
   submissionStatus: null,
+  submittedTicketId: null,
   recentReports: [],
   isAnalyzing: false,
   isSubmitting: false,
@@ -22,7 +23,8 @@ export const useReportStore = create<ReportStoreState>()((set, get) => ({
       isAnalyzing: true, 
       currentImage: image, 
       classification: null,
-      submissionStatus: null 
+      submissionStatus: null,
+      submittedTicketId: null
     });
 
     try {
@@ -60,7 +62,10 @@ export const useReportStore = create<ReportStoreState>()((set, get) => ({
 
       const response = await submitReport(req);
       if (response.success && response.data) {
-        set({ submissionStatus: 'submitted' });
+        set({ 
+          submissionStatus: 'submitted',
+          submittedTicketId: response.data.ticketId
+        });
       }
     } catch (error) {
       console.error('[ReportStore] Submission failed:', error);
@@ -77,6 +82,7 @@ export const useReportStore = create<ReportStoreState>()((set, get) => ({
     currentImage: null, 
     classification: null, 
     submissionStatus: null, 
+    submittedTicketId: null,
     isAnalyzing: false, 
     isSubmitting: false 
   }),

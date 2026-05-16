@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import type { Map, GeoJSONSource, MapLayerMouseEvent } from 'mapbox-gl';
-import { useIssueGeoJson } from '@/hooks/useIssueGeoJson';
+import { useMapStore } from '@/stores/useMapStore';
 import { MAP_MARKER_COLORS } from '@/types';
 
 interface IssueLayerProps {
@@ -9,7 +9,7 @@ interface IssueLayerProps {
 }
 
 const IssueLayer: React.FC<IssueLayerProps> = ({ map, onIssueClick }) => {
-  const { geoJson } = useIssueGeoJson();
+  const { issuesGeoJson: geoJson } = useMapStore();
 
   useEffect(() => {
     if (!map || !geoJson) return;

@@ -42,14 +42,6 @@
 
 @media (max-width: 900px) {
   .map-fab-container {
-    bottom: 100px; /* Floating above bottom nav pill */
-  }
-  
-  .fab-label {
-    display: none;
-  }
-  
-  .map-report-fab {
-    padding: 16px;
+    display: none; /* Hide FAB on mobile as it's redundant with BottomNav */
   }
 }

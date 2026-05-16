@@ -85,7 +85,7 @@ export const useMapStore = create<MapStoreState>()((set, get) => ({
         // Backend filters are slightly different than map display filters,
         // but we pass them if they match.
         category: filters.category && filters.category.length > 0 ? filters.category[0] : undefined,
-        severity: filters.severityMin,
+        severity_min: filters.severityMin,
       });
 
       if (response.success && response.data) {

@@ -10,6 +10,7 @@ import parkingRouter from './routes/parking.js';
 import transitRouter from './routes/transit.js';
 import crowdRouter from './routes/crowd.js';
 import emergencyRouter from './routes/emergency.js';
+import authRouter from './routes/auth.js';
 import { seedReports, seedPazarListings } from './store.js';
 import { errorHandler } from './middleware/errorHandler.js';
 
@@ -28,6 +29,7 @@ seedReports();
 seedPazarListings();
 
 // Routes
+app.use('/api/auth', authRouter);
 app.use('/api/chat', chatRouter);
 
 // Task 03 — Civic Reports
@@ -54,9 +56,13 @@ app.get('/health', (_req, res) => {
   res.json({ status: 'ok' });
 });
 
+app.get('/', (_req, res) => {
+  res.json({ message: 'SplitAI Backend API' });
+});
+
 // Start Server
-app.listen(port, () => {
-  console.log(`Server listening at http://localhost:${port}`);
+app.listen(port, '0.0.0.0', () => {
+  console.log(`Server listening at http://0.0.0.0:${port}`);
 });
 
 export default app;

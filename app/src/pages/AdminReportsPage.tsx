@@ -1,16 +1,26 @@
-import React, { useState, useMemo } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import PageContainer from '@/components/layout/PageContainer';
 import ReportTable from '@/components/admin/ReportTable';
 import AdminTabs from '@/components/admin/AdminTabs';
-import { mockReports } from '@/utils/mockAdminData';
+import { useAdminStore } from '@/stores/useAdminStore';
 import { CivicReport, ReportStatus, IssueCategory } from '@/types';
 import './AdminReportsPage.css';
 
 const AdminReportsPage: React.FC = () => {
-  const [reports, setReports] = useState<CivicReport[]>(mockReports);
+  const {
+    reports,
+    fetchReports,
+    updateReportStatus,
+  } = useAdminStore();
+
   const [filterStatus, setFilterStatus] = useState<ReportStatus | 'all'>('all');
   const [filterCategory, setFilterCategory] = useState<IssueCategory | 'all'>('all');
   const [searchTerm, setSearchTerm] = useState('');
+
+  // Fetch reports from backend on mount
+  useEffect(() => {
+    fetchReports();
+  }, [fetchReports]);
 
   const filteredReports = useMemo(() => {
     return reports.filter(r => {
@@ -23,7 +33,7 @@ const AdminReportsPage: React.FC = () => {
   }, [reports, filterStatus, filterCategory, searchTerm]);
 
   const handleStatusChange = (id: string, newStatus: ReportStatus) => {
-    setReports(prev => prev.map(r => r.id === id ? { ...r, status: newStatus, updatedAt: new Date().toISOString() } : r));
+    updateReportStatus(id, newStatus);
   };
 
   const handleViewDetails = (report: CivicReport) => {

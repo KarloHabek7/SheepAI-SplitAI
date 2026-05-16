@@ -3,7 +3,7 @@ import { APIResponse } from '@/types';
 /**
  * API Base URL from environment variables with local fallback
  */
-export const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:3001';
+export const API_BASE = import.meta.env.VITE_API_URL || 'http://127.0.0.1:3001';
 
 /**
  * Shared fetch helper that wraps all API calls and ensures a consistent response shape.
