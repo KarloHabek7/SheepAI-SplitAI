@@ -57,7 +57,7 @@ You are now acting as the **Team Lead Agent** in Google Antigravity IDE. You hav
 
 ## 1. Context & Role
 - **Lane:** Team Lead (`lead`) — Lane 0
-- **Current Branch:** lane/lead/<feature-name>
+- **Current Branch:** lane/lead/task-<id>-<description> (unique branch per task)
 - **Ownership:** `Development_plans/`, `docs/architecture/`, `app/src/types/` (primary owner), project root config files.
 - **Cross-Lane Access (via `/implement-any`):** May write to ANY lane. Run `git status` before writes. Use `lead→<lane>` commit scope.
 - **Shared Files (Full access):** `app/src/types/`, `app/package.json`, `app/src/i18n/locales/*.json`, `app/src/App.tsx`.
@@ -83,7 +83,7 @@ You are now acting as the **Frontend Agent** in Google Antigravity IDE. You must
 
 ## 1. Context & Role
 - **Lane:** Frontend Lead (`frontend`)
-- **Current Branch:** lane/frontend/<feature-name>
+- **Current Branch:** lane/frontend/task-<id>-<description> (unique branch per task)
 - **Ownership:** `app/src/components/`, `app/src/pages/`, `app/src/styles/`, `app/src/assets/images/`
 - **Shared Files (Additive ONLY):** `app/src/types/`, `app/package.json`, `app/src/i18n/locales/*.json`, `app/src/App.tsx`
 
@@ -110,7 +110,7 @@ You are now acting as the **Backend Agent** in Google Antigravity IDE. You must 
 
 ## 1. Context & Role
 - **Lane:** Backend Lead (`backend`)
-- **Current Branch:** lane/backend/<feature-name>
+- **Current Branch:** lane/backend/task-<id>-<description> (unique branch per task)
 - **Ownership:** `app/src/{services,stores,server,lib,middleware}/` (excluding AI)
 - **Shared Files (Additive ONLY):** `app/src/types/`, `app/package.json`, `app/src/i18n/locales/*.json`, `app/src/App.tsx`
 
@@ -137,7 +137,7 @@ You are now acting as the **AI Agent** in Google Antigravity IDE. You must adher
 
 ## 1. Context & Role
 - **Lane:** AI/ML Integrator (`ai`)
-- **Current Branch:** lane/ai/<feature-name>
+- **Current Branch:** lane/ai/task-<id>-<description> (unique branch per task)
 - **Ownership:** `app/src/{hooks,services,lib}/ai/`
 - **Shared Files (Additive ONLY):** `app/src/types/`, `app/package.json`, `app/src/i18n/locales/*.json`, `app/src/App.tsx`
 
@@ -164,7 +164,7 @@ You are now acting as the **Creative Agent** in Google Antigravity IDE. You must
 
 ## 1. Context & Role
 - **Lane:** Creative Lead (`creative`) — Assets + Pitch combined
-- **Current Branch:** lane/creative/<feature-name>
+- **Current Branch:** lane/creative/task-<id>-<description> (unique branch per task)
 - **Ownership:** `assets/`, `app/public/assets/`, `docs/{design,pitch,demo}/`, `DESIGN.md`, `PITCH.md`
 - **Shared Files (Additive ONLY):** `app/src/types/`, `app/package.json`, `app/src/i18n/locales/*.json`, `app/src/App.tsx`, `app/src/styles/tokens.css`
 
@@ -192,7 +192,7 @@ You are now acting as the **Flex Agent** in Google Antigravity IDE. You have exp
 
 ## 1. Context & Role
 - **Lane:** Flex / General Purpose (`flex`) — Lane 5
-- **Current Branch:** lane/flex/<feature-name>
+- **Current Branch:** lane/flex/task-<id>-<description> (unique branch per task)
 - **Ownership:** Full cross-directory write access to `app/src/`, `assets/`, `docs/`, etc.
 - **Purpose:** Small, multi-component fixes and time-sensitive tasks that bridge traditional lanes.
 
