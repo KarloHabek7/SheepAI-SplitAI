@@ -11,7 +11,7 @@
 
 ---
 
-## 📊 Overall Progress: 6/35 tasks complete (17%) — CP1 Integration in progress
+## 📊 Overall Progress: 8/35 tasks complete (23%) — CP1 Integration in progress
 
 <!-- Updated by Team Lead at checkpoints -->
 
@@ -32,18 +32,18 @@
 | T07 Emergency Page | ⬜ Not Started | | Multilingual Siren Translator |
 | T08 PWA + Responsive + Capacitor | ⬜ Not Started | | PWA manifest, responsive audit, Android setup |
 
-### Lane 2: Backend — 2/10 tasks done
+### Lane 2: Backend — 4/10 tasks done
 
 | Task | Status | Completed By | Notes |
 |---|---|---|---|
 | T01: BFF Scaffold | ✅ Done | Agent@12:26 | Basic Express setup with health checks |
 | T02: Chat Route | ✅ Done | Agent@12:26 | Implemented POST /api/chat and GET history with mock responses |
-| T03: Report Routes | ⬜ Not Started | — | Depends on T01, T08 |
+| T03: Report Routes | ✅ Done | Agent@12:39 | Implemented /analyze, /submit, and /list with Split seed data |
 | T04: Pazar Routes | ⬜ Not Started | — | Depends on T01, T08 |
 | T05: Admin Routes | ⬜ Not Started | — | Depends on T01, T03 |
 | T06: Utility Routes | ⬜ Not Started | — | Depends on T01 |
 | T07: Mock Tools | ⬜ Not Started | — | Depends on T01, T06 |
-| T08: In-Memory Store | ⬜ Not Started | — | Depends on T01 |
+| T08: In-Memory Store | ✅ Done | Agent@12:39 | Centralized data store in store.ts used by all routes |
 | T09: Service Layer | ⬜ Not Started | — | Depends on T02–T06 |
 | T10: Zustand Stores | ⬜ Not Started | — | Depends on T09 |
 
@@ -105,7 +105,7 @@
 ## ⏭️ Next Recommended Actions (per lane)
 
 - **Frontend:** T01, T02, T03, T05 Done. Start with **T04 Pazar Feed + Vendor Upload** or **T06 Admin Dashboard**.
-- **Backend:** T01 and T02 Done. Proceed with **T08 (In-Memory Store)** or **T03 (Report Routes)**.
+- **Backend:** T01, T02, T03, T08 Done. Proceed with **T04 (Pazar Routes)** or **T05 (Admin Routes)**.
 - **AI:** Start **T01 Gemini SDK Setup** (no dependencies). Then T02+T03 in parallel, then T04+T05 in parallel, then T06, then T07.
 - **Creative:** Start **T01 Brand Website** immediately (Wave 1, no deps). Then T02 (Design Tokens). Then T03+T04 in parallel. T05 after assets ready. T06 last (needs working app).
 - **Lead:** Delegation complete. Next: wait for Frontend T02, Backend T02, AI T01–T03 to finish, then run CP1 Integration (Lead T01) at ~14:00.
