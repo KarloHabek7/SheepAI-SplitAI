@@ -5,6 +5,11 @@ import { requestLogger } from './middleware/requestLogger.js';
 import { errorHandler } from './middleware/errorHandler.js';
 import chatRouter from './routes/chat.js';
 import reportRouter from './routes/report.js';
+import adminRouter from './routes/admin.js';
+import parkingRouter from './routes/parking.js';
+import transitRouter from './routes/transit.js';
+import crowdRouter from './routes/crowd.js';
+import emergencyRouter from './routes/emergency.js';
 import { seedReports } from './store.js';
 
 // Seed demo data on startup
@@ -76,8 +81,14 @@ app.use('/api/chat', chatRouter);
 app.use('/api/report', reportRouter);  // For /analyze and /submit
 app.use('/api/reports', reportRouter); // For listing
 // TODO: Task 04 — POST /api/pazar/analyze, POST /api/pazar/submit, GET /api/pazar/feed
-// TODO: Task 05 — GET /api/admin/dashboard, PATCH /api/admin/reports/:id
-// TODO: Task 06 — GET /api/emergency/:type, GET /api/parking/:zone, GET /api/transit/:line, GET /api/crowd/:area
+// Task 05 — Admin Dashboard
+app.use('/api/admin', adminRouter);
+
+// Task 06 — Utility Routes
+app.use('/api/parking', parkingRouter);
+app.use('/api/transit', transitRouter);
+app.use('/api/crowd', crowdRouter);
+app.use('/api/emergency', emergencyRouter);
 
 // ---------------------------------------------------------------------------
 // Error Handler (must be LAST)

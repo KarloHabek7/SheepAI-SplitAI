@@ -32,7 +32,7 @@
 | T07 Emergency Page | ✅ Done | Agent@14:00 | Multilingual Siren Translator with QR scanner placeholder and clickable contacts |
 | T08 PWA + Responsive + Capacitor | ⬜ Not Started | | PWA manifest, responsive audit, Android setup |
 
-### Lane 2: Backend — 4/10 tasks done
+### Lane 2: Backend — 5/10 tasks done
 
 | Task | Status | Completed By | Notes |
 |---|---|---|---|
@@ -40,8 +40,8 @@
 | T02: Chat Route | ✅ Done | Agent@12:26 | Implemented POST /api/chat and GET history with mock responses |
 | T03: Report Routes | ✅ Done | Agent@12:39 | Implemented /analyze, /submit, and /list with Split seed data |
 | T04: Pazar Routes | ⬜ Not Started | — | Depends on T01, T08 |
-| T05: Admin Routes | ⬜ Not Started | — | Depends on T01, T03 |
-| T06: Utility Routes | ⬜ Not Started | — | Depends on T01 |
+| T05: Admin Routes | ✅ Done | Agent@13:57 | Tasks 5.1-5.3 complete: Dashboard stats and Report PATCH endpoints mounted and verified. |
+| T06: Utility Routes | ✅ Done | Agent@14:15 | Tasks 6.1-6.5 complete: all utility routes mounted and verified |
 | T07: Mock Tools | ⬜ Not Started | — | Depends on T01, T06 |
 | T08: In-Memory Store | ✅ Done | Agent@12:39 | Centralized data store in store.ts used by all routes |
 | T09: Service Layer | ⬜ Not Started | — | Depends on T02–T06 |
@@ -88,6 +88,7 @@
 | # | Suggestion | Source | Effort | Priority | Status |
 |---|---|---|---|---|---|
 | R01 | Standardize Material Symbols across all lanes for consistency with Stitch design | Frontend Agent | S | P2 | ⬜ Unevaluated |
+| R02 | Add aggregation utility to store.ts for dashboard-style queries | Backend Agent | S | P2 | ⬜ Unevaluated |
 
 ### Status Legend
 - `⬜ Unevaluated` — Not yet reviewed by Team Lead
@@ -106,7 +107,7 @@
 ## ⏭️ Next Recommended Actions (per lane)
 
 - **Frontend:** T01-T07 Done. Proceed with **T08 PWA + Responsive + Capacitor**.
-- **Backend:** T01, T02, T03, T08 Done. Proceed with **T04 (Pazar Routes)** or **T05 (Admin Routes)**.
+- **Backend:** T01, T02, T03, T05, T06, T08 Done. Next: Execute **Task 04 (Pazar Routes)**.
 - **AI:** Start **T01 Gemini SDK Setup** (no dependencies). Then T02+T03 in parallel, then T04+T05 in parallel, then T06, then T07.
 - **Creative:** Start **T01 Brand Website** immediately (Wave 1, no deps). Then T02 (Design Tokens). Then T03+T04 in parallel. T05 after assets ready. T06 last (needs working app).
 - **Lead:** Delegation complete. Next: wait for Frontend T02, Backend T02, AI T01–T03 to finish, then run CP1 Integration (Lead T01) at ~14:00.

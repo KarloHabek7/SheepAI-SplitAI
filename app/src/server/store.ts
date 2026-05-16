@@ -23,6 +23,10 @@ class DataStore {
     return this.reports;
   }
 
+  getReportById(id: string) {
+    return this.reports.find(r => r.id === id);
+  }
+
   // --- Listing Helpers ---
   addListing(listing: PazarListing) {
     this.listings.push(listing);
