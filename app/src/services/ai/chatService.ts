@@ -1,25 +1,30 @@
 import { ChatMessage, ChatResponse } from '../../types';
+import { processMessage, createChatSession } from './chatOrchestrator';
 
 export class ChatService {
   /**
    * Generates a response using the AI (RAG) engine.
-   * NOTE: This is currently a stub for the AI lane to implement.
+   * This bridges the legacy ChatService to the new ChatOrchestrator.
    */
-  async generateResponse(message: string, history: ChatMessage[]): Promise<ChatResponse> {
-    console.log(`[ChatService] Processing message: "${message}" with history length: ${history.length}`);
+  async generateResponse(message: string, history: ChatMessage[], conversationId?: string): Promise<ChatResponse> {
+    const id = conversationId || `conv-${Date.now()}`;
     
-    // Slight delay to simulate AI processing
-    await new Promise(resolve => setTimeout(resolve, 500));
+    // Ensure session exists
+    createChatSession({ conversationId: id });
+
+    // Process the message through the orchestrator
+    const result = await processMessage(id, message);
 
     return {
       message: {
         id: `msg-${Date.now()}`,
         role: 'assistant',
-        content: `This is a stubbed response for: "${message}". The AI Lane will replace this logic with Gemini RAG calls.`,
-        citations: [{ sourceDocument: 'Local Stub Engine', excerpt: 'Stub' }],
+        content: result.text,
+        citations: result.citations,
+        toolCall: result.functionCalls[0], // First tool call for now
         timestamp: new Date().toISOString()
       },
-      conversationId: 'mock-conversation'
+      conversationId: id
     };
   }
 }

@@ -53,10 +53,10 @@
 | T02 Context Cache & RAG | ✅ Done | Agent@12:58 | CacheService refactored, fallback logic added, no hardcoded models. |
 | T03 System Prompt Engineering | ✅ Done | Agent@12:57 | Full persona system: 11-section modular prompts, buildSystemPrompt() builder, vision prompt, 4-lang greetings. Fixed duplicate SupportedLanguage in types. |
 | T04 Function Calling Schema | ✅ Done | AI Agent@13:00 | Implemented Civic, Utility, and Emergency tool declarations. |
-| T05 Vision Schemas (Zod) | ✅ Done | Agent@12:58 | T05.1 Civic Report schema complete. T05.2 Pazar next. |
+| T05 Vision Schemas (Zod) | ✅ Done | Agent@12:58 | T05.1 Civic Report and T05.2 Pazar schemas complete. |
 | T06.1 Vision Service | ✅ Done | AI Agent@14:06 | Implemented analyzeCivicReport and analyzePazarListing with Gemini. |
 | T06 Chat Orchestration | ✅ Done | AI Agent@14:45 | T06.2 chatOrchestrator.ts: session mgmt, citation parsing, function call detection, cache integration. |
-| T07 AI React Hooks | ✅ Done | AI Agent@15:13 | Implemented useChat hook with conversation state, multilingual suggestions, and streaming tracking, and useVisionAnalysis hook. |
+| T07 AI React Hooks | ✅ Done | AI Agent@15:13 | Implemented useChat and useVisionAnalysis. Wired chatService to Orchestrator. |
 
 ### Lane 4: Creative — 0/0 tasks done
 
@@ -103,6 +103,6 @@
 
 - **Frontend:** T01-T07 Done. Proceed with **T08 PWA + Responsive + Capacitor**.
 - **Backend:** T01, T02, T03, T05, T06, T07, T08 Done. Next: Execute **Task 04 (Pazar Routes)**.
-- **AI:** T01-T07 Done (8/8). Next: All AI lane tasks completed.
+- **AI:** T01-T07 Done (8/8). All tasks completed and audited. Ready for Backend integration.
 - **Creative:** Start **T01 Brand Website** immediately (Wave 1, no deps). Then T02 (Design Tokens). Then T03+T04 in parallel. T05 after assets ready. T06 last (needs working app).
 - **Lead:** CP1/CP2 Integration complete. Build errors resolved. Unblocked Frontend T08, Backend T04, AI T06.
