@@ -22,10 +22,6 @@ const PazarSubmitPage: React.FC = () => {
       <div className="pazar-submit-content">
         {!isSubmitted ? (
           <>
-            <div className="submit-header">
-              <h1>Vendor Portal</h1>
-              <p>Update your stall's availability and prices in seconds.</p>
-            </div>
             <VendorUpload onComplete={handleUploadComplete} />
           </>
         ) : (

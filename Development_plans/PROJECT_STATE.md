@@ -24,7 +24,7 @@
 | T01 App Shell + Layout | ✅ Done | Agent@15:05 | Re-implemented: foundation routing, Header, BottomNav with Material Symbols & Design Tokens [Overhauled: FE-R01 Premium Glassmorphic Pill Header & BottomNav] |
 | T02 Chat Page UI | ✅ Done | Agent@15:23 | Re-implemented: premium glassmorphism bubbles, Material Symbols, and enhanced mock logic [Overhauled: FE-R02 Premium AI Chat Assistant with Floating Popover & Aura Glassmorphism] |
 | T03 Photo Report Page | ✅ Done | Agent@13:03 | Re-implemented: 3-step flow, AI scanner effect, and high-tech classification cards |
-| T04 Pazar Feed + Vendor Upload | ✅ Done | Agent@13:00 | Product cards, filters, vendor photo upload (mocked) |
+| T04 Pazar Feed + Vendor Upload | ✅ Done | Agent@13:00 | Product cards, filters, vendor photo upload (mocked) [Overhauled: FE-R05 Premium Pazar Market Pages & Vendor Upload] |
 | T05 3D Map Page (Mapbox) | ✅ Done | Agent@13:07 | Re-implemented: 3D buildings, status-colored clusters, geolocation, and side panel detail view |
 | T06 Admin Dashboard | ✅ Done | Agent@14:05 | Metric cards, severity chart, report table, and mock data |
 | T07 Emergency Page | ✅ Done | Agent@14:00 | Multilingual Siren Translator with QR scanner placeholder and clickable contacts |
@@ -101,7 +101,7 @@
 
 ## ⏭️ Next Recommended Actions (per lane)
 
-- **Frontend:** FE-R03 Report Page Redesign ✅ Done. FE-R04 Map Page Polish ✅ Done. Next: **FE-R05 Pazar Pages Overhaul** (interactive — user picks Aura components).
+- **Frontend:** FE-R05 Pazar Pages Overhaul ✅ Done. Next: **FE-R06 Admin Dashboard Polish** (interactive — user picks Aura components).
 - **Backend:** T01, T02, T03, T05, T06, T08 Done. Next: Execute **Task 04 (Pazar Routes)**.
 - **AI:** T01-T05, T06.1 Done. Next: Execute **T06 Chat Orchestration** and **T06.2 Chat Orchestrator**.
 - **Creative:** Start **T01 Brand Website** immediately (Wave 1, no deps). Then T02 (Design Tokens). Then T03+T04 in parallel. T05 after assets ready. T06 last (needs working app).
