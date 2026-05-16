@@ -3,9 +3,11 @@ import PageContainer from '@/components/layout/PageContainer';
 import VendorUpload from '@/components/pazar/VendorUpload';
 import { PazarListingClassification } from '@/types';
 import { submitListing } from '@/services/pazarService';
+import { useAuthStore } from '@/stores/useAuthStore';
 import './PazarSubmitPage.css';
 
 const PazarSubmitPage: React.FC = () => {
+  const { user } = useAuthStore();
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [listingId, setListingId] = useState<string | null>(null);
@@ -16,7 +18,7 @@ const PazarSubmitPage: React.FC = () => {
     try {
       const response = await submitListing({
         classification,
-        vendor: 'Local Vendor', // TODO: from auth context
+        vendor: user?.fullName || 'Local Vendor',
       });
       if (response.success && response.data) {
         setListingId(response.data.listingId);
