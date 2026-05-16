@@ -4,65 +4,79 @@ import './ClassificationPreview.css';
 
 interface ClassificationPreviewProps {
   classification: CivicReportClassification;
+  onConfirm: (note: string) => void;
+  onBack: () => void;
 }
 
-const ClassificationPreview: React.FC<ClassificationPreviewProps> = ({ classification }) => {
+const ClassificationPreview: React.FC<ClassificationPreviewProps> = ({ classification, onConfirm, onBack }) => {
+  const [note, setNote] = React.useState('');
+
   const getSeverityColor = (level: number) => {
-    if (level >= 8) return '#ff2d2d'; // High
-    if (level >= 4) return '#ffb000'; // Medium
-    return '#16c784'; // Low
+    if (level <= 3) return 'var(--color-success)';
+    if (level <= 7) return 'var(--color-warning)';
+    return 'var(--color-error)';
   };
 
   return (
-    <div className="classification-card">
-      <div className="classification-header">
-        <div className="classification-badge">AI Analysis Complete</div>
-        <div className="confidence-meter">
-          {Math.round(classification.confidence * 100)}% Match
-        </div>
+    <div className="classification-preview">
+      <div className="ai-badge">
+        <span className="material-symbols-outlined">auto_awesome</span>
+        AI Analysis Complete
       </div>
-
-      <div className="classification-body">
-        <div className="field-group">
-          <label>Category</label>
-          <div className="field-value capitalize">{classification.category.replace('_', ' ')}</div>
-        </div>
-
-        <div className="field-group">
-          <label>Department</label>
-          <div className="field-value capitalize">{classification.department.replace('_', ' ')}</div>
-        </div>
-
-        <div className="field-group">
-          <label>Severity</label>
-          <div className="severity-row">
-            <div className="severity-bar-bg">
-              <div 
-                className="severity-bar-fill" 
-                style={{ 
-                  width: `${classification.severity * 10}%`,
-                  backgroundColor: getSeverityColor(classification.severity)
-                }}
-              />
-            </div>
-            <span className="severity-text">{classification.severity}/10</span>
+      
+      <div className="result-card">
+        <div className="card-section category-section">
+          <div className="section-label">Identified Category</div>
+          <div className="category-value">
+            <span className="material-symbols-outlined category-icon">report</span>
+            {classification.category.replace(/_/g, ' ')}
           </div>
         </div>
 
-        <div className="field-group">
-          <label>Zone</label>
-          <div className="field-value capitalize">{classification.zone.replace('_', ' ')}</div>
+        <div className="card-section severity-section">
+          <div className="section-label">Severity Level ({classification.severity}/10)</div>
+          <div className="severity-bar-container">
+            <div 
+              className="severity-bar-fill" 
+              style={{ 
+                width: `${classification.severity * 10}%`,
+                background: getSeverityColor(classification.severity)
+              }}
+            ></div>
+          </div>
         </div>
 
-        <div className="field-group">
-          <label>Description</label>
-          <div className="field-value description">{classification.description}</div>
+        <div className="grid-details">
+          <div className="card-section">
+            <div className="section-label">Department</div>
+            <div className="detail-value">{classification.department.replace(/_/g, ' ')}</div>
+          </div>
+          <div className="card-section">
+            <div className="section-label">City Zone</div>
+            <div className="detail-value">{classification.zone.replace(/_/g, ' ')}</div>
+          </div>
         </div>
 
-        <div className="field-group suggested">
-          <label>Suggested Action</label>
-          <div className="field-value action">{classification.suggestedAction}</div>
+        <div className="card-section">
+          <div className="section-label">AI Description</div>
+          <p className="ai-description">{classification.description}</p>
         </div>
+
+        <div className="card-section note-section">
+          <div className="section-label">Add a Note (Optional)</div>
+          <textarea 
+            placeholder="Add any additional details..." 
+            value={note}
+            onChange={(e) => setNote(e.target.value)}
+          />
+        </div>
+      </div>
+
+      <div className="action-footer">
+        <button className="secondary-btn" onClick={onBack}>Back</button>
+        <button className="primary-btn submit-btn" onClick={() => onConfirm(note)}>
+          Confirm & Submit Report
+        </button>
       </div>
     </div>
   );
