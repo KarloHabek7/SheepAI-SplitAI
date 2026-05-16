@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { useAppStore } from '@/stores/useAppStore';
 import appLogo from '@/assets/images/app_logo.png';
 import './Header.css';
 
 const Header: React.FC = () => {
   const location = useLocation();
   const { t, i18n } = useTranslation();
+  const { mockMode, setMockMode } = useAppStore();
   const [theme, setTheme] = useState<'light' | 'dark'>(
     (localStorage.getItem('theme') as 'light' | 'dark') || 'light'
   );
@@ -32,6 +34,12 @@ const Header: React.FC = () => {
 
   const toggleTheme = () => {
     setTheme(prev => prev === 'light' ? 'dark' : 'light');
+  };
+
+  const toggleMockMode = () => {
+    setMockMode(!mockMode);
+    // Reload to ensure all services pickup the change if they don't use the store
+    window.location.reload();
   };
 
   return (
@@ -70,6 +78,15 @@ const Header: React.FC = () => {
         </nav>
         
         <div className="header-actions">
+          <button 
+            className={`pill-btn mock-btn ${mockMode ? 'active' : ''}`} 
+            onClick={toggleMockMode} 
+            aria-label="Toggle Mock Mode" 
+            title={mockMode ? "Mock Mode ON" : "Mock Mode OFF"}
+          >
+            <span className="material-symbols-outlined">science</span>
+            {mockMode && <span className="mock-label">MOCK</span>}
+          </button>
           <button className="pill-btn lang-btn" onClick={toggleLanguage} aria-label="Switch Language" title="Switch Language">
             <span className="material-symbols-outlined">language</span>
             <span className="lang-code">{i18n.language.slice(0, 2).toUpperCase()}</span>

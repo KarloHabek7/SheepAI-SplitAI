@@ -126,6 +126,26 @@
   border-color: rgba(255, 255, 255, 0.2);
 }
 
+.mock-btn.active {
+  background: rgba(139, 92, 246, 0.15);
+  border-color: rgba(139, 92, 246, 0.3);
+  color: #a78bfa;
+}
+
+.mock-btn.active:hover {
+  background: rgba(139, 92, 246, 0.25);
+}
+
+.mock-label {
+  font-size: 0.7rem;
+  letter-spacing: 0.5px;
+  background: #8b5cf6;
+  color: white;
+  padding: 1px 4px;
+  border-radius: 4px;
+  margin-left: 2px;
+}
+
 @media (max-width: 900px) {
   .desktop-nav {
     display: none;

@@ -482,10 +482,12 @@ export interface AppStoreState {
   theme: Theme;
   isOnline: boolean;
   cacheStatus: 'initializing' | 'ready' | 'error';
+  mockMode: boolean;
   setLanguage: (lang: SupportedLanguage) => void;
   setTheme: (theme: Theme) => void;
   setOnline: (isOnline: boolean) => void;
   setCacheStatus: (status: AppStoreState['cacheStatus']) => void;
+  setMockMode: (enabled: boolean) => void;
 }
 
 /** User profile information */

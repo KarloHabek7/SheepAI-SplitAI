@@ -5,8 +5,10 @@ import { APIResponse } from '@/types';
  */
 export const API_BASE = import.meta.env.VITE_API_URL || 'http://127.0.0.1:3001';
 
-// Toggle this to true if the backend is not deployed
-const USE_MOCK_FALLBACK = import.meta.env.PROD || import.meta.env.VITE_USE_MOCK === 'true';
+// Toggle this to true if the backend is not deployed or forced via localStorage
+const USE_MOCK_FALLBACK = 
+  import.meta.env.VITE_USE_MOCK === 'true' || 
+  localStorage.getItem('splitai-mock-mode') === 'true';
 
 /**
  * Shared fetch helper that wraps all API calls and ensures a consistent response shape.
@@ -15,6 +17,12 @@ export async function fetchApi<T>(
   path: string,
   options: RequestInit = {}
 ): Promise<APIResponse<T>> {
+  // 1. Check if we should bypass the real API entirely (Force Mock Mode)
+  if (localStorage.getItem('splitai-mock-mode') === 'true') {
+    console.info(`[API] Forced Mock Mode: Intercepting ${path}`);
+    return await getMockFallback<T>(path, options);
+  }
+
   const url = `${API_BASE}${path}`;
   
   const headers = new Headers(options.headers || {});
@@ -47,7 +55,7 @@ export async function fetchApi<T>(
   } catch (err: any) {
     console.warn(`[API] Request to ${path} failed:`, err.message);
 
-    // Mock Fallback Logic for Demos
+    // Mock Fallback Logic for Demos (Network Failure)
     if (USE_MOCK_FALLBACK) {
       console.info(`[API] Falling back to mock data for ${path}`);
       return await getMockFallback<T>(path, options);
@@ -101,7 +109,7 @@ async function getMockFallback<T>(path: string, options: RequestInit = {}): Prom
       user: { id: 'u1', email: 'admin@split.hr', fullName: 'Admin User', role: 'admin' },
       token: 'demo-token-admin'
     };
-  } else if (path.startsWith('/api/admin/stats')) {
+  } else if (path.startsWith('/api/admin/dashboard')) {
     data = {
       totalReports: MOCK_REPORTS.length,
       openReports: MOCK_REPORTS.filter(r => r.status !== 'resolved').length,

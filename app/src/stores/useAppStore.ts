@@ -14,18 +14,24 @@ export const useAppStore = create<AppStoreState>()(
       theme: 'dark',
       isOnline: true,
       cacheStatus: 'initializing',
+      mockMode: localStorage.getItem('splitai-mock-mode') === 'true',
 
       setLanguage: (lang: SupportedLanguage) => set({ language: lang }),
       setTheme: (theme: Theme) => set({ theme }),
       setOnline: (isOnline: boolean) => set({ isOnline }),
       setCacheStatus: (status: AppStoreState['cacheStatus']) => set({ cacheStatus: status }),
+      setMockMode: (enabled: boolean) => {
+        localStorage.setItem('splitai-mock-mode', String(enabled));
+        set({ mockMode: enabled });
+      },
     }),
     {
       name: 'splitai-app',
-      // Only persist language and theme
+      // Persist core app settings
       partialize: (state) => ({ 
         language: state.language, 
-        theme: state.theme 
+        theme: state.theme,
+        mockMode: state.mockMode
       }),
     }
   )
