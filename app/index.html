@@ -10,7 +10,7 @@
     <meta name="theme-color" content="#0047AB" />
     
     <!-- Wide-open CSP for Hackatlon/Pitch reliability -->
-    <meta http-equiv="Content-Security-Policy" content="default-src * 'unsafe-inline' 'unsafe-eval'; script-src * 'unsafe-inline' 'unsafe-eval'; connect-src * 'unsafe-inline' http: https: ws: wss:; img-src * data: blob:; frame-src *; style-src * 'unsafe-inline'; font-src * data:;">
+    <meta http-equiv="Content-Security-Policy" content="default-src * 'unsafe-inline' 'unsafe-eval'; script-src * 'unsafe-inline' 'unsafe-eval' blob:; worker-src * blob: 'unsafe-inline' 'unsafe-eval'; child-src * blob:; connect-src * 'unsafe-inline' http: https: ws: wss:; img-src * data: blob:; frame-src *; style-src * 'unsafe-inline'; font-src * data:;">
     
     <!-- Fonts & Icons -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
