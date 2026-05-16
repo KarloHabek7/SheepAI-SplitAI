@@ -2,27 +2,28 @@
 
 > **One AI agent for Split: ask anything, report anything, in any language.**
 >
-> **Last Updated:** 2026-05-16T11:25:00+02:00
+> **Last Updated:** 2026-05-16T11:35:00+02:00
 > **Phase:** Architecture → Delegation
 
 ---
 
 ## 1. Overview & Architecture
 
-SplitAI is a **Unified Municipal AI Agent** for the City of Split. It provides a single conversational interface backed by Gemini 2.5 Flash that routes citizen and tourist requests to specialized capabilities: RAG regulation Q&A, Vision-based civic reporting, a daily Pazar market feed, multilingual chat, and an admin triage dashboard.
+SplitAI is a **Unified Municipal AI Agent** for the City of Split. It provides a single conversational interface backed by Gemini 3.0 Flash that routes citizen and tourist requests to specialized capabilities: RAG regulation Q&A, Vision-based civic reporting, a daily Pazar market feed, multilingual chat, and an admin triage dashboard.
 
 **Deliverables:**
 1. **Brand Website** — Static landing page (Aura template) for judges and marketing
-2. **Web Application (PWA)** — React 19 + Vite + TypeScript — primary product
-3. **BFF Server** — Express.js proxy protecting Gemini API key, serving mock tools
+2. **Web Application** — React 19 + Vite + TypeScript — primary product
+3. **Native Mobile App** — Capacitor wrapping the React app → Android/iOS (same codebase)
+4. **BFF Server** — Express.js proxy protecting Gemini API key, serving mock tools
 
 **Full architecture:** See [`docs/architecture/ARCHITECTURE.md`](../docs/architecture/ARCHITECTURE.md)
 
 ```mermaid
 graph LR
-    Client["📱 PWA Client"]
+    Client["📱 Web + Mobile Client"]
     BFF["🔐 BFF Server"]
-    Gemini["🤖 Gemini 2.5 Flash"]
+    Gemini["🤖 Gemini 3.0 Flash"]
     Tools["🔧 Mock Tools"]
     Cache["📚 Context Cache"]
 
@@ -56,6 +57,9 @@ graph LR
 - [ ] Task 1.7: Emergency Page — QR scanner, multilingual instructions (Est. 1h)
 - [ ] Task 1.8: PWA Setup — manifest, service worker, offline shell (Est. 0.5h)
 - [ ] Task 1.9: Responsive Polish — mobile-first, bottom nav, touch targets (Est. 1h)
+- [ ] Task 1.10: Capacitor Init — install Capacitor, configure, add Android platform (Est. 0.5h)
+- [ ] Task 1.11: Capacitor Native Plugins — Camera, Geolocation, Haptics integration (Est. 1h)
+- [ ] Task 1.12: Android Build — build APK, test on device/emulator (Est. 0.5h)
 
 ### Lane 2: Backend / API / Data
 - [ ] Task 2.1: Express BFF Scaffold — server entry, CORS, env, health check (Est. 0.5h)
@@ -102,6 +106,7 @@ graph LR
 | **Wave 4** | L1-T1.2 (Chat UI), L1-T1.3 (Report UI), L2-T2.7–2.8 (Tools+Store), L3-T3.6–3.7 (Hooks) | Sonnet, Sonnet, Flash, Opus | Core feature pages |
 | **Wave 5** | L1-T1.4–1.7 (Remaining pages), L2-T2.9 (Service Layer) | Sonnet, Flash | Secondary features |
 | **Wave 6** | L1-T1.8–1.9 (PWA + Polish), L4-T4.5–4.6 (Pitch) | Flash, Opus | Final polish |
+| **Wave 7** | L1-T1.10–1.12 (Capacitor Mobile) | Flash | After web app is feature-complete |
 
 ### Parallel Lanes Visualization
 
@@ -155,6 +160,7 @@ gantt
     Emergency Page                 :l1t7, 17:00, 1h
     PWA Setup                      :l1t8, 18:00, 30m
     Responsive Polish              :l1t9, 18:00, 1h
+    Capacitor Init + Build         :l1t10, 17:30, 1h
 ```
 
 ---
@@ -163,7 +169,7 @@ gantt
 
 - **14:00 (CP1):** Chat + RAG end-to-end working. Frontend Chat UI → BFF → Gemini with Context Cache → response with citations displayed. This is the **minimum viable demo**.
 - **17:00 (CP2):** Photo Report + Vision E2E working. Photo upload → classification → ticket submission → admin dashboard shows the report. Pazar feed functional.
-- **18:30 (CP3):** Final integration. All features connected. PWA installable. Admin dashboard complete. Demo rehearsed. Backup video recorded.
+- **18:30 (CP3):** Final integration. All features connected. PWA installable. Native Android APK built. Admin dashboard complete. Demo rehearsed. Backup video recorded.
 
 ---
 
@@ -179,6 +185,7 @@ gantt
 | Git merge conflicts between lanes | Medium | Lane isolation rules + integration checkpoints. Shared files are additive-only. |
 | Brand site delays block Frontend | Low | Frontend starts with temporary tokens; swap when Creative delivers. |
 | PDF processing for RAG fails | Low | Pre-process PDFs to text files as fallback. Test with small sample first. |
+| Capacitor build fails | Low | PWA is the fallback — app still works in mobile browser. Capacitor is bonus for demo. |
 
 ---
 
@@ -191,6 +198,7 @@ gantt
 | Pazar feed shows AI-extracted listings | ✅ Working at CP2 |
 | Admin dashboard shows aggregated reports | ✅ Working at CP3 |
 | App installable as PWA on mobile | ✅ Working at CP3 |
+| Native Android APK builds and runs | ✅ Working at CP3 |
 | Sub-second text response time | ✅ Verified at CP1 |
 | Multilingual (at least HR, EN, DE) | ✅ Working at CP1 |
 | Premium UI (glassmorphism, animations) | ✅ Polished at CP3 |

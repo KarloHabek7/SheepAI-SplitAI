@@ -6,7 +6,7 @@
 
 ## 🌟 North Star
 
-"One AI agent for Split: ask anything, report anything, in any language — unifying citizen services, tourist assistance, and municipal operations into a single conversational AI powered by Gemini 2.5 Flash."
+"One AI agent for Split: ask anything, report anything, in any language — unifying citizen services, tourist assistance, and municipal operations into a single conversational AI powered by Gemini 3.0 Flash."
 
 ---
 
@@ -53,15 +53,18 @@
 
 ### 🎨 Pillar 4: Premium Experience (The Polish)
 
-> **Why it matters:** Judging criteria weight Innovation & UX at 30%. A glassmorphic, responsive, installable PWA with micro-animations will differentiate us from every other hackathon project with a bootstrap UI. The brand site creates the first impression. Premium design = premium product perception.
+> **Why it matters:** Judging criteria weight Innovation & UX at 30%. A glassmorphic, responsive, installable PWA **and native Android/iOS app** with micro-animations will differentiate us from every other hackathon project with a bootstrap UI. The brand site creates the first impression. A real native app on a judge's phone is the ultimate "this is production-ready" signal.
 
 #### Feature 4.1: Brand Website & Design System
 <!-- Populated by /delegate -->
 
-#### Feature 4.2: PWA & Mobile Experience
+#### Feature 4.2: PWA & Responsive Web
 <!-- Populated by /delegate -->
 
-#### Feature 4.3: Pitch & Demo Materials
+#### Feature 4.3: Native Mobile App (Capacitor)
+<!-- Populated by /delegate -->
+
+#### Feature 4.4: Pitch & Demo Materials
 <!-- Populated by /delegate -->
 
 ---

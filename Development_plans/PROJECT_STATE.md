@@ -1,13 +1,13 @@
 # PROJECT STATE — Auto-Updated by Agents
 
-> **Last Updated:** 2026-05-16T11:25:00+02:00
+> **Last Updated:** 2026-05-16T11:35:00+02:00
 > **Updated By:** Lead Agent (Lane 0)
 
 ---
 
 ## 🎯 North Star Vision
 
-"One AI agent for Split: ask anything, report anything, in any language — a unified municipal assistant that serves residents, tourists, and city workers through conversational RAG, Vision AI reporting, a daily Pazar market feed, and an admin triage dashboard, all powered by Gemini 2.5 Flash."
+"One AI agent for Split: ask anything, report anything, in any language — a unified municipal assistant that serves residents, tourists, and city workers through conversational RAG, Vision AI reporting, a daily Pazar market feed, and an admin triage dashboard, all powered by Gemini 3.0 Flash. Delivered as a web app, native Android/iOS app (via Capacitor), and branding website."
 
 ---
 
@@ -74,8 +74,8 @@
 
 ## ⏭️ Next Recommended Actions (per lane)
 
-- **Frontend:** Awaiting task delegation. **Soft blocker:** tokens.css from Creative lane (can start with temp tokens).
+- **Frontend:** Awaiting task delegation. **Soft blocker:** tokens.css from Creative lane (can start with temp tokens). Capacitor mobile tasks come after web is feature-complete.
 - **Backend:** Awaiting task delegation. Can start BFF scaffold immediately after delegation.
-- **AI:** Awaiting task delegation. Can start Gemini SDK setup immediately after delegation.
+- **AI:** Awaiting task delegation. Can start Gemini 3.0 Flash SDK setup immediately after delegation.
 - **Creative:** Awaiting task delegation. Brand site is the first priority (unblocks tokens.css for Frontend).
 - **Lead:** Run `/delegate` to create per-lane task packages.

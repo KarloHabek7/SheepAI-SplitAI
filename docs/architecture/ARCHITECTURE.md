@@ -1,24 +1,27 @@
 # SplitAI — System Architecture
 
-> **Version:** 2.0 (New Idea — Unified Municipal AI Agent)
-> **Last Updated:** 2026-05-16T11:25:00+02:00
+> **Version:** 2.1 (Gemini 3.0 Flash + Capacitor Native Mobile)
+> **Last Updated:** 2026-05-16T11:35:00+02:00
 > **Author:** Lead Agent (Lane 0)
 
 ---
 
 ## 1. System Overview
 
-SplitAI is a **Unified Municipal AI Agent** for the City of Split. It provides a single conversational interface that routes citizen and tourist requests to specialized AI capabilities: RAG-powered regulation Q&A, Vision-based civic issue reporting, a daily Pazar market feed, and multilingual chat — all backed by Gemini 2.5 Flash.
+SplitAI is a **Unified Municipal AI Agent** for the City of Split. It provides a single conversational interface that routes citizen and tourist requests to specialized AI capabilities: RAG-powered regulation Q&A, Vision-based civic issue reporting, a daily Pazar market feed, and multilingual chat — all backed by Gemini 3.0 Flash.
 
-The system comprises **three deliverables**:
+The system comprises **four deliverables**:
 
-| Deliverable | Technology | Purpose |
-|---|---|---|
-| **Brand Website** | Static HTML/CSS (Aura template) | Marketing landing page, visual north star |
-| **Web Application** | React 19 + Vite + TypeScript | Primary product: chat UI, photo reporting, admin dashboard |
-| **Mobile Experience** | PWA (Progressive Web App) | Mobile-optimized version of the web app — same codebase |
+| Deliverable | Technology | Purpose | Priority |
+|---|---|---|---|
+| **Brand Website** | Static HTML/CSS (Aura template) | Marketing landing page, visual north star | Wave 1 |
+| **Web Application** | React 19 + Vite + TypeScript | Primary product: chat UI, photo reporting, admin dashboard | Wave 2–5 |
+| **Native Mobile App** | Capacitor (wraps React app) | Android/iOS native app — same codebase as web app | Wave 6 |
+| **BFF Server** | Express.js (Node.js) | API proxy protecting Gemini key, serving mock tools | Wave 2 |
 
-> **Decision:** No native mobile app. The web app is built as a PWA with responsive design, installable on mobile via "Add to Home Screen". This saves an entire development track while delivering 95% of the mobile experience.
+> **Mobile Strategy:** The web app is built first as a responsive PWA. Once the web app is feature-complete, **Capacitor** wraps the same Vite build output into native Android/iOS apps with zero code changes. Capacitor provides access to native APIs (Camera, GPS, Push Notifications, Haptics) via plugins. This gives us a real native app in the app store while sharing 100% of the React codebase.
+>
+> **Why Capacitor over Tauri:** Capacitor is purpose-built for web→mobile. It has mature iOS/Android support, official camera/GPS plugins, and requires no Rust toolchain. Tauri's mobile support is newer and less battle-tested for hackathon timelines.
 
 ---
 
@@ -28,7 +31,8 @@ The system comprises **three deliverables**:
 graph TB
     subgraph "Client Layer"
         BW["🌐 Brand Website<br/>(Static HTML)"]
-        WA["📱 Web App / PWA<br/>(React + Vite)"]
+        WA["🖥️ Web App<br/>(React + Vite)"]
+        MA["📱 Mobile App<br/>(Capacitor + React)"]
     end
 
     subgraph "Application Layer"
@@ -37,7 +41,7 @@ graph TB
     end
 
     subgraph "AI Layer"
-        GF["🤖 Gemini 2.5 Flash<br/>(Chat + Function Calling)"]
+        GF["🤖 Gemini 3.0 Flash<br/>(Chat + Function Calling)"]
         GV["👁️ Gemini Vision<br/>(Image Classification)"]
         CC["📚 Context Cache<br/>(RAG — GUP, Komunalni Red)"]
     end
@@ -58,6 +62,7 @@ graph TB
     end
 
     WA -->|"HTTPS / REST"| BFF
+    MA -->|"HTTPS / REST"| BFF
     BFF -->|"@google/genai SDK"| GF
     BFF -->|"@google/genai SDK"| GV
     GF -->|"Cached Context"| CC
@@ -71,9 +76,11 @@ graph TB
     T1 --> MS
     T5 --> MS
     WA -->|"State"| LS
+    MA -->|"State"| LS
 
     style BW fill:#003366,color:#fff
     style WA fill:#003366,color:#fff
+    style MA fill:#003366,color:#fff
     style BFF fill:#1a5276,color:#fff
     style GF fill:#e74c3c,color:#fff
     style GV fill:#e74c3c,color:#fff
@@ -89,7 +96,8 @@ graph TB
 | Component | Tech | Responsibility |
 |---|---|---|
 | **Brand Website** | Static HTML/CSS/JS | Marketing page for judges. Showcases product vision, screenshots, team. Deployed to Vercel. |
-| **Web App (PWA)** | React 19 + Vite + TS + Zustand | Primary product. Contains all user-facing features: Chat, Photo Reporting, Pazar Feed, Admin Dashboard. Installable as PWA on mobile. |
+| **Web App** | React 19 + Vite + TS + Zustand | Primary product. Contains all user-facing features: Chat, Photo Reporting, Pazar Feed, Admin Dashboard. Responsive, works as PWA too. |
+| **Mobile App** | Capacitor wrapping the React app | Native Android/iOS app. Same codebase as web app. Access to Camera, GPS, Push Notifications, Haptics via Capacitor plugins. Built after web app is feature-complete. |
 
 ### 3.2 Application Layer (BFF)
 
@@ -102,8 +110,8 @@ graph TB
 
 | Component | Tech | Responsibility |
 |---|---|---|
-| **Gemini Chat** | `gemini-2.5-flash` | Main conversational engine. Receives user messages + system prompt. Uses function calling to route requests to the correct tool. Multilingual by default. |
-| **Gemini Vision** | `gemini-2.5-flash` (multimodal) | Receives base64 images. Returns structured JSON classification (issue type, severity, location, department). Used for both civic reports and Pazar listings. |
+| **Gemini Chat** | `gemini-3.0-flash` | Main conversational engine. Receives user messages + system prompt. Uses function calling to route requests to the correct tool. Multilingual by default. |
+| **Gemini Vision** | `gemini-3.0-flash` (multimodal) | Receives base64 images. Returns structured JSON classification (issue type, severity, location, department). Used for both civic reports and Pazar listings. |
 | **Context Cache** | `createCachedContent()` | Pre-loads GUP (250+ pages), Komunalni Red, and Emergency Protocols into Gemini's context window. All RAG queries use this cached context for instant retrieval without vector DB. |
 
 ### 3.4 Tool Layer (Function Calling)
@@ -340,7 +348,7 @@ sequenceDiagram
 | Lane | Produces | Consumes | Handoff Points |
 |---|---|---|---|
 | **Lane 0: Lead** | Architecture docs, type contracts, MASTER_PLAN, task delegation | Selected idea, research | Delivers types → All lanes. Delivers task files → All lanes. |
-| **Lane 1: Frontend** | React pages, components, layouts, styles, responsive PWA | Types, design tokens, mock API responses | Delivers UI → Integration. Consumes API contracts from Backend. |
+| **Lane 1: Frontend** | React pages, components, layouts, styles, responsive web + Capacitor native mobile | Types, design tokens, mock API responses | Delivers UI → Integration. Delivers Capacitor build → Mobile. Consumes API contracts from Backend. |
 | **Lane 2: Backend** | Express BFF server, API routes, mock tools, in-memory store | Types, AI service interfaces | Delivers running server → Integration. Delivers API endpoints → Frontend. |
 | **Lane 3: AI** | Gemini SDK integration, prompt engineering, RAG setup, Vision schemas | Types, PDF documents | Delivers AI service modules → Backend integration. |
 | **Lane 4: Creative** | Brand website, design tokens, assets (icons, images), pitch deck | Selected idea, architecture | Delivers DESIGN.md + tokens.css → All lanes. Delivers brand site → Vercel. |
@@ -394,6 +402,10 @@ graph LR
 | Icons | Lucide React | Already installed, consistent style |
 | i18n | i18next + react-i18next | Already installed, runtime language switching |
 | PWA | vite-plugin-pwa | Add-to-home-screen, offline shell |
+| Native Mobile | @capacitor/core + @capacitor/cli | Wraps Vite build into Android/iOS native app |
+| Native Camera | @capacitor/camera | Native camera access for photo reporting |
+| Native GPS | @capacitor/geolocation | Native location for report geo-tagging |
+| Native Push | @capacitor/push-notifications | Push notifications for report status updates |
 
 ### 10.2 Backend
 
@@ -410,7 +422,7 @@ graph LR
 
 | Concern | Technology | Rationale |
 |---|---|---|
-| Model | gemini-2.5-flash | Free tier, 1M context, sub-second, multilingual |
+| Model | gemini-3.0-flash | Latest model, improved speed + multilingual + vision capabilities |
 | RAG | Context Caching API | No vector DB needed, native Gemini feature |
 | Vision | Gemini multimodal input | Same model, image + text → structured JSON |
 | Function Calling | Gemini tool declarations | Structured routing to mock city services |
@@ -432,7 +444,7 @@ graph LR
 
 ```
 SplitAI/
-├── app/                          # Web Application (React + Vite)
+├── app/                          # Web + Mobile Application (React + Vite + Capacitor)
 │   ├── src/
 │   │   ├── assets/images/        # Static imported assets
 │   │   ├── components/
@@ -473,6 +485,9 @@ SplitAI/
 │   │   ├── assets/               # Large static files (PDFs, icons)
 │   │   ├── manifest.json         # PWA manifest
 │   │   └── sw.js                 # Service worker (PWA)
+│   ├── android/                  # Capacitor Android project (auto-generated)
+│   ├── ios/                      # Capacitor iOS project (auto-generated)
+│   ├── capacitor.config.ts       # Capacitor configuration
 │   └── package.json
 ├── brand_site/                   # Branding Website (Static HTML)
 ├── assets/                       # Raw creative assets
@@ -486,6 +501,74 @@ SplitAI/
 ├── Decisions/                    # Idea selection, brand decisions
 └── Research/                     # Research task outputs
 ```
+
+---
+
+## 11.1 Capacitor Mobile Architecture
+
+### How It Works
+
+```mermaid
+flowchart LR
+    subgraph "Development"
+        RC["React + Vite Source Code"]
+        VB["npm run build → dist/"]
+    end
+
+    subgraph "Web Deploy"
+        VH["Vercel Hosting"]
+    end
+
+    subgraph "Mobile Deploy"
+        CS["npx cap sync"]
+        AA["Android Studio → APK"]
+        XC["Xcode → IPA"]
+    end
+
+    RC --> VB
+    VB --> VH
+    VB --> CS
+    CS --> AA
+    CS --> XC
+```
+
+### Capacitor Setup Steps (for Frontend lane)
+
+1. `npm install @capacitor/core @capacitor/cli`
+2. `npx cap init "SplitAI" "com.splitai.app" --web-dir dist`
+3. `npm install @capacitor/camera @capacitor/geolocation @capacitor/push-notifications @capacitor/haptics`
+4. `npx cap add android`
+5. `npx cap add ios` (if macOS available)
+6. After each web build: `npm run build && npx cap sync`
+7. Open in Android Studio: `npx cap open android`
+
+### Native Plugin Usage
+
+Capacitor plugins expose native APIs that work identically on web (via fallback) and native:
+
+```typescript
+// Works on both web and native — Capacitor auto-selects the right implementation
+import { Camera, CameraResultType } from '@capacitor/camera';
+import { Geolocation } from '@capacitor/geolocation';
+
+// Take a photo (uses native camera on mobile, file picker on web)
+const photo = await Camera.getPhoto({ resultType: CameraResultType.Base64 });
+
+// Get GPS location (uses native GPS on mobile, browser API on web)
+const position = await Geolocation.getCurrentPosition();
+```
+
+### Key Decisions
+
+| Concern | Decision | Rationale |
+|---|---|---|
+| Shared codebase | 100% shared React code | Zero duplication, single source of truth |
+| Native camera | @capacitor/camera | Better UX than HTML file input on mobile |
+| Native GPS | @capacitor/geolocation | More accurate than browser geolocation API |
+| Push notifications | @capacitor/push-notifications | Real native push for report status updates |
+| Haptic feedback | @capacitor/haptics | Tactile response on report submission |
+| Build priority | Web first → Mobile after CP2 | Web must work for demo; mobile is a bonus |
+| Demo target | Android APK (easier to demo) | No Apple Developer account needed |
 
 ---
 
@@ -506,9 +589,10 @@ SplitAI/
 
 | Metric | Target | Strategy |
 |---|---|---|
-| Chat response (text) | < 1s | Gemini Flash + Context Cache pre-warmed |
+| Chat response (text) | < 1s | Gemini 3.0 Flash + Context Cache pre-warmed |
 | Vision classification | < 2s | Single API call with responseSchema |
 | Page load (first paint) | < 1.5s | Vite code splitting + lazy routes |
+| Mobile app startup | < 2s | Capacitor WebView pre-loaded |
 | PWA install | Works offline | Service worker caches shell |
 | Concurrent users | 10+ (demo) | In-memory store, no DB bottleneck |
 
@@ -544,6 +628,7 @@ gantt
     Pazar Feed                 :pazar, 15:00, 1.5h
     Admin Dashboard            :admin, 16:00, 2h
     Emergency / QR             :emerg, 17:00, 1h
+    Capacitor Mobile Build     :mobile, 17:30, 1h
     Demo Rehearsal             :demo, 18:00, 0.5h
     CP3: Final Integration     :milestone, cp3, 18:30, 0
 ```
