@@ -19,12 +19,12 @@
 
 ## 🏗️ Lane Status
 
-### Lane 1: Frontend — 0/8 tasks done
+### Lane 1: Frontend — 2/8 tasks done
 
 | Task | Status | Completed By | Notes |
 |---|---|---|---|
-| T01 App Shell + Layout | ⬜ Not Started | | Foundation: routing, Header, BottomNav, PageContainer |
-| T02 Chat Page UI | ⬜ Not Started | | Bubbles, citations, suggested prompts, input bar |
+| T01 App Shell + Layout | ✅ Done | Agent@12:25 | Foundation: routing, Header, BottomNav, PageContainer |
+| T02 Chat Page UI | ✅ Done | Agent@12:27 | Bubbles, citations, suggested prompts, input bar |
 | T03 Photo Report Page | ⬜ Not Started | | Upload, AI classification preview, ticket confirmation |
 | T04 Pazar Feed + Vendor Upload | ⬜ Not Started | | Product cards, filters, vendor photo upload |
 | T05 3D Map Page (Mapbox) | ⬜ Not Started | | Home screen: 3D buildings, issue markers, clustering |
@@ -104,7 +104,7 @@
 
 ## ⏭️ Next Recommended Actions (per lane)
 
-- **Frontend:** Start with **T01 App Shell + Layout** (no dependencies). Then T02–T07 in parallel (all depend on T01). T08 runs last. **Soft blocker:** tokens.css from Creative lane (use temp tokens until delivered).
+- **Frontend:** T01 Done. Start with **T02 Chat Page UI** or **T05 3D Map Page** (both unblocked). **Soft blocker:** real Mapbox token for T05.
 - **Backend:** Start with **T01 (BFF Scaffold)** and **T08 (In-Memory Store)** in parallel — both have no deps beyond the scaffold. Then proceed to T02–T06 (routes), T07 (tools), T09 (services), T10 (stores).
 - **AI:** Start **T01 Gemini SDK Setup** (no dependencies). Then T02+T03 in parallel, then T04+T05 in parallel, then T06, then T07.
 - **Creative:** Start **T01 Brand Website** immediately (Wave 1, no deps). Then T02 (Design Tokens). Then T03+T04 in parallel. T05 after assets ready. T06 last (needs working app).

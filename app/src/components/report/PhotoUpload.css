@@ -1,0 +1,80 @@
+.photo-upload-container {
+  width: 100%;
+  margin: var(--space-md) 0;
+}
+
+.upload-placeholder {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  background: var(--color-bg-elevated);
+  border: 2px dashed var(--color-border);
+  border-radius: var(--radius-lg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: var(--transition-default);
+  padding: var(--space-lg);
+  text-align: center;
+}
+
+.upload-placeholder:hover {
+  border-color: var(--color-primary);
+  background: rgba(var(--color-primary-rgb), 0.05);
+}
+
+.upload-icon {
+  font-size: 48px;
+  margin-bottom: var(--space-sm);
+}
+
+.upload-text {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  margin-bottom: 4px;
+}
+
+.upload-subtext {
+  font-size: 14px;
+  color: var(--color-text-secondary);
+}
+
+.image-preview-container {
+  position: relative;
+  width: 100%;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-card);
+}
+
+.image-preview {
+  width: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+.change-photo-btn {
+  position: absolute;
+  bottom: var(--space-md);
+  right: var(--space-md);
+  background: rgba(0, 0, 0, 0.6);
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: var(--radius-full);
+  font-size: 13px;
+  font-weight: 500;
+  backdrop-filter: blur(4px);
+  cursor: pointer;
+  transition: var(--transition-default);
+}
+
+.change-photo-btn:hover {
+  background: rgba(0, 0, 0, 0.8);
+}
+
+.hidden-input {
+  display: none;
+}
