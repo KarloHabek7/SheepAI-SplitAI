@@ -50,7 +50,7 @@ export async function fetchApi<T>(
     // Mock Fallback Logic for Demos
     if (USE_MOCK_FALLBACK) {
       console.info(`[API] Falling back to mock data for ${path}`);
-      return await getMockFallback<T>(path);
+      return await getMockFallback<T>(path, options);
     }
 
     return {
@@ -67,7 +67,7 @@ export async function fetchApi<T>(
 /**
  * Provides static mock data for specific endpoints when the backend is unreachable.
  */
-async function getMockFallback<T>(path: string): Promise<APIResponse<T>> {
+async function getMockFallback<T>(path: string, options: RequestInit = {}): Promise<APIResponse<T>> {
   const { MOCK_REPORTS, MOCK_LISTINGS } = await import('./mockData');
   
   let data: any = null;
@@ -114,15 +114,22 @@ async function getMockFallback<T>(path: string): Promise<APIResponse<T>> {
       hotspots: []
     };
   } else if (path.startsWith('/api/chat')) {
-    data = {
-      message: {
-        id: 'mock-chat-1',
-        role: 'assistant',
-        content: 'I am running in offline demo mode. My real AI capabilities require a backend connection, but I can show you Split city info!',
-        timestamp: new Date().toISOString()
-      },
-      conversationId: 'demo-conv'
-    };
+    const { generateChatMockResponse } = await import('./ai/chatMockManager');
+    
+    let userMsg = '';
+    let lang = 'hr';
+
+    if (options.body && typeof options.body === 'string') {
+      try {
+        const body = JSON.parse(options.body);
+        userMsg = body.message || '';
+        lang = body.language || 'hr';
+      } catch (e) {
+        // Fallback to defaults if parse fails
+      }
+    }
+
+    data = generateChatMockResponse(userMsg, lang as any);
   }
 
   return {
