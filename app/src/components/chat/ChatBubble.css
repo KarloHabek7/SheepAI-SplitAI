@@ -1,145 +1,97 @@
-.chat-bubble-wrapper {
+.aura-bubble-row {
   display: flex;
   align-items: flex-start;
-  gap: 12px;
+  gap: 10px;
   width: 100%;
-  margin-bottom: var(--space-sm);
-  animation: bubble-in var(--transition-default);
+  margin-bottom: 12px;
+  animation: bubble-fade-in 0.3s ease-out;
 }
 
-.chat-bubble-wrapper.user {
+.aura-bubble-row.user {
   justify-content: flex-end;
 }
 
-.chat-bubble-wrapper.assistant {
+.aura-bubble-row.assistant {
   justify-content: flex-start;
 }
 
-.bubble-avatar {
-  width: 36px;
-  height: 36px;
-  border-radius: var(--radius-full);
-  background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+.aura-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #4f46e5; /* Indigo 600 */
   color: white;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  box-shadow: 0 4px 12px var(--color-border);
-  border: 2px solid var(--color-bg-card);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
 
-.avatar-icon {
-  font-size: 20px;
-}
-
-.chat-bubble-content-box {
-  max-width: 82%;
-  padding: 16px 20px;
-  border-radius: var(--radius-xl);
+.aura-bubble-box {
+  max-width: 80%;
+  padding: 12px 16px;
+  border-radius: 12px;
   position: relative;
   display: flex;
   flex-direction: column;
   gap: 6px;
+  font-family: var(--font-sans);
 }
 
-/* User Bubble Styles */
-.user .chat-bubble-content-box {
-  background: linear-gradient(135deg, var(--color-primary), #1a5cbf);
-  color: white;
-  border-bottom-right-radius: 6px;
-  box-shadow: var(--shadow-primary);
+/* User Bubble exactly matching Aura (#4f46e5 / indigo-600) */
+.user .aura-bubble-box {
+  background: #4f46e5;
+  color: #ffffff;
+  border-bottom-right-radius: 4px;
+  box-shadow: 0 4px 12px rgba(79, 70, 229, 0.25);
 }
 
-/* Assistant Bubble Styles */
-.assistant .chat-bubble-content-box {
-  background: var(--glass-bg);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid var(--glass-border);
-  color: var(--color-text-primary);
-  border-bottom-left-radius: 6px;
-  box-shadow: var(--shadow-card);
-}
-
-.bubble-header {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin-bottom: 2px;
-}
-
-.assistant-name {
-  font-weight: 700;
-  font-size: 0.85rem;
-  color: var(--color-primary);
-}
-
-.assistant-badge {
-  font-size: 0.65rem;
-  font-weight: 600;
-  padding: 2px 6px;
-  background: var(--color-border);
-  color: var(--color-text-secondary);
-  border-radius: var(--radius-full);
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
+/* Assistant Bubble exactly matching Aura (#252527) */
+.assistant .aura-bubble-box {
+  background: #252527;
+  color: #e2e8f0;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-bottom-left-radius: 4px;
 }
 
 .bubble-text {
-  font-size: var(--font-size-body);
-  line-height: 1.55;
+  font-size: 0.875rem;
+  line-height: 1.5;
   white-space: pre-wrap;
   word-break: break-word;
 }
 
-.bubble-footer {
+.bubble-meta {
   display: flex;
   justify-content: flex-end;
   align-items: center;
   gap: 8px;
-  margin-top: 4px;
-  opacity: 0.8;
+  margin-top: 2px;
+  opacity: 0.7;
 }
 
 .bubble-time {
-  font-size: 0.72rem;
+  font-size: 0.7rem;
   font-weight: 500;
 }
 
 .bubble-lang {
   font-size: 0.65rem;
   font-weight: 700;
-  padding: 2px 6px;
-  background: rgba(0, 0, 0, 0.1);
+  padding: 1px 5px;
+  background: rgba(0, 0, 0, 0.2);
   border-radius: 4px;
 }
 
-.user .bubble-lang {
-  background: rgba(255, 255, 255, 0.2);
-}
-
-@keyframes bubble-in {
-  from {
-    opacity: 0;
-    transform: translateY(12px) scale(0.96);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
+@keyframes bubble-fade-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 @media (max-width: 600px) {
-  .chat-bubble-content-box {
-    max-width: 90%;
-    padding: 12px 16px;
-  }
-  .bubble-avatar {
-    width: 32px;
-    height: 32px;
-  }
-  .avatar-icon {
-    font-size: 18px;
+  .aura-bubble-box {
+    max-width: 88%;
+    padding: 10px 14px;
   }
 }

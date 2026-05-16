@@ -1,116 +1,79 @@
-.chat-input-container {
-  padding: 12px var(--space-sm) 28px var(--space-sm);
-  background: linear-gradient(to top, var(--color-bg-primary) 85%, transparent);
-  width: 100%;
+.aura-input-bar {
   display: flex;
-  justify-content: center;
-}
-
-.chat-input-pill {
-  max-width: 900px;
+  align-items: center;
+  gap: 8px;
+  background: #1C1C1E;
+  border-radius: 12px;
+  padding: 8px 10px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.2s ease;
   width: 100%;
-  display: flex;
-  align-items: flex-end;
-  gap: 10px;
-  background: var(--color-bg-card);
-  border: 1px solid var(--glass-border);
-  border-radius: var(--radius-xl);
-  padding: 8px 12px;
-  box-shadow: var(--shadow-elevated);
-  transition: var(--transition-default);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
 }
 
-.chat-input-pill:focus-within {
-  border-color: var(--color-primary);
-  box-shadow: 0 8px 32px rgba(0, 71, 171, 0.18);
-  transform: translateY(-1px);
+.aura-input-bar:focus-within {
+  border-color: rgba(99, 102, 241, 0.5);
+  box-shadow: 0 0 0 1px rgba(99, 102, 241, 0.3);
 }
 
-.chat-action-btn {
+.aura-attach-btn {
   background: transparent;
   border: none;
-  color: var(--color-text-secondary);
-  width: 40px;
-  height: 40px;
-  border-radius: var(--radius-full);
+  color: #94a3b8;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: var(--transition-fast);
-  flex-shrink: 0;
+  transition: all 0.2s;
 }
 
-.chat-action-btn:hover:not(:disabled) {
-  background: var(--color-bg-elevated);
-  color: var(--color-primary);
+.aura-attach-btn:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.05);
+  color: #ffffff;
 }
 
-.chat-action-btn:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-
-.chat-textarea {
+.aura-input-field {
   flex: 1;
-  border: none;
   background: transparent;
-  padding: 10px 4px;
-  font-family: var(--font-sans);
-  font-size: var(--font-size-body);
-  color: var(--color-text-primary);
-  resize: none;
-  outline: none;
-  max-height: 150px;
-  line-height: 1.5;
-}
-
-.chat-textarea::placeholder {
-  color: var(--color-text-secondary);
-  opacity: 0.7;
-}
-
-.chat-send-btn {
-  background: var(--color-bg-elevated);
-  color: var(--color-text-secondary);
-  width: 40px;
-  height: 40px;
   border: none;
-  border-radius: var(--radius-full);
+  color: #ffffff;
+  font-size: 0.875rem;
+  font-family: var(--font-sans);
+  outline: none;
+  resize: none;
+  padding: 6px 4px;
+  max-height: 120px;
+  line-height: 1.4;
+}
+
+.aura-input-field::placeholder {
+  color: #64748b;
+}
+
+.aura-send-btn {
+  background: #3b3b3e;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  border: none;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: var(--transition-default);
-  flex-shrink: 0;
+  transition: all 0.2s;
 }
 
-.chat-send-btn.active {
-  background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
-  color: white;
-  box-shadow: 0 4px 14px rgba(0, 71, 171, 0.35);
+.aura-send-btn.active {
+  background: #4f46e5; /* Indigo 600 */
 }
 
-.chat-send-btn.active:hover {
-  transform: scale(1.05);
-  box-shadow: 0 6px 20px rgba(0, 71, 171, 0.45);
+.aura-send-btn.active:hover {
+  background: #4338ca; /* Indigo 700 */
 }
 
-.chat-send-btn:disabled {
-  opacity: 0.5;
+.aura-send-btn:disabled {
+  opacity: 0.4;
   cursor: not-allowed;
-}
-
-@media (max-width: 600px) {
-  .chat-input-pill {
-    border-radius: 24px;
-    padding: 6px 10px;
-    gap: 6px;
-  }
-  .chat-action-btn, .chat-send-btn {
-    width: 36px;
-    height: 36px;
-  }
 }

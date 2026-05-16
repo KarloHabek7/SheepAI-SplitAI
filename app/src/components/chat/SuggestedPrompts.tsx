@@ -8,17 +8,17 @@ interface SuggestedPromptsProps {
 
 const SuggestedPrompts: React.FC<SuggestedPromptsProps> = ({ prompts, onSelect }) => {
   return (
-    <div className="suggested-prompts-wrapper">
-      <div className="prompts-scroll-container">
+    <div className="aura-prompts-wrapper">
+      <div className="aura-prompts-scroll">
         {prompts.map((prompt, index) => (
           <button 
             key={index} 
-            className="suggested-prompt-chip"
+            className="aura-prompt-chip"
             onClick={() => onSelect(prompt)}
             title={prompt}
           >
-            <span className="material-symbols-outlined prompt-chip-icon">lightbulb</span>
-            <span className="prompt-chip-text">{prompt}</span>
+            <span className="material-symbols-outlined text-xs">auto_awesome</span>
+            <span>{prompt}</span>
           </button>
         ))}
       </div>
