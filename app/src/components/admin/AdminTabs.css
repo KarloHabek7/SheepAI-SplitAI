@@ -1,0 +1,38 @@
+.admin-tabs {
+  display: flex;
+  gap: var(--space-sm);
+  background: rgba(255, 255, 255, 0.05);
+  padding: 4px;
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  margin-bottom: var(--space-md);
+  width: max-content;
+}
+
+.admin-tab {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border-radius: var(--radius-sm);
+  color: var(--color-text-secondary);
+  text-decoration: none;
+  font-size: var(--font-size-small);
+  font-weight: 500;
+  transition: var(--transition-fast);
+}
+
+.admin-tab:hover {
+  color: white;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.admin-tab.active {
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.admin-tab .material-symbols-outlined {
+  font-size: 18px;
+}

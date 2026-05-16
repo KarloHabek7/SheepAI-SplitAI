@@ -15,8 +15,9 @@ const Header: React.FC = () => {
         <nav className="desktop-nav">
           <Link to="/" className={location.pathname === '/' ? 'active' : ''}>Map</Link>
           <Link to="/chat" className={location.pathname === '/chat' ? 'active' : ''}>Assistant</Link>
-          <Link to="/pazar" className={location.pathname === '/pazar' ? 'active' : ''}>Pazar</Link>
+          <Link to="/pazar" className={location.pathname.startsWith('/pazar') ? 'active' : ''}>Pazar</Link>
           <Link to="/report" className={location.pathname === '/report' ? 'active' : ''}>Report</Link>
+          <Link to="/admin/dashboard" className={location.pathname.startsWith('/admin') ? 'active' : ''}>Admin</Link>
         </nav>
         
         <div className="header-actions">

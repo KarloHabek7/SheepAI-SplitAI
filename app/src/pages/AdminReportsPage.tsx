@@ -1,6 +1,7 @@
 import React, { useState, useMemo } from 'react';
 import PageContainer from '@/components/layout/PageContainer';
 import ReportTable from '@/components/admin/ReportTable';
+import AdminTabs from '@/components/admin/AdminTabs';
 import { mockReports } from '@/utils/mockAdminData';
 import { CivicReport, ReportStatus, IssueCategory } from '@/types';
 import './AdminReportsPage.css';
@@ -31,6 +32,7 @@ const AdminReportsPage: React.FC = () => {
 
   return (
     <PageContainer>
+      <AdminTabs />
       <div className="admin-header">
         <div>
           <h1 className="admin-title">Civic Reports Database</h1>

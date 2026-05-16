@@ -4,6 +4,7 @@ import DashboardMetric from '@/components/admin/DashboardMetric';
 import SeverityChart from '@/components/admin/SeverityChart';
 import CategoryBreakdown from '@/components/admin/CategoryBreakdown';
 import ReportTable from '@/components/admin/ReportTable';
+import AdminTabs from '@/components/admin/AdminTabs';
 import { mockReports, getDashboardStats } from '@/utils/mockAdminData';
 import { CivicReport, ReportStatus } from '@/types';
 import './AdminDashboardPage.css';
@@ -26,6 +27,7 @@ const AdminDashboardPage: React.FC = () => {
 
   return (
     <PageContainer>
+      <AdminTabs />
       <div className="admin-header">
         <div>
           <h1 className="admin-title">City Triage Overview</h1>

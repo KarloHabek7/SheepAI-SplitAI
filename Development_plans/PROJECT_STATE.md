@@ -17,7 +17,7 @@
 
 ## 🏗️ Lane Status
 
-### Lane 1: Frontend — 7/8 tasks done
+### Lane 1: Frontend — 8/9 tasks done
 
 | Task | Status | Completed By | Notes |
 |---|---|---|---|
@@ -29,6 +29,8 @@
 | T06 Admin Dashboard | ✅ Done | Agent@14:05 | Metric cards, severity chart, report table with mock triage data |
 | T07 Emergency Page | ✅ Done | Agent@14:00 | Multilingual Siren Translator with QR scanner placeholder and clickable contacts |
 | T08 PWA + Responsive + Capacitor | ⬜ Not Started | | PWA manifest, responsive audit, Android setup |
+| FE-R07 Emergency Page Refactor | ✅ Done | Agent@14:25 | Re-implemented: cinematic glassmorphic emergency layout, realistic QR scanner, premium alert cards |
+| FE-R06 Admin Dashboard Polish | ✅ Done | Agent@14:28 | Re-implemented: gradient cards, glassmorphic layout, AdminTabs navigation |
 
 ### Lane 2: Backend — 7/10 tasks done (Task 08 Complete)
 
@@ -101,7 +103,7 @@
 
 ## ⏭️ Next Recommended Actions (per lane)
 
-- **Frontend:** T01-T07 Done. Proceed with **T08 PWA + Responsive + Capacitor**.
+- **Frontend:** T01-T07, FE-R06, FE-R07 Done. Proceed with **FE-R08 Cross-Cutting Polish**.
 - **Backend:** T01, T02, T03, T05, T06, T07, T08 Done. Next: Execute **Task 04 (Pazar Routes)**.
 - **AI:** T01-T07 Done (8/8). All tasks completed and audited. Ready for Backend integration.
 - **Creative:** Start **T01 Brand Website** immediately (Wave 1, no deps). Then T02 (Design Tokens). Then T03+T04 in parallel. T05 after assets ready. T06 last (needs working app).
