@@ -1,5 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { PazarListingClassification, PazarItem } from '@/types';
+import { analyzeVendorPhoto } from '@/services/pazarService';
 import './VendorUpload.css';
 
 interface VendorUploadProps {
@@ -14,26 +15,42 @@ const VendorUpload: React.FC<VendorUploadProps> = ({ onComplete }) => {
   const [extractedItems, setExtractedItems] = useState<PazarItem[]>([]);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const fileToBase64 = (file: File): Promise<string> => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => {
+        const result = reader.result as string;
+        // Strip the data:image/...;base64, prefix
+        const base64 = result.split(',')[1] || result;
+        resolve(base64);
+      };
+      reader.onerror = reject;
+      reader.readAsDataURL(file);
+    });
+  };
+
+  const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const selectedFile = e.target.files?.[0];
     if (selectedFile) {
       setPreviewUrl(URL.createObjectURL(selectedFile));
-      simulateAnalysis();
+      setIsAnalyzing(true);
+      try {
+        const base64 = await fileToBase64(selectedFile);
+        const response = await analyzeVendorPhoto({ image: base64 });
+        if (response.success && response.data) {
+          setExtractedItems(response.data.classification.items);
+        } else {
+          console.error('[VendorUpload] Analysis failed:', response.error);
+          // Fallback to empty items so user can manually enter
+          setExtractedItems([]);
+        }
+      } catch (error) {
+        console.error('[VendorUpload] Analysis error:', error);
+        setExtractedItems([]);
+      } finally {
+        setIsAnalyzing(false);
+      }
     }
-  };
-
-  const simulateAnalysis = () => {
-    setIsAnalyzing(true);
-    // Mocking Gemini Vision extraction
-    setTimeout(() => {
-      const mockItems: PazarItem[] = [
-        { name: 'Brancin', category: 'fish', price: 22, unit: 'kg' },
-        { name: 'Orada', category: 'fish', price: 18, unit: 'kg' },
-        { name: 'Srdela', category: 'fish', price: 5, unit: 'kg' },
-      ];
-      setExtractedItems(mockItems);
-      setIsAnalyzing(false);
-    }, 2000);
   };
 
   const handleItemChange = (index: number, field: keyof PazarItem, value: string | number) => {

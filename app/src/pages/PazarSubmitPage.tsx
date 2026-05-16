@@ -2,28 +2,51 @@ import React, { useState } from 'react';
 import PageContainer from '@/components/layout/PageContainer';
 import VendorUpload from '@/components/pazar/VendorUpload';
 import { PazarListingClassification } from '@/types';
+import { submitListing } from '@/services/pazarService';
 import './PazarSubmitPage.css';
 
 const PazarSubmitPage: React.FC = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [listingId, setListingId] = useState<string | null>(null);
+  const [expiresAt, setExpiresAt] = useState<string | null>(null);
 
-  const handleUploadComplete = (classification: PazarListingClassification) => {
-    // In a real app, this would call the backend
-    console.log('Submitting classification:', classification);
-    setTimeout(() => {
-      setListingId(`PZ-${Math.floor(Math.random() * 10000)}`);
-      setIsSubmitted(true);
-    }, 1500);
+  const handleUploadComplete = async (classification: PazarListingClassification) => {
+    setIsSubmitting(true);
+    try {
+      const response = await submitListing({
+        classification,
+        vendor: 'Local Vendor', // TODO: from auth context
+      });
+      if (response.success && response.data) {
+        setListingId(response.data.listingId);
+        setExpiresAt(response.data.expiresAt);
+        setIsSubmitted(true);
+      } else {
+        console.error('[PazarSubmit] Submission failed:', response.error);
+      }
+    } catch (error) {
+      console.error('[PazarSubmit] Submission error:', error);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
     <PageContainer>
       <div className="pazar-submit-content">
         {!isSubmitted ? (
-          <>
+          <div style={{ position: 'relative' }}>
             <VendorUpload onComplete={handleUploadComplete} />
-          </>
+            {isSubmitting && (
+              <div style={{
+                position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center',
+                background: 'rgba(0,0,0,0.5)', borderRadius: '16px', backdropFilter: 'blur(4px)', zIndex: 10
+              }}>
+                <span style={{ color: '#fff', fontSize: '14px' }}>Publishing listing…</span>
+              </div>
+            )}
+          </div>
         ) : (
           <div className="success-state">
             <div className="success-icon-container">
@@ -38,7 +61,7 @@ const PazarSubmitPage: React.FC = () => {
               </div>
               <div className="info-row">
                 <span>Expires at:</span>
-                <strong>{new Date(Date.now() + 4 * 3600000).toLocaleTimeString()}</strong>
+                <strong>{expiresAt ? new Date(expiresAt).toLocaleTimeString() : '—'}</strong>
               </div>
             </div>
             <button className="primary-btn" onClick={() => setIsSubmitted(false)}>

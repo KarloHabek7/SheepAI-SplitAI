@@ -5,15 +5,27 @@ import ChatInput from '@/components/chat/ChatInput';
 import SuggestedPrompts from '@/components/chat/SuggestedPrompts';
 import CitationCard from '@/components/chat/CitationCard';
 import ToolCallCard from '@/components/chat/ToolCallCard';
+import { useChatStore } from '@/stores/useChatStore';
 import { ChatMessage } from '@/types';
-import { MOCK_PROMPTS, INITIAL_MESSAGE, generateMockResponse } from '@/utils/mockChatData';
 import './ChatPage.css';
 
+/** Initial greeting shown when the conversation is empty */
+const GREETING_MESSAGE: ChatMessage = {
+  id: 'greeting',
+  role: 'assistant' as const,
+  content: "Dobar dan! I am Split Zmaj, your personal municipal assistant. I've been trained on the city's regulations (GUP), waste management protocols, and local services. How can I help you today?",
+  timestamp: new Date().toISOString(),
+};
+
 const ChatPage: React.FC = () => {
-  const [messages, setMessages] = useState<ChatMessage[]>([INITIAL_MESSAGE]);
-  const [isStreaming, setIsStreaming] = useState(false);
+  const { messages: storeMessages, isStreaming, suggestedPrompts, sendMessage } = useChatStore();
   const [showPopover, setShowPopover] = useState(true);
   const messagesEndRef = useRef<HTMLDivElement>(null);
+
+  // Prepend the static greeting when there are no real messages yet
+  const messages = storeMessages.length === 0
+    ? [GREETING_MESSAGE]
+    : [GREETING_MESSAGE, ...storeMessages];
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -24,29 +36,7 @@ const ChatPage: React.FC = () => {
   }, [messages, isStreaming]);
 
   const handleSendMessage = (content: string) => {
-    const userMessage: ChatMessage = {
-      id: Date.now().toString(),
-      role: 'user',
-      content,
-      timestamp: new Date().toISOString(),
-    };
-
-    setMessages(prev => [...prev, userMessage]);
-    setIsStreaming(true);
-
-    // Mock assistant response logic simulating streaming
-    setTimeout(() => {
-      const mockResponse = generateMockResponse(content);
-
-      const assistantMessage: ChatMessage = {
-        id: (Date.now() + 1).toString(),
-        timestamp: new Date().toISOString(),
-        ...mockResponse
-      };
-
-      setMessages(prev => [...prev, assistantMessage]);
-      setIsStreaming(false);
-    }, 1200);
+    sendMessage(content);
   };
 
   return (
@@ -136,10 +126,10 @@ const ChatPage: React.FC = () => {
               </div>
 
               {/* Suggested Prompts before input */}
-              {messages.length === 1 && (
+              {storeMessages.length === 0 && (
                 <div className="aura-suggested-section">
                   <SuggestedPrompts 
-                    prompts={MOCK_PROMPTS} 
+                    prompts={suggestedPrompts} 
                     onSelect={handleSendMessage} 
                   />
                 </div>

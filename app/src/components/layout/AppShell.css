@@ -13,3 +13,9 @@
   flex-direction: column;
   padding: 0; /* Content starts at 0, header and bottom nav float above */
 }
+
+@media (max-width: 900px) {
+  .main-content {
+    padding-bottom: 100px; /* Account for floating bottom nav */
+  }
+}

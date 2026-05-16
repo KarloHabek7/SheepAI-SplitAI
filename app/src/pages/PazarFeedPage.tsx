@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PageContainer from '@/components/layout/PageContainer';
 import PazarGrid from '@/components/pazar/PazarGrid';
-import { MOCK_PAZAR_LISTINGS } from '@/utils/mockPazarData';
+import { usePazarStore } from '@/stores/usePazarStore';
 import './PazarFeedPage.css';
 
 import imgFish from '@/assets/images/pazar_fish.png';
@@ -9,6 +9,12 @@ import imgFruit from '@/assets/images/pazar_fruit.png';
 import imgCheese from '@/assets/images/pazar_cheese.png';
 
 const PazarFeedPage: React.FC = () => {
+  const { listings, isLoading, fetchListings } = usePazarStore();
+
+  useEffect(() => {
+    fetchListings();
+  }, [fetchListings]);
+
   // Use our locally generated images repeatedly for the marquee
   const images = [
     imgFish, imgFruit, imgCheese, imgFish, imgFruit, imgCheese, imgFish, imgFruit
@@ -55,7 +61,14 @@ const PazarFeedPage: React.FC = () => {
       </section>
       
       <PageContainer>
-        <PazarGrid listings={MOCK_PAZAR_LISTINGS} />
+        {isLoading && listings.length === 0 ? (
+          <div style={{ textAlign: 'center', padding: '3rem 1rem', color: 'var(--color-text-secondary)' }}>
+            <span className="material-symbols-outlined" style={{ fontSize: '40px', display: 'block', marginBottom: '0.5rem', opacity: 0.5 }}>hourglass_empty</span>
+            Loading market listings…
+          </div>
+        ) : (
+          <PazarGrid listings={listings} />
+        )}
       </PageContainer>
     </div>
   );

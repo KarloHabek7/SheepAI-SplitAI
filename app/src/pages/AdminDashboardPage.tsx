@@ -1,29 +1,49 @@
-import React, { useState, useMemo } from 'react';
+import React, { useEffect, useMemo } from 'react';
+import type { IssueCategory } from '@/types';
 import PageContainer from '@/components/layout/PageContainer';
 import DashboardMetric from '@/components/admin/DashboardMetric';
 import SeverityChart from '@/components/admin/SeverityChart';
 import CategoryBreakdown from '@/components/admin/CategoryBreakdown';
 import ReportTable from '@/components/admin/ReportTable';
 import AdminTabs from '@/components/admin/AdminTabs';
-import { mockReports, getDashboardStats } from '@/utils/mockAdminData';
+import { useAdminStore } from '@/stores/useAdminStore';
 import { CivicReport, ReportStatus } from '@/types';
 import './AdminDashboardPage.css';
 
 const AdminDashboardPage: React.FC = () => {
-  const [reports, setReports] = useState<CivicReport[]>(mockReports);
-  
-  const stats = useMemo(() => getDashboardStats(reports), [reports]);
+  const {
+    reports,
+    dashboardData,
+    fetchDashboard,
+    fetchReports,
+    updateReportStatus,
+  } = useAdminStore();
+
+  // Fetch dashboard stats and reports on mount
+  useEffect(() => {
+    fetchDashboard();
+    fetchReports();
+  }, [fetchDashboard, fetchReports]);
+
   const recentReports = useMemo(() => [...reports].sort((a, b) => 
     new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()).slice(0, 5), [reports]);
 
   const handleStatusChange = (id: string, newStatus: ReportStatus) => {
-    setReports(prev => prev.map(r => r.id === id ? { ...r, status: newStatus, updatedAt: new Date().toISOString() } : r));
+    updateReportStatus(id, newStatus);
   };
 
   const handleViewDetails = (report: CivicReport) => {
     console.log('Viewing details for:', report.id);
     // In real app, this would open a modal or navigate
   };
+
+  // Use backend dashboard data, with safe fallbacks for loading state
+  const totalReports = dashboardData?.totalReports ?? 0;
+  const openReports = dashboardData?.openReports ?? 0;
+  const resolvedToday = dashboardData?.resolvedToday ?? 0;
+  const averageResolutionHours = dashboardData?.averageResolutionHours ?? 0;
+  const reportsBySeverity = dashboardData?.reportsBySeverity ?? {};
+  const reportsByCategory = dashboardData?.reportsByCategory ?? {} as Record<IssueCategory, number>;
 
   return (
     <div className="admin-page-root">
@@ -45,34 +65,34 @@ const AdminDashboardPage: React.FC = () => {
         <div className="metrics-grid">
           <DashboardMetric 
             label="Total Reports" 
-            value={stats.totalReports} 
+            value={totalReports} 
             icon="assessment" 
             trend={{ value: 12, isUp: true }}
           />
           <DashboardMetric 
             label="Open Issues" 
-            value={stats.openReports} 
+            value={openReports} 
             icon="pending_actions" 
             color="warning"
           />
           <DashboardMetric 
             label="Resolved Today" 
-            value={stats.resolvedToday} 
+            value={resolvedToday} 
             icon="check_circle" 
             color="success"
             trend={{ value: 8, isUp: true }}
           />
           <DashboardMetric 
             label="Avg. Resolution" 
-            value={`${stats.averageResolutionHours}h`} 
+            value={`${averageResolutionHours}h`} 
             icon="schedule" 
             color="primary"
           />
         </div>
 
         <div className="charts-grid">
-          <SeverityChart data={stats.reportsBySeverity} />
-          <CategoryBreakdown data={stats.reportsByCategory} />
+          <SeverityChart data={reportsBySeverity} />
+          <CategoryBreakdown data={reportsByCategory} />
         </div>
 
         <div className="recent-reports-section">

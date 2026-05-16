@@ -428,6 +428,7 @@ export interface ReportStoreState {
   currentImage: string | null;
   classification: CivicReportClassification | null;
   submissionStatus: ReportStatus | null;
+  submittedTicketId: string | null;
   recentReports: CivicReport[];
   isAnalyzing: boolean;
   isSubmitting: boolean;
