@@ -3,12 +3,14 @@ import { PazarListing } from '@/types';
 import FreshnessIndicator from './FreshnessIndicator';
 import './ProductCard.css';
 
+import imgFruit from '@/assets/images/pazar_fruit.png';
+
 interface ProductCardProps {
   listing: PazarListing;
 }
 
 const ProductCard: React.FC<ProductCardProps> = ({ listing }) => {
-  const fallbackImg = "https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/1d4fd59c-9023-4628-8ea1-4256408af86b_800w.jpg"; // from Aura
+  const fallbackImg = imgFruit;
   
   return (
     <div className="product-card">
@@ -32,7 +34,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ listing }) => {
               </li>
             ))}
             {listing.items.length > 3 && (
-              <li className="product-item-row">
+              <li className="product-item-row" style={{ background: 'transparent', border: 'none' }}>
                 <span className="product-item-name" style={{ opacity: 0.7 }}>+ {listing.items.length - 3} more items</span>
               </li>
             )}

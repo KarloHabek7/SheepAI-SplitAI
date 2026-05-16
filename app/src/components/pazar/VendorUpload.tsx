@@ -6,6 +6,8 @@ interface VendorUploadProps {
   onComplete: (classification: PazarListingClassification) => void;
 }
 
+import imgBg from '@/assets/images/pazar_hero_bg.png';
+
 const VendorUpload: React.FC<VendorUploadProps> = ({ onComplete }) => {
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   const [isAnalyzing, setIsAnalyzing] = useState(false);
@@ -52,7 +54,7 @@ const VendorUpload: React.FC<VendorUploadProps> = ({ onComplete }) => {
     <div className="vendor-upload-container">
       {/* Background from Aura Component */}
       <div className="vendor-upload-bg">
-        <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/60668e31-2150-424e-b292-05bfdda254e0_1600w.jpg" alt="Abstract background" />
+        <img src={imgBg} alt="Abstract background" />
         <div className="vendor-upload-overlay"></div>
       </div>
 
