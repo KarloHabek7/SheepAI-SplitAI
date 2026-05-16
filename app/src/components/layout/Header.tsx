@@ -1,51 +1,33 @@
-import { NavLink } from 'react-router-dom';
-import { Map, MessageSquare, ShoppingBag, ShieldAlert, Languages, Sun, Moon } from 'lucide-react';
-import { useTranslation } from 'react-i18next';
+import React from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import './Header.css';
 
-const Header = () => {
-  const { i18n } = useTranslation();
-
-  const toggleLanguage = () => {
-    const nextLang = i18n.language === 'en' ? 'hr' : 'en';
-    i18n.changeLanguage(nextLang);
-  };
-
+const Header: React.FC = () => {
+  const location = useLocation();
+  
   return (
     <header className="app-header">
       <div className="header-content">
-        <NavLink to="/" className="logo">
-          <span className="logo-text">Split</span>
-          <span className="logo-accent">AI</span>
-        </NavLink>
-
+        <Link to="/" className="logo">
+          <span className="logo-text">Split<span className="logo-accent">AI</span></span>
+        </Link>
+        
         <nav className="desktop-nav">
-          <NavLink to="/" end className={({ isActive }) => isActive ? 'nav-item active' : 'nav-item'}>
-            <Map size={20} />
-            <span>Map</span>
-          </NavLink>
-          <NavLink to="/chat" className={({ isActive }) => isActive ? 'nav-item active' : 'nav-item'}>
-            <MessageSquare size={20} />
-            <span>Chat</span>
-          </NavLink>
-          <NavLink to="/pazar" className={({ isActive }) => isActive ? 'nav-item active' : 'nav-item'}>
-            <ShoppingBag size={20} />
-            <span>Pazar</span>
-          </NavLink>
-          <NavLink to="/emergency" className={({ isActive }) => isActive ? 'nav-item active' : 'nav-item'}>
-            <ShieldAlert size={20} />
-            <span>Emergency</span>
-          </NavLink>
+          <Link to="/" className={location.pathname === '/' ? 'active' : ''}>Map</Link>
+          <Link to="/chat" className={location.pathname === '/chat' ? 'active' : ''}>Assistant</Link>
+          <Link to="/pazar" className={location.pathname === '/pazar' ? 'active' : ''}>Pazar</Link>
+          <Link to="/report" className={location.pathname === '/report' ? 'active' : ''}>Report</Link>
         </nav>
-
+        
         <div className="header-actions">
-          <button onClick={toggleLanguage} className="action-btn" aria-label="Toggle Language">
-            <Languages size={20} />
-            <span className="lang-code">{i18n.language.toUpperCase()}</span>
+          <button className="icon-button" aria-label="Switch Language">
+            <span className="material-symbols-outlined">language</span>
           </button>
-          <button className="action-btn" aria-label="Toggle Theme">
-            <Sun className="sun-icon" size={20} />
-            <Moon className="moon-icon" size={20} />
+          <button className="icon-button" aria-label="Toggle Theme">
+            <span className="material-symbols-outlined">dark_mode</span>
+          </button>
+          <button className="icon-button mobile-menu" aria-label="Menu">
+            <span className="material-symbols-outlined">menu</span>
           </button>
         </div>
       </div>

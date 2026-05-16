@@ -1,27 +1,35 @@
+import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { Map, MessageSquare, Camera, ShoppingBag } from 'lucide-react';
 import './BottomNav.css';
 
-const BottomNav = () => {
+const BottomNav: React.FC = () => {
   return (
     <nav className="bottom-nav">
-      <NavLink to="/" end className={({ isActive }) => isActive ? 'nav-item active' : 'nav-item'}>
-        <Map size={24} />
-        <span>Map</span>
+      <NavLink to="/" className={({ isActive }) => `nav-item ${isActive ? 'active' : ''}`}>
+        <span className="material-symbols-outlined">map</span>
+        <span className="nav-label">Map</span>
       </NavLink>
-      <NavLink to="/chat" className={({ isActive }) => isActive ? 'nav-item active' : 'nav-item'}>
-        <MessageSquare size={24} />
-        <span>Chat</span>
+      
+      <NavLink to="/chat" className={({ isActive }) => `nav-item ${isActive ? 'active' : ''}`}>
+        <span className="material-symbols-outlined">chat</span>
+        <span className="nav-label">Assistant</span>
       </NavLink>
-      <NavLink to="/report" className={({ isActive }) => isActive ? 'nav-item active' : 'nav-item'}>
-        <div className="report-fab">
-          <Camera size={28} color="white" />
+      
+      <NavLink to="/report" className={({ isActive }) => `nav-item ${isActive ? 'active' : ''}`}>
+        <div className="fab-container">
+          <span className="material-symbols-outlined fab-icon">add_a_photo</span>
         </div>
-        <span>Report</span>
+        <span className="nav-label">Report</span>
       </NavLink>
-      <NavLink to="/pazar" className={({ isActive }) => isActive ? 'nav-item active' : 'nav-item'}>
-        <ShoppingBag size={24} />
-        <span>Pazar</span>
+      
+      <NavLink to="/pazar" className={({ isActive }) => `nav-item ${isActive ? 'active' : ''}`}>
+        <span className="material-symbols-outlined">shopping_basket</span>
+        <span className="nav-label">Pazar</span>
+      </NavLink>
+      
+      <NavLink to="/emergency" className={({ isActive }) => `nav-item ${isActive ? 'active' : ''}`}>
+        <span className="material-symbols-outlined">emergency</span>
+        <span className="nav-label">Info</span>
       </NavLink>
     </nav>
   );
