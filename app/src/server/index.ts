@@ -10,6 +10,7 @@ import parkingRouter from './routes/parking.js';
 import transitRouter from './routes/transit.js';
 import crowdRouter from './routes/crowd.js';
 import emergencyRouter from './routes/emergency.js';
+import authRouter from './routes/auth.js';
 import { seedReports, seedPazarListings } from './store.js';
 import { errorHandler } from './middleware/errorHandler.js';
 
@@ -28,6 +29,7 @@ seedReports();
 seedPazarListings();
 
 // Routes
+app.use('/api/auth', authRouter);
 app.use('/api/chat', chatRouter);
 
 // Task 03 — Civic Reports

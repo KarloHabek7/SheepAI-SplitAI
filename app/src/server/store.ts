@@ -232,202 +232,380 @@ export const seedReports = () => {
         suggestedAction: 'Repair stone placement.',
         confidence: 0.88
       }
-    }
-  ];
-
-  mockReports.forEach(r => store.addReport(r));
-
-  // Add 10 more reports for remaining neighborhoods
-  const extraReports: CivicReport[] = [
-    {
-      id: uuidv4(),
-      ticketId: 'GR-2026-1006',
-      status: 'submitted',
-      createdAt: new Date(Date.now() - 3600000 * 3).toISOString(),
-      updatedAt: new Date(Date.now() - 3600000 * 3).toISOString(),
-      imageUrl: 'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?q=80&w=2070&auto=format&fit=crop',
-      location: { lat: 43.5011, lng: 16.4532, address: 'Firule, Spinčićeva ul.' },
-      classification: {
-        category: 'pothole',
-        severity: 5,
-        zone: 'zona_b',
-        department: 'promet',
-        description: 'Pothole near the hospital entrance.',
-        suggestedAction: 'Fill with cold mix asphalt.',
-        confidence: 0.91
-      }
     },
+    // --- New Reports for Pitch ---
     {
       id: uuidv4(),
-      ticketId: 'GR-2026-1007',
-      status: 'in_progress',
-      createdAt: new Date(Date.now() - 3600000 * 18).toISOString(),
-      updatedAt: new Date(Date.now() - 3600000 * 2).toISOString(),
-      imageUrl: 'https://images.unsplash.com/photo-1605600611284-19561ad7ddf0?q=80&w=2070&auto=format&fit=crop',
-      location: { lat: 43.5142, lng: 16.4455, address: 'Gripe, Ul. slobode' },
-      classification: {
-        category: 'waste_overflow',
-        severity: 8,
-        zone: 'zona_b',
-        department: 'cistoca',
-        description: 'Recycling containers overflowing with cardboard.',
-        suggestedAction: 'Schedule extra pickup.',
-        confidence: 0.97
-      }
-    },
-    {
-      id: uuidv4(),
-      ticketId: 'GR-2026-1008',
+      ticketId: 'GR-2026-1016',
       status: 'submitted',
-      createdAt: new Date(Date.now() - 3600000 * 12).toISOString(),
-      updatedAt: new Date(Date.now() - 3600000 * 12).toISOString(),
-      imageUrl: 'https://images.unsplash.com/photo-1590674899484-13da0d1b58f5?q=80&w=2070&auto=format&fit=crop',
-      location: { lat: 43.5115, lng: 16.4322, address: 'Lovret, Gundulićeva ul.' },
+      createdAt: new Date(Date.now() - 3600000 * 0.5).toISOString(),
+      updatedAt: new Date(Date.now() - 3600000 * 0.5).toISOString(),
+      imageUrl: 'https://images.unsplash.com/photo-1495556650867-99590cea3657?q=80&w=2070&auto=format&fit=crop',
+      location: { lat: 43.5072, lng: 16.4385, address: 'Diocletian\'s Palace, Vestibul' },
       classification: {
-        category: 'illegal_parking',
-        severity: 4,
-        zone: 'zona_a',
-        department: 'promet',
-        description: 'Delivery truck parked on the sidewalk.',
-        suggestedAction: 'Issue fine.',
+        category: 'noise_complaint',
+        severity: 9,
+        zone: 'unesco_core',
+        department: 'komunalni_redari',
+        description: 'Unauthorized amplified music from a nearby balcony.',
+        suggestedAction: 'Dispatch redari for fine issuance.',
         confidence: 0.94
       }
     },
     {
       id: uuidv4(),
-      ticketId: 'GR-2026-1009',
+      ticketId: 'GR-2026-1017',
       status: 'in_progress',
-      createdAt: new Date(Date.now() - 3600000 * 36).toISOString(),
-      updatedAt: new Date(Date.now() - 3600000 * 6).toISOString(),
-      imageUrl: 'https://images.unsplash.com/photo-1581092160562-40aa08e78837?q=80&w=2070&auto=format&fit=crop',
-      location: { lat: 43.5098, lng: 16.4451, address: 'Lučac, Ul. kralja Zvonimira' },
+      createdAt: new Date(Date.now() - 3600000 * 4).toISOString(),
+      updatedAt: new Date(Date.now() - 3600000 * 1).toISOString(),
+      imageUrl: 'https://images.unsplash.com/photo-1596431792973-774f4b23829f?q=80&w=2070&auto=format&fit=crop',
+      location: { lat: 43.5082, lng: 16.4395, address: 'Old Town, Dominisova ul.' },
       classification: {
-        category: 'damaged_infrastructure',
-        severity: 6,
+        category: 'waste_overflow',
+        severity: 8,
+        zone: 'zona_a',
+        department: 'cistoca',
+        description: 'Garbage bags piled up in a narrow alleyway.',
+        suggestedAction: 'Manual pickup required due to vehicle access limits.',
+        confidence: 0.97
+      }
+    },
+    {
+      id: uuidv4(),
+      ticketId: 'GR-2026-1018',
+      status: 'submitted',
+      createdAt: new Date(Date.now() - 3600000 * 2).toISOString(),
+      updatedAt: new Date(Date.now() - 3600000 * 2).toISOString(),
+      imageUrl: 'https://images.unsplash.com/photo-1544928147-79a2dbc1f389?q=80&w=2070&auto=format&fit=crop',
+      location: { lat: 43.5088, lng: 16.4358, address: 'Marmontova ul.' },
+      classification: {
+        category: 'vandalism',
+        severity: 5,
         zone: 'zona_a',
         department: 'komunalni_redari',
-        description: 'Broken handrail on public stairs.',
-        suggestedAction: 'Weld and repaint.',
+        description: 'Sticker bombing and small tags on public benches.',
+        suggestedAction: 'Cleaning and surface restoration.',
         confidence: 0.89
       }
     },
     {
       id: uuidv4(),
-      ticketId: 'GR-2026-1010',
+      ticketId: 'GR-2026-1019',
       status: 'submitted',
-      createdAt: new Date(Date.now() - 3600000 * 5).toISOString(),
-      updatedAt: new Date(Date.now() - 3600000 * 5).toISOString(),
-      imageUrl: 'https://images.unsplash.com/photo-1572059002053-8cc5ad2f4a38?q=80&w=2070&auto=format&fit=crop',
-      location: { lat: 43.5085, lng: 16.4348, address: 'Varoš, Križeva ul.' },
+      createdAt: new Date(Date.now() - 3600000 * 1).toISOString(),
+      updatedAt: new Date(Date.now() - 3600000 * 1).toISOString(),
+      imageUrl: 'https://images.unsplash.com/photo-1579441113917-8490a6f87d3a?q=80&w=2070&auto=format&fit=crop',
+      location: { lat: 43.5075, lng: 16.4335, address: 'Matejuška' },
       classification: {
-        category: 'vandalism',
+        category: 'noise_complaint',
         severity: 7,
         zone: 'zona_a',
         department: 'komunalni_redari',
-        description: 'Smashed public lighting fixture.',
-        suggestedAction: 'Replace glass and bulb.',
-        confidence: 0.93
+        description: 'Large group with portable speaker after midnight.',
+        suggestedAction: 'Warning and dispersal.',
+        confidence: 0.91
       }
     },
     {
       id: uuidv4(),
-      ticketId: 'GR-2026-1011',
-      status: 'resolved',
-      createdAt: new Date(Date.now() - 3600000 * 72).toISOString(),
-      updatedAt: new Date(Date.now() - 3600000 * 24).toISOString(),
-      imageUrl: '',
-      location: { lat: 43.5021, lng: 16.4481, address: 'Bačvice, Preradovićevo šetalište' },
+      ticketId: 'GR-2026-1020',
+      status: 'submitted',
+      createdAt: new Date(Date.now() - 3600000 * 6).toISOString(),
+      updatedAt: new Date(Date.now() - 3600000 * 6).toISOString(),
+      imageUrl: 'https://images.unsplash.com/photo-1611097551399-c8c7603c4f2e?q=80&w=2070&auto=format&fit=crop',
+      location: { lat: 43.5112, lng: 16.4421, address: 'Zvonimirova ul.' },
       classification: {
-        category: 'noise_complaint',
-        severity: 3,
+        category: 'damaged_infrastructure',
+        severity: 6,
         zone: 'zona_b',
         department: 'komunalni_redari',
-        description: 'Loud music from a temporary stall.',
-        suggestedAction: 'Warn owner and check permit.',
-        confidence: 0.85
+        description: 'Traffic signal at intersection partially non-functional.',
+        suggestedAction: 'Technician dispatch for relay check.',
+        confidence: 0.95
       }
     },
     {
       id: uuidv4(),
-      ticketId: 'GR-2026-1012',
-      status: 'submitted',
-      createdAt: new Date(Date.now() - 3600000 * 4).toISOString(),
-      updatedAt: new Date(Date.now() - 3600000 * 4).toISOString(),
-      imageUrl: 'https://images.unsplash.com/photo-1541888941259-79974dfb9602?q=80&w=2070&auto=format&fit=crop',
-      location: { lat: 43.5088, lng: 16.4405, address: 'Diocletian\'s Palace, Ul. Dominisova' },
+      ticketId: 'GR-2026-1021',
+      status: 'in_progress',
+      createdAt: new Date(Date.now() - 3600000 * 48).toISOString(),
+      updatedAt: new Date(Date.now() - 3600000 * 24).toISOString(),
+      imageUrl: 'https://images.unsplash.com/photo-1581092160562-40aa08e78837?q=80&w=2070&auto=format&fit=crop',
+      location: { lat: 43.5185, lng: 16.4562, address: 'Pujanke, Gotovčeva ul.' },
       classification: {
-        category: 'illegal_construction',
-        severity: 9,
-        zone: 'unesco_core',
-        department: 'urbanizam',
-        description: 'New window opening in a protected wall without permit.',
-        suggestedAction: 'Stop works and restore stone.',
+        category: 'abandoned_vehicle',
+        severity: 5,
+        zone: 'zona_c',
+        department: 'promet',
+        description: 'Old vehicle with broken windows occupying parking space.',
+        suggestedAction: 'Issue tow notice.',
         confidence: 0.98
       }
     },
     {
       id: uuidv4(),
-      ticketId: 'GR-2026-1013',
-      status: 'in_progress',
-      createdAt: new Date(Date.now() - 3600000 * 24).toISOString(),
-      updatedAt: new Date(Date.now() - 3600000 * 8).toISOString(),
-      imageUrl: 'https://images.unsplash.com/photo-1506197357523-6447817b53e3?q=80&w=2070&auto=format&fit=crop',
-      location: { lat: 43.5158, lng: 16.4265, address: 'Spinut, Ul. sedam Kaštela' },
+      ticketId: 'GR-2026-1022',
+      status: 'submitted',
+      createdAt: new Date(Date.now() - 3600000 * 12).toISOString(),
+      updatedAt: new Date(Date.now() - 3600000 * 12).toISOString(),
+      imageUrl: 'https://images.unsplash.com/photo-1541888941259-79974dfb9602?q=80&w=2070&auto=format&fit=crop',
+      location: { lat: 43.5095, lng: 16.4285, address: 'Marjan, Forest Trail 2' },
       classification: {
-        category: 'abandoned_vehicle',
-        severity: 4,
-        zone: 'zona_c',
-        department: 'promet',
-        description: 'Rusty car with no plates blocking parking.',
-        suggestedAction: 'Attach warning, tow if not moved.',
+        category: 'waste_overflow',
+        severity: 7,
+        zone: 'marjan_park',
+        department: 'zastita_okolisa',
+        description: 'Illegal dumping of construction debris in protected forest.',
+        suggestedAction: 'Immediate removal and camera check.',
         confidence: 0.96
       }
     },
     {
       id: uuidv4(),
-      ticketId: 'GR-2026-1014',
+      ticketId: 'GR-2026-1023',
       status: 'submitted',
-      createdAt: new Date(Date.now() - 3600000 * 2).toISOString(),
-      updatedAt: new Date(Date.now() - 3600000 * 2).toISOString(),
+      createdAt: new Date(Date.now() - 3600000 * 3).toISOString(),
+      updatedAt: new Date(Date.now() - 3600000 * 3).toISOString(),
       imageUrl: 'https://images.unsplash.com/photo-1582139329536-e7284fece509?q=80&w=2070&auto=format&fit=crop',
-      location: { lat: 43.5125, lng: 16.4405, address: 'Manuš, Vukovarska ul.' },
+      location: { lat: 43.5035, lng: 16.4521, address: 'Firule Beach' },
       classification: {
         category: 'public_safety',
-        severity: 8,
+        severity: 4,
         zone: 'zona_b',
         department: 'policija',
-        description: 'Aggressive behavior in the park area.',
-        suggestedAction: 'Dispatch patrol.',
-        confidence: 0.90
+        description: 'Stray dogs acting aggressively near the promenade.',
+        suggestedAction: 'Animal control patrol.',
+        confidence: 0.88
       }
     },
     {
       id: uuidv4(),
-      ticketId: 'GR-2026-1015',
+      ticketId: 'GR-2026-1024',
       status: 'resolved',
-      createdAt: new Date(Date.now() - 3600000 * 96).toISOString(),
-      updatedAt: new Date(Date.now() - 3600000 * 48).toISOString(),
-      imageUrl: '',
-      location: { lat: 43.5015, lng: 16.4535, address: 'Firule, Put Firula' },
+      createdAt: new Date(Date.now() - 3600000 * 120).toISOString(),
+      updatedAt: new Date(Date.now() - 3600000 * 72).toISOString(),
+      imageUrl: 'https://images.unsplash.com/photo-1515162816999-a0c47dc192f7?q=80&w=2070&auto=format&fit=crop',
+      location: { lat: 43.5215, lng: 16.4632, address: 'Mejaši, Vukovarska ul.' },
       classification: {
-        category: 'graffiti',
-        severity: 3,
+        category: 'pothole',
+        severity: 8,
+        zone: 'zona_c',
+        department: 'promet',
+        description: 'Large pothole on a major transit route.',
+        suggestedAction: 'Full resurfacing.',
+        confidence: 0.93
+      }
+    },
+    {
+      id: uuidv4(),
+      ticketId: 'GR-2026-1025',
+      status: 'submitted',
+      createdAt: new Date(Date.now() - 3600000 * 1).toISOString(),
+      updatedAt: new Date(Date.now() - 3600000 * 1).toISOString(),
+      imageUrl: 'https://images.unsplash.com/photo-1579441113917-8490a6f87d3a?q=80&w=2070&auto=format&fit=crop',
+      location: { lat: 43.5065, lng: 16.4325, address: 'Riva Promenade' },
+      classification: {
+        category: 'waste_overflow',
+        severity: 9,
+        zone: 'zona_a',
+        department: 'cistoca',
+        description: 'Public bins completely full during tourist peak hour.',
+        suggestedAction: 'Emergency emptying.',
+        confidence: 0.99
+      }
+    },
+    {
+      id: uuidv4(),
+      ticketId: 'GR-2026-1026',
+      status: 'submitted',
+      createdAt: new Date(Date.now() - 3600000 * 2).toISOString(),
+      updatedAt: new Date(Date.now() - 3600000 * 2).toISOString(),
+      imageUrl: 'https://images.unsplash.com/photo-1544928147-79a2dbc1f389?q=80&w=2070&auto=format&fit=crop',
+      location: { lat: 43.5125, lng: 16.4255, address: 'Spinut, Marjanska ul.' },
+      classification: {
+        category: 'illegal_parking',
+        severity: 6,
+        zone: 'zona_c',
+        department: 'promet',
+        description: 'Cars parked in Marjan forest entrance zone.',
+        suggestedAction: 'Tow away.',
+        confidence: 0.94
+      }
+    },
+    {
+      id: uuidv4(),
+      ticketId: 'GR-2026-1027',
+      status: 'in_progress',
+      createdAt: new Date(Date.now() - 3600000 * 36).toISOString(),
+      updatedAt: new Date(Date.now() - 3600000 * 12).toISOString(),
+      imageUrl: 'https://images.unsplash.com/photo-1590674899484-13da0d1b58f5?q=80&w=2070&auto=format&fit=crop',
+      location: { lat: 43.5152, lng: 16.4425, address: 'Gripe, Glagoljaška ul.' },
+      classification: {
+        category: 'damaged_infrastructure',
+        severity: 5,
         zone: 'zona_b',
         department: 'komunalni_redari',
-        description: 'Small tags on a utility box.',
-        suggestedAction: 'Paint over with gray paint.',
-        confidence: 0.88
+        description: 'Damaged stone stairs leading to Gripe fortress.',
+        suggestedAction: 'Stone masonry repair.',
+        confidence: 0.92
+      }
+    },
+    {
+      id: uuidv4(),
+      ticketId: 'GR-2026-1028',
+      status: 'submitted',
+      createdAt: new Date(Date.now() - 3600000 * 5).toISOString(),
+      updatedAt: new Date(Date.now() - 3600000 * 5).toISOString(),
+      imageUrl: 'https://images.unsplash.com/photo-1605600611284-19561ad7ddf0?q=80&w=2070&auto=format&fit=crop',
+      location: { lat: 43.5225, lng: 16.4715, address: 'Žnjan, Put Žnjana' },
+      classification: {
+        category: 'waste_overflow',
+        severity: 7,
+        zone: 'zona_c',
+        department: 'cistoca',
+        description: 'Container for plastic waste overflowing onto road.',
+        suggestedAction: 'Schedule extra pickup.',
+        confidence: 0.96
+      }
+    },
+    {
+      id: uuidv4(),
+      ticketId: 'GR-2026-1029',
+      status: 'submitted',
+      createdAt: new Date(Date.now() - 3600000 * 1).toISOString(),
+      updatedAt: new Date(Date.now() - 3600000 * 1).toISOString(),
+      imageUrl: 'https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=2070&auto=format&fit=crop',
+      location: { lat: 43.5085, lng: 16.4382, address: 'Diocletian\'s Palace, Peristil North' },
+      classification: {
+        category: 'graffiti',
+        severity: 10,
+        zone: 'unesco_core',
+        department: 'komunalni_redari',
+        description: 'Fresh graffiti on UNESCO protected stone column.',
+        suggestedAction: 'Urgent expert restoration.',
+        confidence: 0.99
+      }
+    },
+    {
+      id: uuidv4(),
+      ticketId: 'GR-2026-1030',
+      status: 'submitted',
+      createdAt: new Date(Date.now() - 3600000 * 0.2).toISOString(),
+      updatedAt: new Date(Date.now() - 3600000 * 0.2).toISOString(),
+      imageUrl: 'https://images.unsplash.com/photo-1495556650867-99590cea3657?q=80&w=2070&auto=format&fit=crop',
+      location: { lat: 43.5078, lng: 16.4375, address: 'Old Town, Pjaca' },
+      classification: {
+        category: 'noise_complaint',
+        severity: 8,
+        zone: 'zona_a',
+        department: 'komunalni_redari',
+        description: 'Illegal street performer with loud PA system.',
+        suggestedAction: 'Confiscate equipment and fine.',
+        confidence: 0.93
       }
     }
   ];
 
-  extraReports.forEach(r => store.addReport(r));
-  console.log(`✅ Seeded ${mockReports.length + extraReports.length} reports.`);
+  mockReports.forEach(r => store.addReport(r));
+
+  // Add more diversity to neighborhoods
+  const neighborReports: CivicReport[] = [
+    {
+      id: uuidv4(),
+      ticketId: 'GR-2026-1031',
+      status: 'submitted',
+      createdAt: new Date(Date.now() - 3600000 * 24).toISOString(),
+      updatedAt: new Date(Date.now() - 3600000 * 24).toISOString(),
+      imageUrl: '',
+      location: { lat: 43.5255, lng: 16.4821, address: 'Stobreč, Put Svetog Lovre' },
+      classification: {
+        category: 'pothole',
+        severity: 4,
+        zone: 'zona_d',
+        department: 'promet',
+        description: 'Small pothole forming near the entrance to the camp.',
+        suggestedAction: 'Cold patch repair.',
+        confidence: 0.87
+      }
+    },
+    {
+      id: uuidv4(),
+      ticketId: 'GR-2026-1032',
+      status: 'submitted',
+      createdAt: new Date(Date.now() - 3600000 * 15).toISOString(),
+      updatedAt: new Date(Date.now() - 3600000 * 15).toISOString(),
+      imageUrl: 'https://images.unsplash.com/photo-1541888941259-79974dfb9602?q=80&w=2070&auto=format&fit=crop',
+      location: { lat: 43.5185, lng: 16.4185, address: 'Spinut, Lučica' },
+      classification: {
+        category: 'abandoned_vehicle',
+        severity: 3,
+        zone: 'zona_c',
+        department: 'promet',
+        description: 'Abandoned boat trailer blocking bike path.',
+        suggestedAction: 'Remove to impound lot.',
+        confidence: 0.94
+      }
+    },
+    {
+      id: uuidv4(),
+      ticketId: 'GR-2026-1033',
+      status: 'in_progress',
+      createdAt: new Date(Date.now() - 3600000 * 72).toISOString(),
+      updatedAt: new Date(Date.now() - 3600000 * 36).toISOString(),
+      imageUrl: 'https://images.unsplash.com/photo-1581092160562-40aa08e78837?q=80&w=2070&auto=format&fit=crop',
+      location: { lat: 43.5115, lng: 16.4485, address: 'Bačvice, Pojišanska ul.' },
+      classification: {
+        category: 'damaged_infrastructure',
+        severity: 4,
+        zone: 'zona_b',
+        department: 'komunalni_redari',
+        description: 'Damaged street sign at intersection.',
+        suggestedAction: 'Replace sign post.',
+        confidence: 0.91
+      }
+    },
+    {
+      id: uuidv4(),
+      ticketId: 'GR-2026-1034',
+      status: 'submitted',
+      createdAt: new Date(Date.now() - 3600000 * 8).toISOString(),
+      updatedAt: new Date(Date.now() - 3600000 * 8).toISOString(),
+      imageUrl: 'https://images.unsplash.com/photo-1590674899484-13da0d1b58f5?q=80&w=2070&auto=format&fit=crop',
+      location: { lat: 43.5285, lng: 16.4521, address: 'Brda, Hercegovačka ul.' },
+      classification: {
+        category: 'illegal_parking',
+        severity: 5,
+        zone: 'zona_c',
+        department: 'promet',
+        description: 'Heavy truck parked overnight in residential zone.',
+        suggestedAction: 'Issue penalty.',
+        confidence: 0.96
+      }
+    },
+    {
+      id: uuidv4(),
+      ticketId: 'GR-2026-1035',
+      status: 'submitted',
+      createdAt: new Date(Date.now() - 3600000 * 2).toISOString(),
+      updatedAt: new Date(Date.now() - 3600000 * 2).toISOString(),
+      imageUrl: 'https://images.unsplash.com/photo-1572059002053-8cc5ad2f4a38?q=80&w=2070&auto=format&fit=crop',
+      location: { lat: 43.5155, lng: 16.4385, address: 'Bol, Vukovarska ul.' },
+      classification: {
+        category: 'vandalism',
+        severity: 6,
+        zone: 'zona_b',
+        department: 'komunalni_redari',
+        description: 'Smashed glass at bus stop shelter.',
+        suggestedAction: 'Replace tempered glass panels.',
+        confidence: 0.97
+      }
+    }
+  ];
+
+  neighborReports.forEach(r => store.addReport(r));
+  console.log(`✅ Seeded ${mockReports.length + neighborReports.length} reports.`);
 };
 
-/**
- * Seed the store with realistic Pazar (Green Market) listings.
- */
 export const seedPazarListings = () => {
   console.log('🌱 Seeding Pazar listings...');
   const now = Date.now();
@@ -493,8 +671,80 @@ export const seedPazarListings = () => {
     },
     {
       id: uuidv4(),
-      vendor: 'OPG Kaštela',
-      items: [{ name: 'Tikvice', category: 'vegetable', price: 2, unit: '€/kg' }],
+      vendor: 'OPG Vrgorac',
+      items: [{ name: 'Jagode', category: 'fruit', price: 4, unit: '€/mjera' }],
+      freshness,
+      isActive: true,
+      createdAt: new Date().toISOString(),
+      expiresAt: new Date(now + FOUR_HOURS).toISOString()
+    },
+    {
+      id: uuidv4(),
+      vendor: 'OPG Neretva',
+      items: [{ name: 'Mandarine', category: 'fruit', price: 2.5, unit: '€/kg' }],
+      freshness,
+      isActive: true,
+      createdAt: new Date().toISOString(),
+      expiresAt: new Date(now + FOUR_HOURS).toISOString()
+    },
+    {
+      id: uuidv4(),
+      vendor: 'Baka Marija',
+      items: [{ name: 'Lavanda', category: 'herbs', price: 5, unit: '€/vrećica' }],
+      freshness,
+      isActive: true,
+      createdAt: new Date().toISOString(),
+      expiresAt: new Date(now + FOUR_HOURS).toISOString()
+    },
+    {
+      id: uuidv4(),
+      vendor: 'Mesnica Škokić',
+      items: [{ name: 'Pršut', category: 'meat', price: 35, unit: '€/kg' }],
+      freshness,
+      isActive: true,
+      createdAt: new Date().toISOString(),
+      expiresAt: new Date(now + FOUR_HOURS).toISOString()
+    },
+    {
+      id: uuidv4(),
+      vendor: 'OPG Med',
+      items: [{ name: 'Dalmatinski med', category: 'other', price: 15, unit: '€/jar' }],
+      freshness,
+      isActive: true,
+      createdAt: new Date().toISOString(),
+      expiresAt: new Date(now + FOUR_HOURS).toISOString()
+    },
+    {
+      id: uuidv4(),
+      vendor: 'Peškarija Ante',
+      items: [{ name: 'Srdele', category: 'fish', price: 6, unit: '€/kg' }],
+      freshness,
+      isActive: true,
+      createdAt: new Date().toISOString(),
+      expiresAt: new Date(now + FOUR_HOURS).toISOString()
+    },
+    {
+      id: uuidv4(),
+      vendor: 'OPG Brač',
+      items: [{ name: 'Kozji sir', category: 'cheese', price: 22, unit: '€/kg' }],
+      freshness,
+      isActive: true,
+      createdAt: new Date().toISOString(),
+      expiresAt: new Date(now + FOUR_HOURS).toISOString()
+    },
+    {
+      id: uuidv4(),
+      vendor: 'Dalmatia Spice',
+      items: [{ name: 'Ružmarin', category: 'herbs', price: 2, unit: '€/bunch' }],
+      freshness,
+      isActive: true,
+      createdAt: new Date().toISOString(),
+      expiresAt: new Date(now + FOUR_HOURS).toISOString()
+    },
+    {
+      id: uuidv4(),
+      vendor: 'Pčelar Split',
+      items: [{ name: 'Propolis', category: 'other', price: 8, unit: '€/bottle' }],
       freshness,
       isActive: true,
       createdAt: new Date().toISOString(),

@@ -488,6 +488,31 @@ export interface AppStoreState {
   setCacheStatus: (status: AppStoreState['cacheStatus']) => void;
 }
 
+/** User profile information */
+export interface User {
+  id: string;
+  email: string;
+  fullName: string;
+  oib?: string;
+  phone?: string;
+  address?: string;
+  role: 'user' | 'admin';
+  avatarUrl?: string;
+}
+
+/** Auth store state */
+export interface AuthStoreState {
+  user: User | null;
+  token: string | null;
+  isAuthenticated: boolean;
+  isLoading: boolean;
+  error: string | null;
+  login: (email: string, password: string) => Promise<void>;
+  register: (data: Partial<User> & { password: string }) => Promise<void>;
+  logout: () => void;
+  clearError: () => void;
+}
+
 // -----------------------------------------------------------------------------
 // 12. Hook Return Types
 // -----------------------------------------------------------------------------

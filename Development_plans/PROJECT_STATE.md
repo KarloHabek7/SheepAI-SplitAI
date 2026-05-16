@@ -1,6 +1,6 @@
 # PROJECT STATE — Auto-Updated by Agents
 
-> **Last Updated:** 2026-05-16T14:18:00+02:00
+> **Last Updated:** 2026-05-16T17:38:00+02:00
 > **Updated By:** Lead Agent (Lane 0)
 
 ---
@@ -31,7 +31,7 @@
 | T08 PWA + Responsive + Capacitor | ⬜ Not Started | | PWA manifest, responsive audit, Android setup |
 | FE-R07 Emergency Page Refactor | ✅ Done | Agent@14:25 | Re-implemented: cinematic glassmorphic emergency layout, realistic QR scanner, premium alert cards |
 | FE-R06 Admin Dashboard Polish | ✅ Done | Agent@14:28 | Re-implemented: gradient cards, glassmorphic layout, AdminTabs navigation |
-| FE-R08 Auth/Login Page | ✅ Done | Agent@16:38 | Implemented standalone dark-mode glassmorphic auth page with login/registration tabs |
+| FE-R08 Auth/Login Page | ✅ Done | Agent@17:35 | Re-implemented: functional dark-mode glassmorphic auth page, ProtectedRoute enforcement, useAuthStore with persistence, and mock backend auth routes |
 | FE-R09 Cross-Cutting Polish | ✅ Done | Agent@16:56 | [Aesthetic tweak: global entrance animations, persistent theme toggle, full i18n support for nav/emergency/auth, optimized emergency interface layout] |
 
 ### Lane 2: Backend — 9/10 tasks done
@@ -76,6 +76,7 @@
 | INT-03 AdminPages Integration | ✅ Done | Agent@17:35 | Wired AdminDashboard and AdminReports to useAdminStore |
 | INT-04 PazarPages Integration | ✅ Done | Agent@17:35 | Wired PazarFeed and PazarSubmit to usePazarStore |
 | INT-05 MapGeoJson Integration | ✅ Done | Agent@17:28 | Wired useIssueGeoJson to reportService.getReports() |
+| Pitch Data Expansion | ✅ Done | Agent@17:38 | Expanded mock reports (25+) and Pazar listings (10+) for pitch presentation. |
 
 
 ---
