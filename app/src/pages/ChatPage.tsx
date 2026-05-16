@@ -7,7 +7,6 @@ import CitationCard from '@/components/chat/CitationCard';
 import ToolCallCard from '@/components/chat/ToolCallCard';
 import { useChatStore } from '@/stores/useChatStore';
 import { ChatMessage } from '@/types';
-import { MOCK_PROMPTS, INITIAL_MESSAGE, generateMockResponse } from '@/utils/mockChatData';
 import './ChatPage.css';
 
 /** Initial greeting shown when the conversation is empty */
