@@ -1,0 +1,171 @@
+/* Custom utility and animation classes translated from source HTML <style> tags */
+
+/* Hajduk Split Theme Overrides */
+:root {
+    --hajduk-bg: #F8F9FA;
+    --hajduk-card: #FFFFFF;
+    --hajduk-text: #111827;
+    --hajduk-text-muted: #4B5563;
+    --hajduk-blue: #0047AB;
+    --hajduk-red: #D71920;
+    --hajduk-gold: #F2C94C;
+    --hajduk-border: rgba(0, 71, 171, 0.15);
+}
+
+/* Core Inversions */
+body {
+    background-color: var(--hajduk-bg) !important;
+    color: var(--hajduk-text) !important;
+}
+
+/* Background overrides */
+.bg-\[\#030303\], .bg-\[\#050505\], .bg-\[\#09090b\]\/90 {
+    background-color: var(--hajduk-card) !important;
+}
+.bg-\[\#080808\], .bg-\[\#0a0a0c\], .bg-\[\#050b14\], .bg-\[\#111\] {
+    background-color: #F3F4F6 !important;
+    border: 1px solid var(--hajduk-border) !important;
+}
+.bg-\[\#111\]\/80 { background-color: rgba(255, 255, 255, 0.85) !important; border: 1px solid var(--hajduk-border) !important; }
+.bg-\[\#111\]\/60 { background-color: rgba(255, 255, 255, 0.6) !important; }
+.bg-\[\#111\]\/40 { background-color: rgba(255, 255, 255, 0.4) !important; }
+.bg-black\/20 { background-color: rgba(255, 255, 255, 0.5) !important; border-color: var(--hajduk-border) !important; }
+
+/* Text overrides */
+.text-white { color: var(--hajduk-text) !important; }
+.text-gray-200 { color: var(--hajduk-text) !important; }
+.text-gray-300, .text-gray-400, .text-gray-500, .text-gray-600 { color: var(--hajduk-text-muted) !important; }
+.hover\:text-white:hover { color: var(--hajduk-blue) !important; }
+
+/* Accents (Blue, Red, Gold) */
+.text-emerald-400, .text-emerald-500 { color: var(--hajduk-blue) !important; }
+.text-orange-400, .text-orange-500, .text-pink-500, .text-blue-400 { color: var(--hajduk-red) !important; }
+.bg-emerald-400\/80 { background-color: var(--hajduk-blue) !important; box-shadow: 0 0 8px rgba(0,71,171,0.4) !important; }
+.bg-orange-500\/10 { background-color: rgba(215, 25, 32, 0.05) !important; }
+.border-orange-500\/20 { border-color: rgba(215, 25, 32, 0.2) !important; }
+
+/* Gradients mapping */
+.from-blue-500 { --tw-gradient-from: var(--hajduk-blue) !important; }
+.via-pink-500 { --tw-gradient-stops: var(--hajduk-blue), var(--hajduk-red) !important; }
+.to-orange-500 { --tw-gradient-to: var(--hajduk-gold) !important; }
+.from-white\/20, .from-white\/30 { --tw-gradient-from: rgba(0, 71, 171, 0.05) !important; }
+.to-white\/5, .to-transparent { --tw-gradient-to: rgba(0,0,0,0) !important; }
+
+/* Borders */
+.border-white\/10, .border-white\/\[0\.08\], .border-white\/\[0\.05\], .border-white\/\[0\.04\], .border-white\/\[0\.02\], .border-white\/20, .border-x.border-white\/10 {
+    border-color: var(--hajduk-border) !important;
+}
+
+/* Buttons / CTAs */
+.bg-white.text-black {
+    background-color: var(--hajduk-blue) !important;
+    color: #FFFFFF !important;
+    border: none !important;
+    box-shadow: 0 4px 14px rgba(0, 71, 171, 0.2) !important;
+    transition: all 0.2s ease-in-out !important;
+}
+.bg-white.text-black:hover {
+    background-color: var(--hajduk-red) !important;
+    box-shadow: 0 6px 20px rgba(215, 25, 32, 0.3) !important;
+    transform: translateY(-2px);
+}
+
+a.bg-white, button.bg-white { color: #FFFFFF !important; }
+
+/* Mix blend fix for light mode WebGL Background */
+.mix-blend-screen { mix-blend-mode: normal !important; }
+
+/* Specific element tweaks */
+.w-6.h-px.bg-gray-600 {
+    background-color: var(--hajduk-gold) !important;
+    height: 2px !important;
+}
+.drop-line {
+    background: linear-gradient(to bottom, transparent, var(--hajduk-blue), transparent) !important;
+    opacity: 0.3 !important;
+}
+.shadow-\[0_8px_32px_rgba\(0\,0\,0\,0\.6\)\], .shadow-\[0_20px_50px_rgba\(0\,0\,0\,0\.5\)\], .shadow-\[0_25px_50px_rgba\(0\,0\,0\,0\.8\)\] {
+    box-shadow: 0 12px 40px rgba(0, 71, 171, 0.08) !important;
+}
+
+/* Icon tinting */
+iconify-icon { color: var(--hajduk-blue); }
+.text-white iconify-icon { color: var(--hajduk-blue) !important; }
+svg { color: var(--hajduk-blue) !important; }
+
+/* Inputs */
+::placeholder { color: var(--hajduk-text-muted) !important; }
+input { color: var(--hajduk-text) !important; background-color: #FFFFFF !important; border: 1px solid var(--hajduk-border) !important; }
+
+/* Reveal Animations */
+.reveal-fade {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 1s cubic-bezier(0.215, 0.61, 0.355, 1), transform 1s cubic-bezier(0.215, 0.61, 0.355, 1);
+}
+.reveal-fade.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.gsap-reveal .word {
+    transform: translateY(110%);
+    transition: transform 1.2s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+.gsap-reveal.is-visible .word {
+    transform: translateY(0%);
+}
+
+/* Engineering Section Animations */
+@keyframes typing {
+    0% { max-width: 0; opacity: 0; }
+    1% { opacity: 1; }
+    100% { max-width: 100%; opacity: 1; }
+}
+@keyframes blink-caret {
+    from, to { border-color: transparent }
+    50% { border-color: var(--hajduk-blue); }
+}
+.animate-type-1 { overflow: hidden; white-space: nowrap; max-width: 0; opacity: 0; animation: typing 1s steps(30, end) forwards; border-right: 2px solid transparent; }
+.animate-type-2 { overflow: hidden; white-space: nowrap; max-width: 0; opacity: 0; animation: typing 1s steps(30, end) forwards 1s; border-right: 2px solid transparent; }
+.animate-type-3 { overflow: hidden; white-space: nowrap; max-width: 0; opacity: 0; animation: typing 1s steps(30, end) forwards 2s; border-right: 2px solid transparent; }
+.animate-type-4 { overflow: hidden; white-space: nowrap; max-width: 0; opacity: 0; animation: typing 1s steps(30, end) forwards 3s; border-right: 2px solid transparent; }
+.animate-type-5 { overflow: hidden; white-space: nowrap; max-width: 0; opacity: 0; animation: typing 1s steps(30, end) forwards 4s; border-right: 2px solid transparent; }
+.animate-type-6 { overflow: hidden; white-space: nowrap; max-width: 0; opacity: 0; animation: typing 1s steps(30, end) forwards 5s; border-right: 2px solid transparent; }
+.animate-type-7 { overflow: hidden; white-space: nowrap; max-width: 0; opacity: 0; animation: typing 1s steps(30, end) forwards 6s; border-right: 2px solid var(--hajduk-blue); animation: typing 1s steps(30, end) forwards 6s, blink-caret .75s step-end infinite 7s; }
+
+@keyframes reverse-spin {
+    from { transform: rotate(360deg); }
+    to { transform: rotate(0deg); }
+}
+.animate-reverse-spin {
+    animation: reverse-spin 20s linear infinite;
+}
+
+@keyframes sonar-ripple {
+    0% { transform: scale(0.5); opacity: 1; border-width: 2px; border-color: var(--hajduk-red); }
+    100% { transform: scale(2.5); opacity: 0; border-width: 1px; border-color: var(--hajduk-red); }
+}
+.animate-sonar {
+    animation: sonar-ripple 4s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+@keyframes flashlight-move {
+    0% { background-position: 0% 0%; }
+    50% { background-position: 100% 100%; }
+    100% { background-position: 0% 0%; }
+}
+.flashlight-bg {
+    background: radial-gradient(circle at center, rgba(0, 71, 171, 0.04) 0%, transparent 50%) !important;
+    background-size: 200% 200%;
+    animation: flashlight-move 8s ease-in-out infinite;
+}
+
+@keyframes dropLine {
+    0% { transform: translateY(-100px); opacity: 0; }
+    50% { opacity: 1; }
+    100% { transform: translateY(200px); opacity: 1; }
+}
+.drop-line {
+    animation: dropLine linear infinite;
+}
