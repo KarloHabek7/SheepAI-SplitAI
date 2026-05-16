@@ -30,7 +30,7 @@ const Header: React.FC = () => {
 
   return (
     <header className={`app-header ${scrolled ? 'scrolled' : ''}`}>
-      <div className="header-pill">
+      <div className="header-container">
         <Link to="/" className="logo">
           <span className="logo-text">Split<span className="logo-accent">AI</span></span>
         </Link>
